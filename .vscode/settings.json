@@ -1,0 +1,68 @@
+{
+        ///////////////////////////////////////////////////////
+
+//////////////////// LATEX CHANGE START
+
+//////////////////////////////////////////////////////
+// Define which recipe is used by `latex-workshop.build#`. It also applies to auto build. Recipes are referred to by their names as defined in `#latex-workshop.latex.recipes`. Note there are two particular values:
+	// - `first` means to use the first recipe in `latex-workshop.latex.recipes`;
+	// - `lastUsed` means to use the last run recipe.
+	"latex-workshop.latex.recipe.default": "first",
+
+	// Define LaTeX compiling recipes. Each recipe in the list is an object containing its name and the names of tools to be used sequentially, which are defined in `latex-workshop.latex.tools`. By default, the first recipe is used to compile the project. For details, please visit https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-recipes.
+	"latex-workshop.latex.recipes": [
+		// {
+		// 	"name": "latexmk (lualatex)",
+		// 	"tools": [
+		// 		"lualatexmk"
+		// 	]
+		// },
+		{
+			"name": "latexmk (lualatex), biber, makeglossaries",
+			"tools": [
+				"lualatexmk"
+			]
+		},
+	],
+        "latex-workshop.latex.rootFile.doNotPrompt": true,
+        "latex-workshop.latex.rootFile.useSubFile": true,
+
+        // Define LaTeX compiling tools to be used in recipes. Each tool is labeled by its `name`. When invoked, `command` is spawned with arguments defined in `args` and environment variables defined in `env`. Typically no spaces should appear in each argument unless in paths. List of available placeholders: `%DOC%`, `%DOC_W32%, %DOC_EXT%`, `%DOC_EXT_W32%`, `%DOCFILE%`, `%DOCFILE_EXT%`, `%DIR%`, `%DIR_W32%`, `%TMPDIR%` and `%OUTDIR%`, `%OUTDIR_W32%`. For more details, please visit https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#placeholders.
+	"latex-workshop.latex.tools": [
+		{
+			"name": "lualatexmk",
+			"command": "latexmk",
+			"args": [
+				"-shell-escape",
+				"-8bit",
+                		"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-lualatex",
+				"-outdir=%OUTDIR%",
+				"%DOC%"
+			],
+			"env": {}
+		},
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+              "%DOC%"
+            ]
+          },
+          {
+            "name": "makeglossaries",
+            "command": "makeglossaries",
+            "args": [
+                "-d%OUTDIR%", "%DOC%",
+            ]
+          }
+
+	],
+///////////////////////////////////////////////////////
+
+//////////////////// LATEX CHANGE END
+
+//////////////////////////////////////////////////////
+}

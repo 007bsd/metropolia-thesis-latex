@@ -2,11 +2,11 @@
 
 % Global information (title of your thesis, your name, degree programme, major, etc.)
 
-%\def\bilingual{yes}%For Finnish students, you must have 2 abstracts, one in English and one in your native language (Finnish or Swedish), so "yes", your thesis is bilingual.
-\def\bilingual{no}%For international student writing in English, only one language and one abstract.
+\def\bilingual{no}%For Finnish students, you must have 2 abstracts, one in English and one in your native language (Finnish or Swedish), so "yes", your thesis is bilingual.
+%\def\bilingual{no}%For international student writing in English, only one language and one abstract.
 
-%\def\thesislang{finnish} %change this depending on the main language of the thesis.
-\def\thesislang{english} % "english" is the only other supported language currently. If someone has the swedish, please contribute!
+\def\thesislang{english} %change this depending on the main language of the thesis.
+%\def\thesislang{english} % "english" is the only other supported language currently. If someone has the swedish, please contribute!
 
 %\def\secondlang{english} %if the main language is Finnish (or Swedish), you must have 2 abstracts (one in Finnish (or Swedish) and one in English)
 %\def\secondlang{finnish}
@@ -60,27 +60,29 @@ First name Last name, Title (e.g.: Project Manager)\newline
 First name Last name, Title (Sami Sainio: Principal Lecturer)
 }
 \def\abstract{
-System testing of any software product is very important to maintain good quality, security, and integrity.
-Embedded systems which bind the software execution tightly between the hardware architecture and software in a tight
-loop has grown at a steady pace over the years. As the embedded systems are complex, it is recommended to apply
-software testing throughout the development process.
+System testing of any software product is very important to maintain good quality, security, and
+integrity. Embedded systems which bind the software execution tightly between the hardware
+architecture and software in a tight loop has grown at a steady pace over the years.
+As the embedded systems are complex, it is recommended to apply software testing throughout the
+development process.
 
-The manual, traditional and automated testing of these embedded systems often follow the same static approaches to
-ncover any vulnerabilities. Fuzzing or fuzz testing is a dynamically automated testing technique which subjects a system to
-a stream of input data by modifying the valid seeds to find bugs and vulnerabilities. Fuzzing has been used to exploit
-any edge cases and to check the weakness after causing the system to fail.
+The manual, traditional and automated testing of embedded systems often follow the same static
+approaches to uncover any vulnerabilities. Fuzzing or fuzz testing is a dynamically automated
+testing technique which subjects a system to a stream of input data by modifying the valid seeds.
+Any program which accepts untrusted and malformed data is ideal for applying fuzzing. Fuzzing has
+been used to exploit any edge cases by generating huge number of input data. The errors are
+not essentially related to functional requirements.
 
-This thesis explores the possibility of the adoption of fuzzing as a test method to support the embedded software
-development lifecycles and improving the system testing and the coverage. The aim is to study different fuzzing
-techniques, methods, and the tools available, and doing a case study to implement the best suitable one for the project.
-For the implementation of the case study, we studied current state of the art fuzzing tools and techniques and the
-classifications of different fuzzing approaches. Machine Learning + fuzzing and side channel aware
-fuzzing were not scope of this thesis.
+This thesis explores the possibility of the adoption of fuzzing in the embedded software development
+lifecycles to discover any faults. The aim is to do a literature review of different fuzzing
+techniques, methods, and the tools available. For the implementation of the case study the project
+``OSS-Fuzz'' was chosen.
 
-The output and results of the thesis are that fuzzing is a popular way to test the correctness and security of
-embedded systems and can be implemented for the improvement of the embedded system testing.
-Found out that, the Fuzzing testing must be done continuously. It helps in findings bugs irrespective of the project
-requirements and not a replacement to the functional testing but a necessary add-ons.
+The output and results of the thesis are that fuzzing is a popular way to test the correctness and
+security of embedded systems and can be implemented for the overall improvement in the embedded system testing.
+Found out that, the Fuzz testing must be deployed continuously to find the vulnerabilities before the software get shipped.
+Fuzzing helps in findings bugs irrespective of the project requirements and not a replacement to the functional
+testing, but a must necessary add-on.
 
 
 }
