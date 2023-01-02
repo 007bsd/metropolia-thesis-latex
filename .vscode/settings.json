@@ -60,6 +60,7 @@
           }
 
 	],
+	"latex-workshop.latex.autoBuild.run": "never",
 ///////////////////////////////////////////////////////
 
 //////////////////// LATEX CHANGE END

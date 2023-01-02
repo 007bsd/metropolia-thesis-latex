@@ -54,35 +54,36 @@ Tämä on tiivistlemän toinen kappale.
 \def\metropoliadegree{Master of Engineering} % change to your needs, e.g. "master", etc.
 \def\metropoliadegreeprogramme{Information Technology}
 \def\metropoliaspecialisation{Networking and Services }
-\def\thesisen{Master’s Thesis} % change to your need, e.g. master's
+\def\thesisen{Master's Thesis} % change to your need, e.g. master's
 \def\metropoliainstructors{
 First name Last name, Title (e.g.: Project Manager)\newline
 First name Last name, Title (Sami Sainio: Principal Lecturer)
 }
 \def\abstract{
-System testing of any software product is very important to maintain good quality, security, and
-integrity. Embedded systems which bind the software execution tightly between the hardware
+System testing of any software product is important to maintain quality, security, and
+integrity. Embedded systems which bind the software execution between the hardware
 architecture and software in a tight loop has grown at a steady pace over the years.
-As the embedded systems are complex, it is recommended to apply software testing throughout the
+For any software development, it is recommended to apply software testing throughout the
 development process.
 
 The manual, traditional and automated testing of embedded systems often follow the same static
 approaches to uncover any vulnerabilities. Fuzzing or fuzz testing is a dynamically automated
 testing technique which subjects a system to a stream of input data by modifying the valid seeds.
 Any program which accepts untrusted and malformed data is ideal for applying fuzzing. Fuzzing has
-been used to exploit any edge cases by generating huge number of input data. The errors are
+been used to exploit any edge cases by generating a huge number of input data. The errors are
 not essentially related to functional requirements.
 
 This thesis explores the possibility of the adoption of fuzzing in the embedded software development
-lifecycles to discover any faults. The aim is to do a literature review of different fuzzing
-techniques, methods, and the tools available. For the implementation of the case study the project
-``OSS-Fuzz'' was chosen.
+lifecycles to discover faults. The aim is to do a literature review of different fuzzing
+techniques, methods, success of fuzzing and the tools available. For the implementation, a proof of
+concept will be created using the project ``OSS-Fuzz'' and clusterfuzzlite were chosen.
 
-The output and results of the thesis are that fuzzing is a popular way to test the correctness and
-security of embedded systems and can be implemented for the overall improvement in the embedded system testing.
-Found out that, the Fuzz testing must be deployed continuously to find the vulnerabilities before the software get shipped.
-Fuzzing helps in findings bugs irrespective of the project requirements and not a replacement to the functional
-testing, but a must necessary add-on.
+This thesis shows that fuzzing is a popular way to test the correctness and
+security of embedded systems and that it can be implemented for the overall improvement in the
+embedded system testing. The Fuzz testing must be deployed continuously to find the
+vulnerabilities before the software gets shipped. Fuzzing helps in finding bugs irrespective of
+the project requirements and is not a replacement to the functional testing, but a
+necessary add-on.
 
 
 }

@@ -2,20 +2,101 @@
 
 \chapter{Introduction}
 
-Embedded systems are growing rapidly and becoming really important component of modern life. From
-workstations, microprocessors, servers to different consumer electronics devices including
-cell phones, interconnected IoT devices, medical instruments, autonomous and connected vehicles
-and many more, where the embedded systems can be found\cite{camposano1996embedded:ARTICLE}. But, in
-reality it is impossible to know the correct number of IoT devices. In a recent study
-shows\cite{IoTconne16:online} that the number of such devices are estimated to grow more than 29
-billion devices by the year 2030 due to the rapid rise in day-to-day use. Due to this growth, the
-security vulnerabilities are also increasing. The recent Mirai malware attacks, third party remote
-exploitation on the automobile, and security attacks on the ICS are such examples\cite{muench2018you}.
+Embedded systems are growing rapidly and becoming really important component of modern life. They
+are deployed in devices such as workstations, microprocessors, servers including different consumer
+electronics devices, cell phones, interconnected \gls{iot} devices, medical instruments,
+autonomous and connected vehicles and many more\cite{camposano1996embedded:ARTICLE}. In a recent study
+shows\cite{IoTconne16:online} that the number of such devices are estimated to grow more than
+29 billion devices by the year 2030 due to the rapid rise in day-to-day use. Due to this growth, the
+amount of related security vulnerabilities are also increasing. The recent Mirai malware attacks,
+third party remote exploitation on the automobile, and security attacks on the \gls{ics} are some
+examples\cite{muench2018you}.\newline
 
-
-
+Software testing with a combination of manual, automation and exploratory method, is a process to
+determine whether a software matches it's predefined specification. It is an informative process
+when done in the intended environment. Testing helps in uncovering bugs, failures, unwanted errors and
+exceptions\cite{819971}. Fuzzing is an automated technique that can be used to generate and input
+random malformed data to the system and observe how the software performs\cite{9787842}.
 According to \citeauthor{9787842}, due to the closed nature, complexity and high diversity of the
-embedded system, fuzzing is not widely used.
+embedded system, fuzzing is not widely used.\newline
+
+The goal for this thesis was to explore the theories of software testing with fuzzing as a testing
+technique. This thesis aims to explain what is fuzzing is, its background and its success over the
+years discovering bugs. The aim was to do a proof of concept environment using
+Google's OSS-Fuzz\cite{GitHubgo49:online} and clusterfuzzlite\cite{ClusterF90:online} project and
+evaluate if fuzzing could be implemented for the embedded systems in the case company.\newline
+
+\section{Background}
+This study was carried out for a company in Helsinki, Finland which designs and develops embedded secure
+silicon \gls{ip} solutions. The solutions range from Key Management Solutions-which helps in securing
+key provisioning Management services, Security protocol solutions- to secure the networking services,
+\gls{dpa} solutions- to protect side channels attacks and anti-counter fitting products
+to \gls{rot} products-highly secure hardware, software and firmware components. \newline
 
 
+The \gls{rot} solutions which are best described as isolated and separated from the
+software/hardware modules that they are meant to defend against the attackers by performing specific critical
+functions\cite{Hardware2:online},\cite{RootsofT78:online}. It is the secure foundation and act as a
+safeguard against the attackers for \gls{soc},computer, semiconductor and electronic system.
+These products are used in securing supply chain solutions, \gls{iot}, cloud and network and
+electronics systems.\newline
 
+
+The company is certified with \gls{iso}- 9001 standard, which is based on the principles of
+continual improvement with a strong customer focus and the top management implication and
+motivation\cite{ISOISO9048:online}. With a dedicated quality assurance team, infrastructure, the company
+is in constant thrive to improve the system testing processes, standards and ultimately
+quality and security of the products. The existing system testing includes testing methods such as, manual,
+integration, automation, security, exploratory testing. The company follows the \gls{ci} practices,
+where the development, integration and testing are done in an incremental way to detect
+the errors early, locating the errors faster and testing more. In recent years fuzzing is becoming a
+popular and promising technique for the automation security testing. Therefore, the company is
+evaluating different fuzzing tools and techniques for its embedded products which will improve the
+quality along with the coverage.\newline
+
+
+\section{Objectives and Purpose}
+
+The objective and aim of this thesis is to evaluate fuzzing techniques, tools as a software automation
+technique to improve the quality, security of the products. This study aimed at gathering information
+for following questions:\newline
+
+\begin{itemize}
+        \item What is fuzzing in the context of software testing? The introduction.
+        \item Overview on fuzzing tools and fuzzers available.
+        \item Can automation software testing of embedded application improve by fuzzing?
+        \item How to build, choose a good fuzzing target? Which fuzzing tool is the best suitable for
+        an embedded project?
+\end{itemize}
+
+
+The scope of this thesis was to evaluate fuzzing techniques and give recommendations based on the result by
+doing fuzzing on small program. The aim was to get an idea on how it could be implemented in software automation
+testing.\newline
+
+
+For the future integrations and improvements of fuzzing as a test method in the company,
+the results of thesis will be used as a baseline.\newline
+
+
+\section{Thesis Structure And Outline}
+
+The structure and document outline of this thesis are as follows:\newline
+Chapter first introduces the subject, theoretical review and benefits of software testing. The
+general explanations on test automation, frameworks. The role of software testing in information security,
+theories and background of software testing.\newline
+
+Chapter Two explains about fuzzing, why fuzz?, the past and the present, the history. It presents the success of
+fuzzing over the years, the vulnerabilities it has discovered, the bugs it has found. It explains about
+fuzzing methods, and the implementations.\newline
+
+Chapter three introduces on the fuzzing tools, different types of fuzzers and their comparisons. It
+discusses different open source projects and the ongoing research on fuzzing.\newline
+
+Chapter four introduces about the current state analysis of the embedded project. Based on studies of
+the previous chapters choosing appropriate fuzzer for the implementations and proof of concept.\newline
+
+Chapter fifth includes the analysis and results of the implementations and case study.\newline
+
+The rest of the chapters include the conclusions, the evaluations and future studies, along with the references
+and appendices.\newline
