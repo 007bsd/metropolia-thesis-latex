@@ -76,12 +76,12 @@
 % \gls{} command) will print in the Glossary/Lyhenteet.
 \input{chapters/0abbr.tex}
 
-
 %----------------------------------------------------------------------------------------
 %	DOCUMENT STARTS HERE...
 %----------------------------------------------------------------------------------------
 
 \begin{document}
+
 \IfLanguageName{finnish}{
 }{
   \raggedright%2021 template, align left, no hyphennization for English version
@@ -134,7 +134,7 @@
 \input{style/toc.tex}
 
 %list of figure, tables would come here if relevant?
-
+\input{chapters/0figs_tables_all.tex}
 %----------------------------------------------------------------------------------------
 %	Lyhenteet / Abbreviation
 %----------------------------------------------------------------------------------------
@@ -151,6 +151,9 @@
 % Thesis content if you strictly follow the "Final Year Project guide". Of course, you
 % can adapt to your specific needs (add more chapter, rename them, etc.).
 \input{chapters/introduction.tex}
+\input{chapters/theory.tex}
+\input{chapters/fuzzyTesting.tex}
+\input{chapters/fuzzing_tools_fuzzers.tex}
 % uncomment what you need.
 %\input{chapters/projectSpec.tex}
 %\input{chapters/methods.tex}
@@ -175,30 +178,32 @@
 %	APPENDICES
 %----------------------------------------------------------------------------------------
 
-\input{style/appendix.tex}
+%\input{style/appendix.tex}
 %force smaller vertical spacing in table of content
 %!!! There can be some fun depending if the appendices have (sub)sections or not :D
 % You will have to play with these numbers and eventually add the \vspace line  before
 % some \chapter and force another number.
 % To add more fun, time to time the table of content get wrong after a build :(
-\addtocontents{toc}{\vspace{11pt}}
-\pretocmd{\chapter}{\addtocontents{toc}{\protect\vspace{-24pt}}}{}{}
+%\addtocontents{toc}{\vspace{11pt}}
+%\pretocmd{\chapter}{\addtocontents{toc}{\protect\vspace{-24pt}}}{}{}
 
-\liite{1}% This is a hack to have right page numbering for each appendix. Make sure to
+%\liite{1}% This is a hack to have right page numbering for each appendix. Make sure to
 % use a unique number for each appendix.
-\input{sample/Xappendix1.tex}% Sample content to demonstrate appendix in LaTeX. You
+%\input{sample/Xappendix1.tex}% Sample content to demonstrate appendix in LaTeX. You
 % are safe to delete this lines (and the next samples) once you refreshed your LaTeX
 % skills (and safe to delete the sample folder and all its file too).
 
 %\addtocontents{toc}{\vspace{11pt}}%fix vertical space for Table of Content
-\liite{2}
-\input{sample/Xappendix2.tex}
+%\liite{2}
+%\input{sample/Xappendix2.tex}
 
-\addtocontents{toc}{\vspace{11pt}}
-\liite{3}
-\input{sample/X_R_example.tex}
+%\addtocontents{toc}{\vspace{11pt}}
+%\liite{3}
+%\input{sample/X_R_example.tex}
 
 
+% BSD change
+\setlength{\footskip}{25pt}
 %----------------------------------------------------------------------------------------
 %	THIS IS THE END
 %----------------------------------------------------------------------------------------

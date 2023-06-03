@@ -50,7 +50,7 @@ Tämä on tiivistlemän toinen kappale.
 \def\aihe{Lyhyt kuvaus opinnäytetyöstä. Max 255 merkkiä.}%for the pdf metadata/properties. If not used, empty it and also the \def\subject.
 
 %English section, for title/abstract
-\title{Improvement of Embedded System Testing by Adding Fuzzing Technique- A Case Study}
+\title{Effective Implementation and Evaluation of Fuzz Testing: A Comparative Study in an Embedded Software Company}
 \def\metropoliadegree{Master of Engineering} % change to your needs, e.g. "master", etc.
 \def\metropoliadegreeprogramme{Information Technology}
 \def\metropoliaspecialisation{Networking and Services }
@@ -60,32 +60,38 @@ First name Last name, Title (e.g.: Project Manager)\newline
 First name Last name, Title (Sami Sainio: Principal Lecturer)
 }
 \def\abstract{
-System testing of any software product is important to maintain quality, security, and
-integrity. Embedded systems which bind the software execution between the hardware
-architecture and software in a tight loop has grown at a steady pace over the years.
-For any software development, it is recommended to apply software testing throughout the
-development process.
+In the era of pervasive digital interconnection, the robustness and security
+resilience of embedded software systems are paramount. As these systems,
+which are integral to various industries such as automotive, aviation, and
+consumer electronics, grow more complex, they present an expanding
+cybersecurity threat landscape. This thesis seeks to enhance the software testing
+methods of a case company's embedded software systems through fuzz testing, an automated,
+a technique that exposes vulnerabilities by inputting invalid or unexpected data.
 
-The manual, traditional and automated testing of embedded systems often follow the same static
-approaches to uncover any vulnerabilities. Fuzzing or fuzz testing is a dynamically automated
-testing technique which subjects a system to a stream of input data by modifying the valid seeds.
-Any program which accepts untrusted and malformed data is ideal for applying fuzzing. Fuzzing has
-been used to exploit any edge cases by generating a huge number of input data. The errors are
-not essentially related to functional requirements.
+%\hspace{2cm}
+\hspace{0.5cm}The motivation for this study is rooted in the growing necessity for stronger
+security measures within embedded systems due to escalating cybersecurity
+threats. A significant challenge lies in selecting a suitable fuzzing tool
+from the multitude of options available. To address this issue, this study
+takes a practical, hands-on approach by being conducted within the
+unique environment of a case-in company.
 
-This thesis explores the possibility of the adoption of fuzzing in the embedded software development
-lifecycles to discover faults. The aim is to do a literature review of different fuzzing
-techniques, methods, success of fuzzing and the tools available. For the implementation, a proof of
-concept will be created using the project ``OSS-Fuzz'' and clusterfuzzlite were chosen.
+\hspace{0.5cm}After an exhaustive literature review of various fuzzing tools,
+two popular tools, American Fuzzy Lop (AFL++) and LibFuzzer, are
+selected for an in-depth comparative analysis. These tools are chosen
+based on their reputation, widespread use, and supportive literature evidence.
+The study examines pivotal factors like integration ease, efficiency, speed,
+code coverage, and the identification of vulnerabilities, providing an
+impartial perspective to aid the decision-making process.
 
-This thesis shows that fuzzing is a popular way to test the correctness and
-security of embedded systems and that it can be implemented for the overall improvement in the
-embedded system testing. The Fuzz testing must be deployed continuously to find the
-vulnerabilities before the software gets shipped. Fuzzing helps in finding bugs irrespective of
-the project requirements and is not a replacement to the functional testing, but a
-necessary add-on.
-
+\hspace{0.5cm}In conclusion, the practical assessment of this study will yield crucial
+insights into the relative performance of AFL++ and LibFuzzer within the case
+company's unique environment. Based on these insights and the outcomes of the
+comparative analysis, the optimal fuzzing tool will be recommended. The ultimate
+promise of this thesis is to deliver a robust, evidence-based strategy for
+enhancing the security resilience of the case company's embedded software
+systems through tailored fuzz testing.
 
 }
-\def\metropoliakeywords{Fuzzing, Embedded system, crypto, software testing}
+\def\metropoliakeywords{fuzzing, embedded system, AFL++, libFuzzer}
 \def\subject{short description of the thesis. Max 255 characters.}%for the pdf metadata/properties. If not used, empty it and also the \def\aihe.

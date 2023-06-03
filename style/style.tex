@@ -17,6 +17,9 @@
 \usepackage{amsfonts}%extra mathematical symbols
 \usepackage{amssymb}
 \usepackage{fontspec}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{array}
 \usepackage{titlesec}
 \usepackage{mathtools}%enhance the appearance of documents containing a lot of mathematics
 \usepackage[amssymb]{SIunits}
@@ -30,6 +33,7 @@
   \setlength{\RaggedRightRightskip}{0pt plus 1fil}%TODO: fix the Overfull/Underfull warnings when \RaggedRight (likely in title and abstact)
 }{}
 \makeatletter
+  \patchcmd{\@section}{\addvspace{10\p@}}{\addvspace{10\p@}\nopagebreak}{}{}
   \let\@gnewline\@raggedtwoe@saved@gnewline% Restore original functionality of \newline
   \let\\\@raggedtwoe@savedcr% Restore original functionality of \\
 \makeatother
@@ -51,9 +55,14 @@
 \setmintedinline{breaklines,breakanywhere}
 \usepackage[singlelinecheck=false]{caption}
 %force the width of a table instead of column
+\usepackage{caption}
+\usepackage{longtable}
 \usepackage{tabularx}
 \usepackage{booktabs} %why not booktabs? :3
-
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
 \usepackage{csquotes}% avoid warning with babel
 
 \usepackage{float} % For forced figure location with modifier H (\begin{figure}[H])
@@ -65,7 +74,8 @@
  \cite{#1}
  \renewcommand\citeright{]}
 }
-
+\setlength{\headheight}{29pt}
+\usepackage{fancyhdr}
 %set date format to D.M.YYYY
 \def\pvm{\the\day.\the\month.\the\year}
 %set date format to D Month YYYY

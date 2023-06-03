@@ -19,8 +19,17 @@
 \newacronym{soc}{SoC}{system-on-chip}
 \newacronym{os}{OS}{Operating Systems}
 \newacronym{iso}{ISO}{International Organization of Standardization}
-\newacronym{ci}{CI}{Continuous Integration}
 \newacronym{dpa}{DPA}{Differential Power Analysis}
+\newacronym{sdlc}{SDLC}{Software Development Lifecycle}
+\newacronym{stlc}{STLC}{Software Testing Lifecycle}
+\newacronym{sut}{SUT}{System Under Test}
+\newacronym{smt}{SMT}{Satisfiability Modulo Theory}
+\newacronym{ddos}{DDoS}{Distributed Denial of Service}
+\newacronym{rtos}{RTOS}{Real Time Operating System}
+\newacronym{afl}{AFL}{American Fuzzy Lop}
+\newacronym{ci/cd}{CI/CD}{Continuous Integration and Continuous Deployment}
+\newacronym{gui}{GUI}{Graphical User Interface}
+
 
 % Glossary entries
 
@@ -39,10 +48,42 @@
 	description={Is a mark up language specially suited for scientific documents}
 }
 
-\newglossaryentry{maths}
+\newglossaryentry{DDoS}
 {
-	name=mathematics,
-	description={Mathematics is what mathematicians do}
+	name=Distributed Denial of Service,
+	description={A malicious attempt to overwhelm a targeted
+	system, network, or website by inundating it with a flood of traffic
+	from multiple sources}
 }
 
+\newglossaryentry{RTOS}
+{
+	name=Real Time Operating System,
+	description={An operating system that is specifically designed to
+	ensure real-time response and predictability in embedded systems
+	with critical timing requirements}
+}
+\newglossaryentry{Fuzzers}
+{
+	name=Fuzzers,
+	description={Fuzzers are software testing tools used to find security
+	vulnerabilities and software bugs by submitting random or
+	semi-random inputs to a program}
+}
 
+\newglossaryentry{fuzz_target}
+{
+	name=Fuzz Target,
+	description={A specific function or area of a software application or
+	system that is intentionally subjected to fuzz testing}
+}
+\newglossaryentry{corpus}
+{
+	name=corpus,
+	description={Designed to include set of minimal inputs for fuzzing }
+}
+\newglossaryentry{fuzzing_engine}
+{
+	name=Fuzzing Engine,
+	description={A tool that finds and executes inputs for a fuzz target}
+}
