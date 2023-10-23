@@ -2,78 +2,138 @@
  %if the chapter heading starts close to bottom of the page,
  %force a line break and remove the vertical vspace
 \vspace{21.5pt}
-\chapter{Embedded Fuzzing, Challenges, Tools And Fuzzers}
-In this chapter, we explore the significance of embedded system fuzzing in ensuring
-the security and reliability of embedded systems. We discuss the comparison between traditional
-fuzzing and the unique challenges associated with fuzzing embedded systems.
-Next, the available popular fuzzing tools and fuzzers are discussed in terms of
-functionality, ease of use, effectiveness and limitations.
-In the last section, we dived into the open-source projects and ongoing research
-in fuzzing such as AFL++\cite{257204}, libFuzzer\cite{libFuzze17:online},
-ClusterFuzz\cite{ClusterF78:online}, OSS-Fuzz\cite{GitHubgo49:online}.
+\chapter{Embedded System, Challenges, Tools And Fuzzers}\label{sec:embedded_system}
+In this chapter, the critical role of fuzzing is illuminated as a mechanism to
+enhance the security and dependability of embedded systems. An initial
+comparative exploration is presented, distinguishing conventional fuzzing
+techniques and the unique challenges introduced when implementing fuzzing
+within the context of embedded systems. This is followed by an extensive
+examination of a selection of widely-used fuzzing tools and fuzzers,
+assessing their operational competencies, user accessibility, efficacy, and
+potential limitations. Key tools encompassed within this analysis include
+AFL++\cite{257204}, libFuzzer\cite{libFuzze17:online}, ClusterFuzz\cite{ClusterF90:online},
+OSS-Fuzz\cite{GitHubgo49:online}, FuzzTest\cite{GitHubgo59:online}, Atheris\cite{atheris2020},
+and Hypothesis\cite{GitHubHy1:online}. The chapter culminates with a meticulous
+survey of relevant open-source initiatives and current research trajectories
+within the field of fuzzing.
 
-\section{Embedded System Fuzzing}
+\section{Embedded System}
 
-\subsection{Embedded System}
+Embedded systems, specialized computer systems engineered for specific tasks,
+diverge significantly from conventional, multi-purpose computers.
+These integrated systems, composed of hardware, software, and occasionally
+mechanical components, are designed to perform specific functions either
+autonomously or within a larger system. In contrast to general-purpose
+computers designed for multitasking, embedded systems typically focus on
+executing a single task or a related group of
+tasks\cite{marwedel2021embedded}\cite{yun2022fuzzing}\cite{Introduc26:online}.
 
-An Embedded system is compromises of hardware and software components and are often centered around
-a microcontroller or microprocessor. These systems are typically designed to perform specific
-tasks with a high level of efficiency and accuracy\cite{marwedel2021embedded}.
-It interacts with the physical environment and communicates with other devices and consist of a
-processor, memory, and peripherals. Firmware, which includes the bootloader, \acrlong{os},
-and file system, controls the hardware of an embedded device and is a common
-fuzzing target\cite{yun2022fuzzing}.
+The figure:\ref{fig:Embedded_System} shows the different components of embedded systems.
 
-As embedded devices become increasingly pervasive in our daily lives and in various domains such as the \acrlong{iot}
-and automotive systems, their security and reliability become significant concerns.
-To ensure the security and reliability of these devices, fuzzing has emerged as an
-important testing technique. Specifically, the different fuzzing approaches applied
-to embedded systems are referred to as embedded fuzzing\cite{eisele2022embedded}. By subjecting the
-embedded systems to a series of tests using malformed or unexpected inputs, the
-testing technique helps developers and security researchers uncover and mitigate
-potential security threats before they can be exploited in the real world.
+% \begin{figure}[ht]
+%         \centering
+%         \AltText{Embedded System}{\includegraphics[width=8.5cm, height=8.5cm]{Embedded_System}}
+%         \caption{Embedded System\cite{Introduc82:online}}\label{fig:Embedded_System}
+% \end{figure}
+\begin{figure}[h]
+        \centering
+        \adjustbox{width=\textwidth}{\includegraphics{Embedded_System}}
+        \caption{Embedded System\cite{Introduc82:online}}\label{fig:Embedded_System}
+\end{figure}
 
-The table:\ref{tab:embedded_devices} presents the types of embedded devices, their characteristics,
-and the challenges for fuzzing associated with each type\cite{yun2022fuzzing}.
 
-% \begin{table}[h]
+Just like conventional computer systems, embedded systems's core components
+usually include a Central Processing Unit (CPU)\cite{WhatisaC78:online},
+Random Access Memory (RAM), and input/output (I/O) interfaces. However,
+embedded systems often lack user-friendly interfaces, and instead might
+feature a minimal user interface or none at all\cite{MainType35:online}.
+
+Reflecting on the prior discussions of embedded systems and fuzzing in
+sections \ref{sec:sec_introduction} and \ref{sec:sec_fuzzing} respectively,
+this chapter explores further the significance and methodology of fuzzing
+within the domain of embedded systems.
+
+\subsection{Types of Embedded Devices}
+Embedded systems can be classified into several types, such as standalone,
+real-time, networked, and mobile systems\cite{Classifi68:online}. These
+systems play essential roles in various sectors, from consumer
+electronics\cite{andrae2010life} like digital watches\cite{Whatisas39:online},
+televisions, and cameras, to industrial machinery\cite{thramboulidis2007soa},
+medical equipment\cite{jafari2007medical}, and
+automobiles\cite{Automoti68:online}\cite{li2003real}\cite{MainType35:online}.
+
+The figure:\ref{fig:types_of_embedded_devices} shows the different types of embedded devices.
+% \begin{figure}[ht]
+%         \centering
+%         \AltText{Types of Embedded Devices}{\includegraphics[width=8.5cm, height=8.5cm]{types_of_embedded_devices}}
+%         \caption{Types of Embedded Devices\cite{yun2022fuzzing}\cite{WhatAreE30:online}}\label{fig:types_of_embedded_devices}
+% \end{figure}
+
+\begin{figure}[h]
+        \centering
+        \adjustbox{width=\textwidth}{\includegraphics{types_of_embedded_devices}}
+        \caption{Types of Embedded Devices}\label{fig:types_of_embedded_devices}
+\end{figure}
+
+\textbf{Standalone Devices:}
+
+Standalone devices constitute a subset of embedded systems functioning
+independently, without the necessity for a host system. They process input
+data within their own interfaces, producing outputs to control or drive
+attached devices or to generate displays. These devices have found broad
+applicability in various appliances due to their flexibility and efficiency.
+They often employ lightweight user environments for optimal
+performance \cite{yun2022fuzzing}\cite{WhatAreE30:online}\cite{TypesofE31:online}.
+
+\textbf{Real-time Embedded Systems:}
+Real-time embedded systems deliver outputs within specific time constraints, crucial for timely
+project completion. These systems interact with external environments via
+interfaces and often utilize sensors. They typically fall into two categories:
+soft systems, which prioritize process completion, and hard systems,
+which emphasize strict adherence to time constraints.
+Real-time operating systems (RTOS) manage hardware resources and application
+software to ensure task completion with precision and consistency\cite{Introduc22:online}\cite{yun2022fuzzing}\cite{WhatAreE30:online}\cite{TypesofE31:online}.
+
+\textbf{Networked embedded systems:}
+Networked embedded systems form key components of wired or wireless networks,
+heavily relying on web server communication. Ubiquitously found in security systems,
+ATMs, and \acrlong{pos}\cite{WhatIsaP12:online} systems, these systems manage a network of devices or workstations
+to perform various functions. If an embedded system forms part of or depends on a device network,
+it is classified as a networked embedded system \cite{Introduc22:online}\cite{yun2022fuzzing}\cite{WhatAreE30:online}\cite{TypesofE31:online}.
+
+In conclusion, the realm of embedded systems is vast and intricate,
+encompassing a wide variety of devices and applications. A consistent
+requirement across these diverse systems is the need for rigorous testing
+and security measures, a task significantly streamlined by the application of
+fuzzing techniques. This chapter offers an in-depth exploration of this
+compelling subject, spotlighting the unique challenges and solutions in
+embedded fuzzing\cite{eisele2022embedded}. The following sections will discuss
+the specific methodologies used in fuzzing for embedded systems, the
+challenges encountered, and potential strategies to overcome them.
+
+
+% The table:\ref{tab:embedded_devices} presents the types of embedded devices, their characteristics,
+% and the challenges for fuzzing associated with each type\cite{yun2022fuzzing}.
+
+% \begin{table}[h!]
 % \centering
-% \begin{tabularx}{\textwidth}{@{}c>{\raggedright\arraybackslash}p{3.5cm}X@{}}
+% \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{3.5cm}X@{}}
 % \toprule
 % \textbf{Type} & \textbf{Characteristics} & \textbf{Challenges for Fuzzing} \\
 % \midrule
-% 1 & Own processor, memory, and peripherals; simple firmware or RTOS; various communication protocols & Requires specific knowledge of protocols and target hardware \\
+% Standalone Devices & Own processor, memory, and peripherals; simple firmware or \acrshort{rtos}; various communication protocols & Requires specific knowledge of protocols and target hardware \\
 % \addlinespace
-% 2 & Embedded version of standard OS; advanced features; higher processing power and memory capacity & Requires knowledge of OS internals and system libraries \\
+% Devices with Embedded Linux or Other OS & Embedded version of standard OS; advanced features; higher processing power and memory capacity & Requires knowledge of OS internals and system libraries \\
 % \addlinespace
-% 3 & Entire firmware in a single binary, including OS and applications & Requires full-system emulation or binary disassembly \\
+% Monolithic Firmware Devices & Entire firmware in a single binary, including OS and applications & Requires full-system emulation or binary disassembly \\
 % \bottomrule
 % \end{tabularx}
 % \caption{Types of Embedded Devices and Their Challenges for Fuzzing}
 % \label{tab:embedded_devices}
 % \end{table}
 
-\begin{table}[h!]
-\centering
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{3.5cm}X@{}}
-\toprule
-\textbf{Type} & \textbf{Characteristics} & \textbf{Challenges for Fuzzing} \\
-\midrule
-Standalone Devices & Own processor, memory, and peripherals; simple firmware or RTOS; various communication protocols & Requires specific knowledge of protocols and target hardware \\
-\addlinespace
-Devices with Embedded Linux or Other OS & Embedded version of standard OS; advanced features; higher processing power and memory capacity & Requires knowledge of OS internals and system libraries \\
-\addlinespace
-Monolithic Firmware Devices & Entire firmware in a single binary, including OS and applications & Requires full-system emulation or binary disassembly \\
-\bottomrule
-\end{tabularx}
-\caption{Types of Embedded Devices and Their Challenges for Fuzzing}
-\label{tab:embedded_devices}
-\end{table}
-\clearpage
 
 \subsection{Comparison Between Traditional and Embedded Fuzzing}
-Fuzzing aims to discover vulnerabilities in software by providing a system with
-unexpected or malformed inputs in both traditional and Embedded system fuzzing.
 
 The table:\ref{tab:fuzzing_comparison} provides the comparison between traditional
 and embedded system fuzzing\cite{yun2022fuzzing}\cite{9742291}.
@@ -82,28 +142,25 @@ and embedded system fuzzing\cite{yun2022fuzzing}\cite{9742291}.
 \centering
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3cm}X X@{}}
 \toprule
-        & \textbf{Traditional Fuzzing} & \textbf{Embedded Fuzzing} \\
+& \textbf{Traditional Fuzzing} & \textbf{Embedded Fuzzing} \\
 \midrule
-\textbf{Target Systems} & Desktop and server applications, web applications, libraries, etc. & \acrlong{rtos}, IoT devices, firmware, etc. \\
+\textbf{Target Systems} & Desktop and server applications, web applications, and libraries. & Real-time operating systems (RTOS), IoT devices, firmware. \\
 \addlinespace
-\textbf{Diverse Targets} & server applications, etc. & Specific hardware and protocols, limited resources, real-time constraints, etc. \\
+\textbf{Diverse Targets} & Server applications. & Specific hardware and protocols with limited resources and real-time constraints. \\
 \addlinespace
-\textbf{Challenges} & Input generation, code coverage, etc. & Specific hardware and \acrlong{os} etc. \\
+\textbf{Challenges} & Input generation and code coverage. & Compatibility with specific hardware and operating systems. \\
 \addlinespace
-\textbf{Reliability Constraints} & No time constraints. & limit the time available for fuzzing. \\
+\textbf{Reliability Constraints} & No strict time limitations, allowing comprehensive and thorough fuzzing tests to enhance reliability of findings. & Operates under real-time constraints, demanding efficient and timely fuzzing tests. The reduced testing time could potentially affect the thoroughness and thus the reliability of the findings. \\
 \addlinespace
-\textbf{Testing Environment} & Simulated or actual systems with standard OS & Emulators,
-simulators, or actual devices with specific hardware and protocols \\
+\textbf{Testing Environment} & Simulated or actual systems with standard operating systems. & Emulators, simulators, or actual devices with specific hardware and protocols. \\
 \addlinespace
-\textbf{Physical Interaction} & Not a primary concern & Must consider environment and physical states of the system \\
+\textbf{Physical Interaction} & Not a primary concern. & Required to consider environment and physical states of the system. \\
 \addlinespace
-\textbf{Limited Resources} & Not a primary concern & Must optimize fuzzing tools to work efficiently within limited resources \\
+\textbf{Limited Resources} & Not a primary concern. & Must optimize fuzzing tools to work efficiently within limited resources. \\
 \addlinespace
-\textbf{Scalability} & Can be easily parallelized to scale with the number of
-target applications or libraries & Physical access to the target
-devices or emulators, which can limit the scalability  \\
+\textbf{Scalability} & Can be easily parallelized to scale with the number of target applications or libraries. & Physical access to the target devices or emulators can limit scalability. \\
 \addlinespace
-\textbf{Tools and Techniques} & AFL, libFuzzer, Honggfuzz, etc. & FirmFuzz, IoTcube, FUZZY, etc. \\
+\textbf{Tools and Techniques} & AFL, libFuzzer, Honggfuzz. & FirmFuzz, IoTcube, FUZZY. \\
 \bottomrule
 \end{tabularx}
 \caption{Comparison of Traditional Fuzzing and Embedded Fuzzing}
@@ -113,259 +170,129 @@ devices or emulators, which can limit the scalability  \\
 In addition to the general differences mentioned in the above table, there are more aspects to consider
 when doing the comparison.
 
-Traditional fuzzing tools and fuzzers have an easier setup than the embedded fuzzing as the later may
-require more manual setup customization due to the wide variety of hardware and software components.
-It is easier to integrate and incorporate the traditional fuzzing into \acrlong{ci/cd} as it is more
-straightforward. On the contrary, embedded fuzzing may require custom integration due to hardware.
-Feedback is usually obtained directly from the target application or library, making it easier to
-monitor the fuzzing process and identify issues. In embedded fuzzing, feedback might come
-from multiple sources, including the target device's firmware, hardware components.
+Beyond the primary distinctions outlined in the table, additional considerations arise when
+comparing traditional and embedded fuzzing techniques. Traditional fuzzing tools
+typically offer a more straightforward setup than their embedded counterparts,
+which may necessitate extensive manual configuration due to the wide range of
+hardware and software components involved. Furthermore, integration of traditional
+fuzzing into \acrlong{ci/cd} systems tends to be more straightforward,
+while embedded fuzzing often requires custom solutions to accommodate
+hardware specificities. Feedback in traditional fuzzing is typically
+derived directly from the target application or library,
+simplifying the process of monitoring fuzzing operations and
+identifying anomalies. In contrast, embedded fuzzing might garner feedback
+from a multitude of sources, encompassing firmware and hardware components
+of the target device, which can complicate monitoring and issue detection\cite{yun2022fuzzing}\cite{WhatAreE30:online}.
 
 \subsection{Challenges in Embedded Fuzzing}
-Fuzzing embedded systems presents distinct challenges and complexities,
-necessitating the development of specialized tools and strategies to ensure
-their security and reliability. In this subsection, we delve into the primary
-concerns and obstacles that researchers and practitioners face when conducting
-fuzz testing on embedded systems, highlighting the need for innovative approaches
-to tackle these challenges effectively.
+Fuzz testing embedded systems presents unique challenges necessitating the development of specialized tools and strategies to maintain system security and reliability. This subsection discusses the primary concerns that researchers and practitioners encounter while fuzz testing embedded systems, emphasizing the need for inventive approaches to effectively address these issues.
 
-\Citeauthor{yun2022fuzzing} states below,
+\Citeauthor{yun2022fuzzing} identifies the following primary challenges:
 \begin{itemize}
-\item Heterogeneous targets: Embedded systems have different hardware,
-operating systems, and communication protocols\cite{yun2022fuzzing}.
-\item Limited resources: Embedded systems typically have limited resources,
-such as processing power and memory, which can restrict the use of
-traditional fuzzing techniques\cite{yun2022fuzzing}.
-\item Real-time and reliability constraints: Some embedded systems have
-real-time requirements, and fuzzing should not disrupt their normal operation\cite{yun2022fuzzing}.
-\item Scalability: It often requires physical access to target devices or
-emulators, limiting the scalability of fuzzing efforts\cite{yun2022fuzzing}.
+\item \textbf{Heterogeneous targets:} The variability in hardware, operating systems, and communication protocols in embedded systems presents a significant challenge\cite{yun2022fuzzing}.
+\item \textbf{Limited resources:} The restricted processing power and memory typically characteristic of embedded systems can limit the applicability of traditional fuzzing techniques\cite{yun2022fuzzing}.
+\item \textbf{Real-time and reliability constraints:} Some embedded systems have strict real-time requirements, and fuzzing must not interfere with their regular operations\cite{yun2022fuzzing}.
+\item \textbf{Scalability issues:} Fuzzing often requires physical access to target devices or emulators, which can impede scalability\cite{yun2022fuzzing}.
 \end{itemize}
 
-\Citeauthor{muench2018you} states below,
+\Citeauthor{muench2018you} highlights further obstacles:
 \begin{itemize}
-\item Limited visibility: The internal state of embedded systems is
-often difficult to observe, making it harder to understand the impact of
-fuzz testing and identify issues\cite{muench2018you}.
-\item Difficulties in reproducing crashes: Due to the diverse nature of
-embedded systems and the use of custom hardware, it may be challenging to
-reproduce crashes consistently and accurately\cite{muench2018you}.
-\item Challenges in determining the root cause of crashes: Difficulties in
-identifying the root cause of crashes in embedded systems\cite{muench2018you}.
+\item \textbf{Limited visibility:} The internal state of embedded systems is often difficult to observe, complicating the interpretation of fuzz testing impacts and issue identification\cite{muench2018you}.
+\item \textbf{Reproduction of crashes:} The diverse nature of embedded systems and the use of custom hardware may hinder the consistent and accurate reproduction of crashes\cite{muench2018you}.
+\item \textbf{Root cause analysis:} There exist difficulties in discerning the root cause of crashes in embedded systems\cite{muench2018you}.
 \end{itemize}
 
-\Citeauthor{eisele2022embedded} states below,
+\Citeauthor{eisele2022embedded} enumerates additional complexities:
 \begin{itemize}
-\item Physical interaction: Embedded systems often interact with the
-physical world, which can make fuzzing more challenging\cite{eisele2022embedded}.
-\item Device-specific hardware and protocols: Embedded devices often use
-custom hardware components and communication protocols, which may not be
-compatible with existing fuzzing tools and techniques\cite{eisele2022embedded}.
-\item Lack of source code: In many cases, the source code for embedded
-systems may not be available, making it difficult to analyze the software
-for potential vulnerabilities and develop appropriate fuzzing test cases\cite{eisele2022embedded}.
+\item \textbf{Physical interaction:} Embedded systems often interact with the physical world, further complicating fuzzing tasks\cite{eisele2022embedded}.
+\item \textbf{Device-specific hardware and protocols:} Custom hardware components and communication protocols in embedded devices may not be compatible with existing fuzzing tools and techniques\cite{eisele2022embedded}.
+\item \textbf{Lack of source code:} Absence of source code for embedded systems can hinder software analysis for potential vulnerabilities and hamper the development of appropriate fuzzing test cases\cite{eisele2022embedded}.
 \end{itemize}
 
-\Citeauthor{manes2019art} states the below,
+\Citeauthor{manes2019art} discusses the following challenges:
 \begin{itemize}
-\item Stateful applications: Fuzzing stateful applications, such as network
-protocols or multi-threaded applications, presents additional challenges.
-Properly handling state transitions, synchronization, and concurrent execution
-is critical for effectively fuzzing these types of applications\cite{manes2019art}.
-\item Oracle problem:  In some cases, determining whether a given input has
-triggered a vulnerability can be challenging. Fuzzers often rely on simple
-oracles, such as crashes, which may not be sufficient to detect all
-types of vulnerabilities\cite{manes2019art}.
-\item Performance: The performance of fuzzers is critical for their effectiveness.
-Slow fuzzers may not be able to explore enough execution paths to find
-vulnerabilities in a reasonable amount of time.\cite{manes2019art}.
+\item \textbf{Stateful applications:} Fuzzing stateful applications, such as network protocols or multi-threaded applications, necessitates effective handling of state transitions, synchronization, and concurrent execution\cite{manes2019art}.
+\item \textbf{Oracle problem:} Identifying whether a specific input has triggered a vulnerability can pose challenges. Fuzzers often depend on simple oracles like crashes, which may not be sufficient for detecting all types of vulnerabilities\cite{manes2019art}.
+\item \textbf{Performance:} The efficiency of fuzzers is critical for their efficacy. Slow fuzzers may not explore sufficient execution paths within a reasonable timeframe, thus failing to uncover vulnerabilities\cite{manes2019art}.
 \end{itemize}
 
-\subsection{Fuzzing Tools and Fuzzers}
+\section{Fuzzing Tools and Fuzzers}
 
-This section on Fuzzing Tools and Fuzzers covers various tools and techniques
-for fuzz testing, including those that can be used for both general
-software and embedded systems. Additionally, this section provides an
-overview of the features and limitations of these tools,
-which can assist practitioners in selecting the appropriate tool
-for their specific needs. They have been effective in discovering and
-mitigating security issues, which has contributed to their popularity
-and widespread adoption.
+Fuzzing embedded systems presents unique challenges and requirements, necessitating the development
+of dedicated tools and techniques. This section provides an overview of several fuzzing tools,
+their functionality, ease of use, and their advantages and limitations.
 
-% \begin{itemize}
-% \item \textbf{AFL (American Fuzzy Lop):}\cite{zalewski2014american}\cite{GitHubgo92:online} \\
-% \emph{Functionality:}Coverage-guided, genetic algorithms, binary program fuzzing \\
-% \emph{Ease of use:}  Simple setup, easy to use for most users \\
-% \emph{Effectiveness:} Widely adopted, has discovered numerous vulnerabilities in widely-used software \\
-% \emph{Limitations:} Lacks support for multi-threaded applications, and limited effectiveness in fuzzing structured data formats
-
-% \item \textbf{libFuzzer:}\cite{libFuzze17:online} \\
-% \emph{Functionality:} Coverage-guided, in-process fuzzing, targets libraries with well-defined APIs \\
-% \emph{Ease of use:} Easy integration with LLVM-based projects, requires writing custom harness code \\
-% \emph{Effectiveness:} Has found vulnerabilities in widely-used libraries and software components \\
-% \emph{Limitations:} In-process fuzzing can result in performance bottlenecks, limited support for non-LLVM compilers
-
-% \item \textbf{honggfuzz:}\cite{GitHubgo89:online} \\
-% \emph{Functionality:} Security-oriented, supports multiple platforms and feedback signals \\
-% \emph{Ease of use:} Moderate setup complexity, flexible configuration options \\
-% \emph{Effectiveness:} Effective in identifying vulnerabilities in various types of software \\
-% \emph{Limitations:} Lacks the ease of use and setup simplicity compared to AFL, limited documentation
-
-% \item \textbf{Peach Fuzzer:}\cite{PeachFuz35:online} \\
-% \emph{Functionality:} Commercial framework, custom data models and state machines, supports various target platforms \\
-% \emph{Ease of use:} Can be complex to set up, offers a graphical user interface (GUI) for ease of use \\
-% \emph{Effectiveness:} Widely used in industry, has discovered vulnerabilities in numerous software systems \\
-% \emph{Limitations:} Proprietary software, high cost, steep learning curve for complex testing scenarios
-
-% \item \textbf{Boofuzz:}\cite{pereyda2019boofuzz} \\
-% \emph{Functionality:} Network protocol fuzzing, custom protocol specifications \\
-% \emph{Ease of use:} Moderate setup complexity, flexible configuration options \\
-% \emph{Effectiveness:} Effective in finding vulnerabilities in network protocols and services \\
-% \emph{Limitations:} Limited support for non-network protocol targets, can be complex to configure for custom protocols
-
-% \item \textbf{Radamsa:}\cite{AkiHelin96:online} \\
-% \emph{Functionality:} General-purpose, black-box fuzzer for file formats, network protocols, and command-line utilities \\
-% \emph{Ease of use:} Simple to set up and use, especially for black-box testing scenarios \\
-% \emph{Effectiveness:} Has identified vulnerabilities in a wide range of software \\
-% \emph{Limitations:} Lacks feedback-driven fuzzing capabilities, limited in identifying complex vulnerabilities
-
-% % \item \textbf{AFL++:}\cite{257204} \\
-% \emph{Functionality:} Enhanced version of AFL with improved mutation strategies and performance \\
-% \emph{Ease of use:} Similar to AFL, simple setup, and easy to use for most users \\
-% \emph{Effectiveness:} Inherits AFL's effectiveness and adds various improvements \\
-% \emph{Limitations:} Still inherits some limitations of AFL, such as the lack
-% of support for multi-threaded applications and structured data formats
-
-% \item \textbf{For fuzzing embedded systems}:
-% \item \textbf{FirmFuzz:}\cite{srivastava2019firmfuzz}\cite{yun2022fuzzing} \\
-% \emph{Functionality:} Automated IoT firmware introspection and analysis \\
-% \emph{Ease of use:} Requires understanding of firmware images and emulation \\
-% \emph{Effectiveness:} Useful for identifying vulnerabilities in firmware images \\
-% \emph{Limitations:} Limited to firmware images, requires specific knowledge and expertise in firmware analysis
-
-% \item \textbf{Firmadyne:}\cite{chen2016towards} \\
-% \emph{Functionality:} Emulation and dynamic analysis of Linux-based embedded firmware \\
-% \emph{Ease of use:}  Moderate setup complexity, requires knowledge of firmware and Linux systems \\
-% \emph{Effectiveness:} Effective in analyzing firmware for potential vulnerabilities \\
-% \emph{Limitations:} Limited to Linux-based firmware, emulation may not accurately represent the actual hardware environment
-
-% \item \textbf{AVATAR:}\cite{zaddach2014avatar} \\
-% \emph{Functionality:} Framework for dynamic analysis and instrumentation of embedded systems \\
-% \emph{Ease of use:} Requires understanding of embedded systems and experience with dynamic analysis \\
-% \emph{Effectiveness:} Can be effective when combined with fuzzers for analyzing embedded firmware \\
-% \emph{Limitations:} Steep learning curve, requires customization for specific target systems
-% \end{itemize}
-
-The table:\ref{tab:fuzzers_table} showcases Fuzzing Tools and Fuzzers for traditional
-and embedded fuzzing.
-\begin{longtable}{>{\raggedright}p{2.1cm}>{\raggedright}p{3cm}>{\raggedright}p{3cm}>{\raggedright\arraybackslash}p{5cm}}
-\caption[Different Types of Fuzzers]{Types of Fuzzers}
-\label{tab:fuzzers_table}\\
+\begin{longtable}{p{2.5cm}p{3cm}p{3cm}p{5cm}}
+\caption{Different Types of Fuzzers}
+\label{tab:fuzzers_table} \\
 \toprule
 \textbf{Name} & \textbf{Functionality} & \textbf{Ease of use} & \textbf{Effectiveness and Limitations} \\
 \midrule
 \endfirsthead
-\multicolumn{4}{c}%
-{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
 \toprule
 \textbf{Name} & \textbf{Functionality} & \textbf{Ease of use} & \textbf{Effectiveness and Limitations} \\
 \midrule
 \endhead
-\acrshort{afl}\cite{zalewski2014american}\cite{GitHubgo92:online} & Coverage-guided,
-genetic algorithms, binary program fuzzing & Simple setup, easy to use & Widely
-adopted, has discovered numerous vulnerabilities. Lacks support for
-multi-threaded applications, and limited effectiveness in fuzzing structured data formats \\
+AFL\cite{zalewski2014american}\cite{GitHubgo92:online} & Coverage-guided, genetic algorithms, binary program fuzzing & Simple setup, easy to use & Widely adopted, has discovered numerous vulnerabilities. Lacks support for multi-threaded applications, and limited effectiveness in fuzzing structured data formats \\
 \midrule
-libFuzzer\cite{libFuzze17:online} & Coverage-guided, in-process fuzzing, targets libraries with
-well-defined APIs & Easy integration with LLVM-based projects, requires writing custom harness
-code & Has found vulnerabilities in widely-used libraries and software components. In-process
-fuzzing can result in performance bottlenecks, limited support for non-LLVM compilers \\
+libFuzzer\cite{libFuzze17:online} & Coverage-guided, in-process fuzzing, targets libraries with well-defined APIs & Easy integration with LLVM-based projects, requires writing custom harness code & Has found vulnerabilities in widely-used libraries and software components. In-process fuzzing can result in performance bottlenecks, limited support for non-LLVM compilers \\
 \midrule
-honggfuzz\cite{GitHubgo89:online} & Security-oriented, supports multiple platforms and
-feedback signals & Moderate setup complexity, flexible configuration options & Effective in
-identifying vulnerabilities in various types of software. Lacks the ease of use and setup
-simplicity compared to AFL, limited documentation \\
+honggfuzz\cite{GitHubgo89:online} & Security-oriented, supports multiple platforms and feedback signals & Moderate setup complexity, flexible configuration options & Effective in identifying vulnerabilities in various types of software. Lacks the ease of use and setup simplicity compared to AFL, limited documentation \\
 \midrule
-Peach Fuzzer\cite{PeachFuz35:online} & Commercial framework, custom data models and state machines,
-supports various target platforms & Can be complex to set up, offers a \acrlong{gui} for ease of
-use & Widely used in industry, has discovered vulnerabilities
-in numerous software systems. Proprietary software, high cost, steep learning curve for complex testing scenarios \\
+Boofuzz\cite{pereyda2019boofuzz} & Network protocol fuzzing, custom protocol specifications & Moderate setup complexity, flexible configuration options & Effective in finding vulnerabilities in network protocols and services. Limited support for non-network protocol targets, can be complex to configure for custom protocols \\
 \midrule
-Boofuzz\cite{pereyda2019boofuzz} & Network protocol fuzzing, custom protocol
-specifications & Moderate setup complexity, flexible configuration options & Effective in finding
-vulnerabilities in network protocols and services. Limited support for non-network protocol
-targets, can be complex to configure for custom protocols \\
+Radamsa\cite{AkiHelin96:online} & Black-box fuzzer for file formats, network protocols, and command-line utilities & Simple to use for black-box testing scenarios & Has identified vulnerabilities in a wide range of software. Lacks feedback-driven fuzzing capabilities, limited in identifying complex vulnerabilities \\
 \midrule
-Radamsa\cite{AkiHelin96:online} & Black-box fuzzer for file formats, network
-protocols, and command-line utilities & Simple to use for black-box testing
-scenarios & Has identified vulnerabilities in a wide range of software. Lacks feedback-driven
-fuzzing capabilities, limited in identifying complex vulnerabilities \\
+AFL++\cite{257204} & Enhanced version of AFL with improved mutation strategies and performance & Similar to AFL, simple setup, and easy to use for most users & Inherits AFL's effectiveness and adds various improvements. Still inherits some limitations of AFL, such as the lack of support for multi-threaded applications and structured data formats \\
 \midrule
-AFL++\cite{257204} & Enhanced version of AFL with improved mutation strategies and
-performance & Similar to AFL, simple setup, and easy to use for most users & Inherits
-AFL's effectiveness and adds various improvements. Still inherits some limitations of AFL,
-such as the lack of support for multi-threaded applications and structured data formats \\
+FirmFuzz\cite{srivastava2019firmfuzz}\cite{yun2022fuzzing}  & Automated IoT firmware introspection and analysis & Requires understanding of firmware images and emulation & Useful for identifying vulnerabilities in firmware images. Limited to firmware images, requires specific knowledge and expertise in firmware analysis \\
 \midrule
-FirmFuzz\cite{srivastava2019firmfuzz}\cite{yun2022fuzzing} & Automated \acrshort{iot} firmware
-introspection and analysis & Requires understanding of firmware images and emulation & Useful for
-identifying vulnerabilities in firmware images. Limited to firmware images, requires specific
-knowledge and expertise in firmware analysis \\
+Firmadyne\cite{chen2016towards} & Emulation and dynamic analysis of Linux-based embedded firmware & Moderate setup complexity, requires knowledge of firmware and Linux systems & Effective in analyzing firmware for potential vulnerabilities. Limited to Linux-based firmware, emulation may not accurately represent the actual hardware environment \\
 \midrule
-Firmadyne\cite{chen2016towards} & Emulation and dynamic analysis of Linux-based embedded
-firmware & Moderate setup complexity, requires knowledge of firmware and Linux systems & Effective
-in analyzing firmware for potential vulnerabilities. Limited to Linux-based firmware, emulation may
-not accurately represent the actual hardware environment \\
+AVATAR\cite{zaddach2014avatar}  & Framework for dynamic analysis and instrumentation of embedded systems & Requires understanding of embedded systems and experience with dynamic analysis & Can be effective when combined with fuzzers for analyzing embedded firmware. Steep learning curve, requires customization for specific target systems \\
 \midrule
-AVATAR\cite{zaddach2014avatar} & Framework for dynamic analysis and instrumentation of embedded
-systems & Requires understanding of embedded systems and experience with dynamic analysis & Can be
-effective when combined with fuzzers for analyzing embedded firmware. Steep learning curve,requires
-customization for specific target systems \\
-\midrule
+Atheris\cite{GitHubgo74:online} & Coverage-guided, native and Python fuzzer with integration with libFuzzer & Easy to use, Python script fuzzing & Effective in identifying vulnerabilities in Python and native extensions. Requires Python 3.3 or later, and it is mostly tested on Linux \\
+\bottomrule
 \end{longtable}
 
-\subsection{Open-source Projects and Ongoing Research}
-In this section, we explore open-source projects and ongoing research in the field of fuzzing.
-Fuzzing has gained significant attention in recent years due to its effectiveness in
-discovering vulnerabilities in software systems. As a result, researchers
-and practitioners are actively working on developing novel fuzzing techniques
-and tools to address the unique challenges posed by various target systems,
-including embedded systems, network protocols, and operating systems.
+\section{Open-source Projects and Ongoing Research}
+This section examines open-source projects and ongoing research in
+the realm of fuzzing. The effectiveness of security testing in
+revealing vulnerabilities in software systems has seen an increased
+spotlight in recent years due to the discovery of high-profile bugs.
+The Heartbleed\cite{Heartble53:online} bug, discovered in OpenSSL in 2014,
+and the Shellshock bug\cite{shetty2018shellshock},
+found in the Bash shell in the same year, are prime examples of serious
+vulnerabilities that have had wide-ranging impacts on the internet.
+Although not found through fuzzing, their discovery highlighted the critical
+importance of rigorous security testing. Section-\ref{par:success_of_fuzzing}, refers the accomplishments and
+vulnerabilities revealed by fuzzing techniques over time.
 
-We discuss several prominent open-source fuzzing projects, such as Google's
-OSS-Fuzz\cite{GitHubgo49:online}, several Afl based fuzzers and the
-GitHub repository dedicated to fuzzing research. These projects aim to advance the state-of-the-art
-in fuzzing by providing a platform for collaboration and knowledge sharing among the fuzzing community.
+Highlighted in this discussion are several high-profile open-source fuzzing initiatives,
+including Google's OSS-Fuzz\cite{GitHubgo49:online}, an assortment of AFL-based fuzzers\cite{257204},
+and a GitHub repository committed to research in fuzzing. The overarching goal
+of these projects is to push the boundaries of what is currently possible in fuzzing.
+This is achieved by providing a platform that fosters collaboration and facilitates
+knowledge sharing among members of the fuzzing community.
 
-By providing an overview of open-source projects and ongoing research in fuzzing,
-this section aims to offer valuable insights into the current state and
-future directions of fuzzing as a critical technique in software security testing.
+The overview of these open-source projects and the active research in fuzzing
+presented in this section is intended to provide invaluable insights into the
+current trends and potential future trajectories of fuzzing as an indispensable
+tool in software security testing.
 
 \textbf{OSS-Fuzz:\cite{GitHubgo49:online}} \\
-OSS-Fuzz is an open-source fuzzing service developed by Google, aiming to
-improve the security and stability of open-source software projects.
-By providing continuous fuzzing for select projects, OSS-Fuzz helps to
-identify and address critical vulnerabilities and bugs before they become
-potential exploits in widely-used software.
-OSS-Fuzz integrates with various fuzzing engines, such as libFuzzer and AFL,
-and supports multiple programming languages, including C, C++, Rust, and Go\cite{GitHubgo49:online}.
+Google's OSS-Fuzz represents a pioneering initiative in the domain of open-source fuzzing.
+Its uniqueness lies not merely in its goal of enhancing security and stability—which is indeed a
+common objective across all fuzzing projects—but in its commitment to continuous,
+automated fuzzing for selected open-source software projects.
 
-One of the primary goals of OSS-Fuzz is to encourage the adoption of fuzzing as
-a standard practice in the open-source community. Projects that integrate with
-OSS-Fuzz receive regular feedback on newly discovered vulnerabilities,
-enabling developers to address issues promptly and maintain a higher
-level of software security\cite{GitHubgo49:online}.
+OSS-Fuzz stands out in its adaptability, integrating with a variety of fuzzing engines such as
+libFuzzer\cite{libFuzze17:online} and AFL++\cite{257204}.
+Furthermore, it supports multiple programming languages, demonstrating its versatility in accommodating
+projects written in C, C++, Rust, and Go. This broad compatibility reinforces its value to the diverse
+landscape of open-source software\cite{ShortInt96:online}.
 
-\textbf{Fuzzbench: \cite{GitHubgo32:online}}\\
-Fuzzbench is a is a benchmarking service developed and supported by Google. It helps
-fuzzers that aim to evaluate and compare different fuzzing techniques. It
-provides a standardized testing environment for fuzzers,
-allowing developers to evaluate the performance of their fuzzers
-against other popular tools and provide reports as well\cite{FuzzBenc32:online}.
-Fuzzbench is a valuable tool for researchers and developers seeking to improve
-the state of fuzzing techniques.
-
-
-\textbf{OneFuzz: \cite{GitHubmi60:online}}\\
+\textbf{OneFuzz:\cite{GitHubmi60:online}}\\
 OneFuzz is a fuzzing-as-a-service platform developed by Microsoft, that aims to
 automate the detection and reporting of software bugs. It is a self-hosted
 platform that provides a range of features, including task scheduling,
@@ -389,24 +316,34 @@ Several fuzzers have been developed based on AFL's architecture, enhancing its
 capabilities or tailoring it for specific use cases. Some notable AFL-based
 fuzzers mentioned below:
 
-\begin{itemize}
-\item \textbf{AFL++:\cite{257204}\cite{GitHubAF78:online}} \\
+\textbf{AFL++:\cite{257204}\cite{GitHubAF78:online}} \\
 An enhanced version of AFL which
 introduces various performance improvements and new features, such as improved mutation strategies,
 faster execution, more and better mutations, improved instrumentation, and custom module support.
-\item \textbf{AFLFast:\cite{GitHubmb97:online}} \\
+
+\textbf{AFLFast:\cite{GitHubmb97:online}} \\
 A fuzzer that introduces a power schedule, aiming to prioritize
 seeds that are more likely to explore new paths and increase coverage.
 By doing so, AFLFast aims to improve the efficiency of fuzzing and maximize
 the code coverage in a shorter time frame\cite{bohme2016coverage}.
-\item \textbf{TriforceLinuxSyscallFuzzer:\cite{GitHubnc62:online}} \\
+
+\textbf{TriforceLinuxSyscallFuzzer:\cite{GitHubnc62:online}} \\
 This fuzzing technique specifically targets Linux system calls,
 aiming to identify potential vulnerabilities in the system call interface.
-\item \textbf{AFL-unicorn:\cite{GitHubBa48:online}} \\
-Afl-unicorn is a versatile AFL modification that enables fuzzing across various architectures,
-source code availability, input data formats, and binary formats (e.g., bare-metal firmware like Wi-Fi or baseband).
-The process involves first examining the binary and developing a fuzzer that emulates the state at
-the input of the parser procedure. AFL-unicorn uses a combination of AFL's coverage-guided fuzzing
-technique and Unicorn's emulation capabilities to explore the different execution paths
-of the target binary\cite{aflunico82:online}.
-\end{itemize}
+
+\textbf{AFL-unicorn:\cite{GitHubBa48:online}} \\
+AFL-Unicorn represents a noteworthy extension of the American Fuzzy Lop (AFL) framework,
+characterized by its versatility across various architectures, data input formats, and
+binary formats—including the firmware\cite{WhatIsFi49:online} of bare-metal devices
+such as Wi-Fi components and baseband\cite{Baseband1:online} processors in mobile phones.
+This utility is designed to examine binary files and then create a fuzzer that
+emulates the state at the entry point of the parsing routine.
+
+The efficacy of AFL-Unicorn is underpinned by the successful integration of
+AFL's coverage-guided fuzzing technique and the\cite{Unicorn–92:online} engine.
+This synergistic combination facilitates the exploration of multiple execution
+paths within the targeted binary, including those within proprietary,
+closed-source firmware like that running on baseband processors. This capability
+contributes to a thorough and comprehensive fuzzing process, even in the context
+of complex and traditionally opaque systems\cite{aflunico82:online}.
+\clearpage

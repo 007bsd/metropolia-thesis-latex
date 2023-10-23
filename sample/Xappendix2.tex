@@ -1,40 +1,107 @@
 % Appendix
-% Just to have more appendices and more content
+% And demonstrate text references and bibliography references in appendix
 
-\chapter{Dummy Appendix}\label{appx:second}
+\chapter{libFuzzer Target Program}\label{appx:second}
+The following is the detailed implementation of the
+target program\cite{FuzzingE54:online}\cite{zephyrsa35:online} used in
+the fuzz testing with Zephyr apps by utilizing the libFuzzer:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam aliquam purus, in ornare nulla imperdiet molestie. Nam tempus erat eu dui rhoncus et vestibulum mi elementum. Ut porttitor elit sit amet justo dignissim sit amet sagittis massa egestas. Mauris sed dolor eget dui fermentum sodales ut eu nibh.
+\section*{main.c}
+\begin{minted}[linenos,frame=lines,baselinestretch=1.2,breaklines]{c}
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
 
-Quisque augue est, elementum ac porttitor non, porttitor ac orci. Donec hendrerit, ligula ac luctus egestas, sem dolor pretium nunc, sed vehicula magna diam a massa. Donec mattis, arcu et tempor mattis, risus tortor ultrices metus, nec sodales sem dolor eu elit. Nullam egestas enim at odio pellentesque bibendum.
 
-Donec et sapien ac leo condimentum vulputate id et tellus. Maecenas hendrerit malesuada interdum. Aenean dignissim sem faucibus elit congue faucibus id non risus. Morbi at dui non tortor pellentesque consequat non eget urna. Cras in sapien dui, a tincidunt velit.
+/* Fuzz testing is coverage-based, so we want to hide a failure case
+ * (a write through a null pointer in this case) down inside a call
+ * tree in such a way that it would be very unlikely to be found by
+ * randomly-selected input.  But the fuzzer can still find it in
+ * linear(-ish) time by discovering each new function along the way
+ * and then probing that new space.  The 1 in 2^56 case here would
+ * require months-to-years of work for a large datacenter, but the
+ * fuzzer gets it in 20 seconds or so. This requires that the code for
+ * each case be distinguishable/instrumentable though, which is why we
+ * generate the recursive handler functions this way and disable
+ * inlining to prevent optimization.
+ *
+ * https://github.com/zephyrproject-rtos/zephyr/blob/main/samples/subsys/debug/fuzz/src/main.c
+ */
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam aliquam purus, in ornare nulla imperdiet molestie. Nam tempus erat eu dui rhoncus et vestibulum mi elementum. Ut porttitor elit sit amet justo dignissim sit amet sagittis massa egestas. Mauris sed dolor eget dui fermentum sodales ut eu nibh.
+int *global_null_ptr;
 
-Quisque augue est, elementum ac porttitor non, porttitor ac orci. Donec hendrerit, ligula ac luctus egestas, sem dolor pretium nunc, sed vehicula magna diam a massa. Donec mattis, arcu et tempor mattis, risus tortor ultrices metus, nec sodales sem dolor eu elit. Nullam egestas enim at odio pellentesque bibendum.
+// crash
+static const uint8_t key[] = { 0x9e, 0x21, 0x0c, 0x18, 0x9d, 0xd1, 0x7d };
+bool found[sizeof(key)/sizeof(key[0])];
 
-Donec et sapien ac leo condimentum vulputate id et tellus. Maecenas hendrerit malesuada interdum. Aenean dignissim sem faucibus elit congue faucibus id non risus. Morbi at dui non tortor pellentesque consequat non eget urna. Cras in sapien dui, a tincidunt velit.
+#define LASTKEY (sizeof(key)/sizeof(key[0]) - 1)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam aliquam purus, in ornare nulla imperdiet molestie. Nam tempus erat eu dui rhoncus et vestibulum mi elementum. Ut porttitor elit sit amet justo dignissim sit amet sagittis massa egestas. Mauris sed dolor eget dui fermentum sodales ut eu nibh.
+#define GEN_CHECK(cur, nxt)                           \
+    void check##nxt(uint8_t *data, size_t sz);        \
+    void check##cur(uint8_t *data, size_t sz)         \
+    {                                                 \
+        if (cur < sz && data[cur] == key[cur]) {      \
+            if (!found[cur]) {                        \
+                printf("Found key %d\n", cur);        \
+                found[cur] = true;                    \
+            }                                         \
+            if (cur == LASTKEY) {                     \
+                *global_null_ptr = 0; /* boom! */     \
+            } else {                                  \
+                check##nxt(data, sz);                 \
+            }                                         \
+        }                                             \
+    }
 
-Quisque augue est, elementum ac porttitor non, porttitor ac orci. Donec hendrerit, ligula ac luctus egestas, sem dolor pretium nunc, sed vehicula magna diam a massa. Donec mattis, arcu et tempor mattis, risus tortor ultrices metus, nec sodales sem dolor eu elit. Nullam egestas enim at odio pellentesque bibendum.
+GEN_CHECK(0, 1)
+GEN_CHECK(1, 2)
+GEN_CHECK(2, 3)
+GEN_CHECK(3, 4)
+GEN_CHECK(4, 5)
+GEN_CHECK(5, 6)
+GEN_CHECK(6, 0)
 
-Donec et sapien ac leo condimentum vulputate id et tellus. Maecenas hendrerit malesuada interdum. Aenean dignissim sem faucibus elit congue faucibus id non risus. Morbi at dui non tortor pellentesque consequat non eget urna. Cras in sapien dui, a tincidunt velit.
+#ifdef USE_LIBFUZZER
+int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
+    check0((uint8_t*)data, size);
+    return 0;
+}
+#else
+int main(void)
+{
+    /*Matches key
+    causes crash*/
+    //uint8_t test_data[] = { 0x9e, 0x21, 0x0c, 0x18, 0x9d, 0xd1, 0x7d };
+    /*Does not match key
+    does not crash*/
+    uint8_t test_data[] = { 0x9e, 0x21, 0x0c, 0x18, 0x9d, 0xd1, 0x7e };
+    check0(test_data, sizeof(test_data)/sizeof(test_data[0]));
+    return 0;
+}
+#endif
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam aliquam purus, in ornare nulla imperdiet molestie. Nam tempus erat eu dui rhoncus et vestibulum mi elementum. Ut porttitor elit sit amet justo dignissim sit amet sagittis massa egestas. Mauris sed dolor eget dui fermentum sodales ut eu nibh.
+\end{minted}
 
-Quisque augue est, elementum ac porttitor non, porttitor ac orci. Donec hendrerit, ligula ac luctus egestas, sem dolor pretium nunc, sed vehicula magna diam a massa. Donec mattis, arcu et tempor mattis, risus tortor ultrices metus, nec sodales sem dolor eu elit. Nullam egestas enim at odio pellentesque bibendum.
+\section*{CMakeLists.txt}
+\begin{minted}{cmake}
+    cmake_minimum_required(VERSION 3.20.0)
+    project(sample_zephyr_libfuzzer)
 
-Donec et sapien ac leo condimentum vulputate id et tellus. Maecenas hendrerit malesuada interdum. Aenean dignissim sem faucibus elit congue faucibus id non risus. Morbi at dui non tortor pellentesque consequat non eget urna. Cras in sapien dui, a tincidunt velit.
+    option(USE_LIBFUZZER "Build with libfuzzer" OFF)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam aliquam purus, in ornare nulla imperdiet molestie. Nam tempus erat eu dui rhoncus et vestibulum mi elementum. Ut porttitor elit sit amet justo dignissim sit amet sagittis massa egestas. Mauris sed dolor eget dui fermentum sodales ut eu nibh.
+    set(CMAKE_C_COMPILER clang)
 
-Quisque augue est, elementum ac porttitor non, porttitor ac orci. Donec hendrerit, ligula ac luctus egestas, sem dolor pretium nunc, sed vehicula magna diam a massa. Donec mattis, arcu et tempor mattis, risus tortor ultrices metus, nec sodales sem dolor eu elit. Nullam egestas enim at odio pellentesque bibendum.
+    if(USE_LIBFUZZER)
+      add_definitions(-DUSE_LIBFUZZER)
+      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fsanitize=fuzzer,address,undefined")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -fsanitize=fuzzer,address,undefined")
+      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fprofile-instr-generate -fcoverage-mapping")
+    endif()
 
-Donec et sapien ac leo condimentum vulputate id et tellus. Maecenas hendrerit malesuada interdum. Aenean dignissim sem faucibus elit congue faucibus id non risus. Morbi at dui non tortor pellentesque consequat non eget urna. Cras in sapien dui, a tincidunt velit.
+    add_executable(zephyr_libfuzzer src/main.c)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam aliquam purus, in ornare nulla imperdiet molestie. Nam tempus erat eu dui rhoncus et vestibulum mi elementum. Ut porttitor elit sit amet justo dignissim sit amet sagittis massa egestas. Mauris sed dolor eget dui fermentum sodales ut eu nibh.
+    if(USE_LIBFUZZER)
+      set_target_properties(zephyr_libfuzzer PROPERTIES LINK_FLAGS "-g -fsanitize=fuzzer,address,undefined")
+    endif()
 
-Quisque augue est, elementum ac porttitor non, porttitor ac orci. Donec hendrerit, ligula ac luctus egestas, sem dolor pretium nunc, sed vehicula magna diam a massa. Donec mattis, arcu et tempor mattis, risus tortor ultrices metus, nec sodales sem dolor eu elit. Nullam egestas enim at odio pellentesque bibendum.
-
-Donec et sapien ac leo condimentum vulputate id et tellus. Maecenas hendrerit malesuada interdum. Aenean dignissim sem faucibus elit congue faucibus id non risus. Morbi at dui non tortor pellentesque consequat non eget urna. Cras in sapien dui, a tincidunt velit.
+\end{minted}

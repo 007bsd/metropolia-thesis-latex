@@ -1,27 +1,136 @@
 % Appendix
 % And demonstrate text references and bibliography references in appendix
 
-\chapter{Some Appendix}\label{appx:first}
+\chapter{AFL++ Target Program}\label{appx:first}
+The following is the detailed implementation of the
+target program\cite{FuzzingE54:online}\cite{zephyrsa35:online} used in
+the fuzz testing with Zephyr apps by utilizing the AFL++\cite{257204}:
 
-Note that every appendix will be a chapter.
+\section*{main.c}
+\begin{minted}[linenos,frame=lines,baselinestretch=1.2,breaklines]{c}
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
 
-Sorry for the ugly hack on how to count the total pages per appendix.
+/* Fuzz testing is coverage-based, so we want to hide a failure case
+ * (a write through a null pointer in this case) down inside a call
+ * tree in such a way that it would be very unlikely to be found by
+ * randomly-selected input.  But the fuzzer can still find it in
+ * linear(-ish) time by discovering each new function along the way
+ * and then probing that new space.  The 1 in 2^56 case here would
+ * require months-to-years of work for a large datacenter, but the
+ * fuzzer gets it in 20 seconds or so. This requires that the code for
+ * each case be distinguishable/instrumentable though, which is why we
+ * generate the recursive handler functions this way and disable
+ * inlining to prevent optimization.
+ *
+ * https://github.com/zephyrproject-rtos/zephyr/blob/main/samples/subsys/debug/fuzz/src/main.c
+ */
+
+int *global_null_ptr;
+
+// crash
+static const uint8_t key[] = { 0x9e, 0x21, 0x0c, 0x18, 0x9d, 0xd1, 0x7d };
+bool found[sizeof(key)/sizeof(key[0])];
+
+#define LASTKEY (sizeof(key)/sizeof(key[0]) - 1)
+
+#define GEN_CHECK(cur, nxt)                           \
+    void check##nxt(uint8_t *data, size_t sz);        \
+    void check##cur(uint8_t *data, size_t sz)         \
+    {                                                 \
+        if (cur < sz && data[cur] == key[cur]) {      \
+            if (!found[cur]) {                        \
+                printf("Found key %d\n", cur);        \
+                found[cur] = true;                    \
+            }                                         \
+            if (cur == LASTKEY) {                     \
+                *global_null_ptr = 0; /* boom! */     \
+            } else {                                  \
+                check##nxt(data, sz);                 \
+            }                                         \
+        }                                             \
+    }
+
+GEN_CHECK(0, 1)
+GEN_CHECK(1, 2)
+GEN_CHECK(2, 3)
+GEN_CHECK(3, 4)
+GEN_CHECK(4, 5)
+GEN_CHECK(5, 6)
+GEN_CHECK(6, 0)
 
 
-Of course with section and subsection.
+int main(int argc, char **argv)
+{
+    /*Matches key
+    causes crash*/
+    //uint8_t test_data[] = { 0x9e, 0x21, 0x0c, 0x18, 0x9d, 0xd1, 0x7d };
+    // no crash
+    //uint8_t test_data[] = { 0x9e, 0x21, 0x0c, 0x18, 0x9d, 0xd1, 0x7e };
+    // Open the file
+   if (argc != 2) {
+        printf("Usage: %s <input_file>\n", argv[0]);
+        return 1;
+    }
 
-\section{Appendix Section}
+    // Open the file
+    FILE *file = fopen(argv[1], "rb");
+    if (file == NULL) {
+        printf("Could not open file %s\n", argv[1]);
+        return 1;
+    }
 
-And you can cite \cite{tobias:book} stuff, it will go into the main bibliography.
+    // Determine the size of the file
+    fseek(file, 0, SEEK_END);
+    size_t size = ftell(file);
+    fseek(file, 0, SEEK_SET);
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam aliquam purus, in ornare nulla imperdiet molestie. Nam tempus erat eu dui rhoncus et vestibulum mi elementum. Ut porttitor elit sit amet justo dignissim sit amet sagittis massa egestas. Mauris sed dolor eget dui fermentum sodales ut eu nibh.
+    // Allocate memory for the data
+    uint8_t *test_data = malloc(size);
+    if (test_data == NULL) {
+        printf("Could not allocate memory for test data\n");
+        fclose(file);
+        return 1;
+    }
 
-Quisque augue est, elementum ac porttitor non, porttitor ac orci. Donec hendrerit, ligula ac luctus egestas, sem dolor pretium nunc, sed vehicula magna diam a massa. Donec mattis, arcu et tempor mattis, risus tortor ultrices metus, nec sodales sem dolor eu elit. Nullam egestas enim at odio pellentesque bibendum.
+    // Read the data from the file
+    if (fread(test_data, 1, size, file) != size) {
+        printf("Error reading file %s\n", argv[1]);
+        free(test_data);
+        fclose(file);
+        return 1;
+    }
 
-\subsection{With a Subsection}
+    // Close the file
+    fclose(file);
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam aliquam purus, in ornare nulla imperdiet molestie. Nam tempus erat eu dui rhoncus et vestibulum mi elementum. Ut porttitor elit sit amet justo dignissim sit amet sagittis massa egestas. Mauris sed dolor eget dui fermentum sodales ut eu nibh.
+    // Use the data
+    check0(test_data, size);
 
-Quisque augue est, elementum ac porttitor non, porttitor ac orci. Donec hendrerit, ligula ac luctus egestas, sem dolor pretium nunc, sed vehicula magna diam a massa. Donec mattis, arcu et tempor mattis, risus tortor ultrices metus, nec sodales sem dolor eu elit. Nullam egestas enim at odio pellentesque bibendum.
+    // Clean up
+    free(test_data);
+    return 0;
+}
 
-Donec et sapien ac leo condimentum vulputate id et tellus. Maecenas hendrerit malesuada interdum. Aenean dignissim sem faucibus elit congue faucibus id non risus. Morbi at dui non tortor pellentesque consequat non eget urna. Cras in sapien dui, a tincidunt velit.
+\end{minted}
+
+\section*{CMakeLists.txt}
+\begin{minted}{cmake}
+    cmake_minimum_required(VERSION 3.20.0)
+    project(sample_zephyr_afl)
+
+    option(USE_AFL "Use afl" OFF)
+
+    if(USE_AFL)
+        set(CMAKE_C_COMPILER afl-gcc-fast)
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fpic -fprofile-arcs -ftest-coverage")
+    else()
+        set(CMAKE_C_COMPILER gcc)
+    endif()
+
+    add_executable(zephyr_aflfuzzer src/main.c)
+    \end{minted}
+
+\clearpage

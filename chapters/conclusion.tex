@@ -1,6 +1,76 @@
 % Conclusions
 %\clearpage%if the chapter heading starts close to bottom of the page, force a line break and remove the vertical vspace
 \vspace{21.5pt}
-\chapter{Conclusions}
+\chapter{Discussions and Conclusions}
 
-Check Final Year Project Guide for the content of Conclusions chapter.
+\section{Discussions}
+Fuzzing, in the realm of software testing, is multifaceted. At its core,
+fuzzing can be relatively straightforward to deploy, acting as a quick initial
+sieve for potential vulnerabilities. However, in other contexts, its
+implementation demands extensive groundwork, especially when targeting
+complex or novel systems. The findings from fuzzing may vary – while some
+vulnerabilities are promptly detected, others remain elusive. One inherent
+limitation of fuzzing is its inability to conclusively determine a system's robustness.
+The absence of detected bugs doesn't necessarily indicate a system's invulnerability;
+instead, it could highlight areas where the fuzzer might require optimization or redirection.
+
+The landscape of fuzzing is dynamic. Although numerous open-source fuzzers
+continuously emerge, often enhancing specific components of fuzzing,
+their evolution is twofold. Some lose traction, lacking the maintenance to
+remain relevant. In contrast, others merge into larger projects
+contributing their innovations to more extensive frameworks.
+A notable examples in the realm of modern fuzzing tools are AFL++, libFuzzer, Atheris and other
+custom fuzzers which exemplify the principle of continuous adaptation and improvement
+in the fuzzing community.
+
+The dawn of AI-enhanced fuzzing\cite{GoogleOn27:online} introduces another layer of complexity.
+AI-driven fuzzing tools, leveraging machine learning models,
+promise adaptive test scenarios and heightened vulnerability detection rates.
+They aim to overcome the traditional limitations of fuzzers, offering the potential
+for more context-aware and target-specific vulnerability detection.
+However, while promising, this AI infusion is still in initial stages,
+requiring comprehensive evaluation over time.
+
+Reflecting on this journey of exploring fuzzing, it became evident
+that the field, although a sub-discipline of software testing,
+offers a vast expanse of knowledge. Venturing into this domain presented
+numerous challenges, from grasping foundational concepts to navigating
+intricate tooling setups. Notably, substantial time was invested in comprehending
+the basics and configuring systems aptly for fuzzing. With this foundational
+understanding now in place, future endeavors can pivot towards assessing varied
+fuzzing methodologies across diverse scenarios.
+
+In conclusion, while fuzzing provides an invaluable avenue for enhancing system
+security, the path forward involves continuous learning, tool assessment,
+and methodological refinement. As the field evolves, especially with AI's inclusion,
+it's imperative to stay updated, prioritizing objectives to harness the maximum
+potential of fuzzing in software testing.
+
+\section{Conclusions}
+This research highlights the significant potential of fuzzing within software
+testing for embedded systems. Hands-on experimentation using both
+libFuzzer and AFL++ within the embedded system architecture of the case company
+demonstrated their effectiveness and ability to swiftly identify vulnerabilities.
+The study showed that these fuzzing tools can detect issues more rapidly than
+certain traditional methods.
+
+A notable aspect of these fuzzing tools is the incorporation of built-in
+reporting mechanisms. This functionality demystifies the intricate task of
+determining and comprehending code coverage, assuring that potential
+vulnerabilities are duly identified. The automation and clarity these tools
+provide can significantly enhance the efficiency of the testing process.
+
+Looking ahead, there exists a strong rationale for deeper integration of
+fuzzing into standard software development lifecycles, especially within
+continuous testing frameworks. As the intricacy of software escalates, so does
+the need for thorough and streamlined testing processes. The adoption of
+fuzzing tools, as evidenced by the outcomes using libFuzzer and AFL++, presents
+a tactical advantage for organizations, guaranteeing software that is both
+operational and resilient to potential threats.
+
+To conclude, this thesis, while presenting an overview of the prevailing
+scenario, also serves as a roadmap for the case company's onward
+testing strategies. The importance of persistently evolving testing
+methodologies is accentuated, and with the knowledge derived from
+the empirical tests, the company stands poised for the adoption of more
+sophisticated and integrated testing approaches.

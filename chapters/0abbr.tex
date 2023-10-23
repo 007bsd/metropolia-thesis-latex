@@ -29,8 +29,12 @@
 \newacronym{afl}{AFL}{American Fuzzy Lop}
 \newacronym{ci/cd}{CI/CD}{Continuous Integration and Continuous Deployment}
 \newacronym{gui}{GUI}{Graphical User Interface}
-
-
+\newacronym{csa}{CSA}{Current State Analysis}
+\newacronym{cpu}{CPU}{Central Processing Unit}
+\newacronym{pos}{POS}{Point Of Sale}
+\newacronym{hsm}{HSM}{hardware security module}
+\newacronym{gcc}{GCC}{GNU Compiler Collection}
+\newacronym{qemu}{QEMU}{Quick Emulator}
 % Glossary entries
 
 \newglossaryentry{part_key}{
@@ -55,7 +59,19 @@
 	system, network, or website by inundating it with a flood of traffic
 	from multiple sources}
 }
+\newglossaryentry{edge-cases}
+{
+	name=edge-cases,
+	description={uncommon inputs that explore the
+	software's behavior at the outer limits or boundaries of what is considered normal or typical.}
+}
 
+\newglossaryentry{CSA}
+{
+	name=current state analysis,
+	description={uncommon inputs that explore the
+	software's behavior at the outer limits or boundaries of what is considered normal or typical.}
+}
 \newglossaryentry{RTOS}
 {
 	name=Real Time Operating System,
@@ -63,7 +79,7 @@
 	ensure real-time response and predictability in embedded systems
 	with critical timing requirements}
 }
-\newglossaryentry{Fuzzers}
+\newglossaryentry{fuzzers}
 {
 	name=Fuzzers,
 	description={Fuzzers are software testing tools used to find security
@@ -86,4 +102,18 @@
 {
 	name=Fuzzing Engine,
 	description={A tool that finds and executes inputs for a fuzz target}
+}
+\newglossaryentry{IAR}
+{
+	name=Ingenjörsfirma Anders Rundgren,
+	description={IAR Systems is a Swedish computer software company that
+	offers development tools for embedded systems}
+}
+
+\newglossaryentry{QEMU}
+{
+	name=Quick Emulator,
+	description={Free and open-source software
+	product that is used to emulate a
+	variety of computer system}
 }
