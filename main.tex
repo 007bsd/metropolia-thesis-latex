@@ -44,6 +44,19 @@
 % #And if still some citation or label warnings, compile once more
 % $ xelatex -shell-escape -8bit main
 
+% LuaLaTeX works too.
+% # minted require -shell-escape to run  external script.
+% # -8bit avoid ^^I for tabs in minted.
+% $ lualatex -shell-escape -8bit main
+% # If any change in the bibliography
+% $ biber main
+% # If any change with the abbreviation or acronym
+% $ makeglossaries main
+% #Then compile again
+% $ lualatex -shell-escape -8bit main
+% #And if still some citation or label warnings, compile once more
+% $ lualatex -shell-escape -8bit main
+
 %----------------------------------------------------------------------------------------
 %	THESIS INFO
 %----------------------------------------------------------------------------------------
@@ -194,6 +207,8 @@
 % are safe to delete this lines (and the next samples) once you refreshed your LaTeX
 % skills (and safe to delete the sample folder and all its file too).
 \input{sample/Xappendix2.tex}
+
+\input{sample/Xappendix3.tex}
 
 % BSD change
 %\setlength{\footskip}{25pt}

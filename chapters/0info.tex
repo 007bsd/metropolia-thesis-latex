@@ -56,42 +56,66 @@ Tämä on tiivistlemän toinen kappale.
 \def\metropoliaspecialisation{Networking and Services }
 \def\thesisen{Master's Thesis} % change to your need, e.g. master's
 \def\metropoliainstructors{
-First name Last name, Title (e.g.: Project Manager)\newline
-First name Last name, Title (Sami Sainio: Principal Lecturer)
+Sami Sainio, Senior Lecturer
 }
 \def\abstract{
-In the era of pervasive digital interconnectedness, the robustness and security
-resilience of embedded software systems have become paramount. These systems
-are integral to various industries, such as automotive, aviation, and consumer
-electronics. As they grow in complexity, they simultaneously present an expanding
-cybersecurity threat landscape. This thesis focuses on enhancing a case company's
-embedded software systems testing methods through fuzz testing-an automated
-technique that uncovers vulnerabilities by inputting invalid or unexpected data.
+% In the era of pervasive digital interconnectedness, the robustness and security
+% resilience of embedded software systems have become paramount. These systems
+% are integral to various industries, such as automotive, aviation, and consumer
+% electronics. As they grow in complexity, they simultaneously present an expanding
+% cybersecurity threat landscape. This thesis focuses on enhancing a case company's
+% embedded software systems testing methods through fuzz testing-an automated
+% technique that uncovers vulnerabilities by inputting invalid or unexpected data.
 
-%\hspace{2cm}
-\hspace{0.5cm}The motivation for this study stems from the escalating need for
-stronger security measures within embedded systems to counteract growing
-cybersecurity threats. A significant challenge is selecting an appropriate
-fuzzing tool from the multitude of available options. This study, therefore,
-adopts a practical, hands-on approach, conducted within the unique environment
-of a case company.
+% %\hspace{2cm}
+% \hspace{0.5cm}The motivation for this study stems from the escalating need for
+% stronger security measures within embedded systems to counteract growing
+% cybersecurity threats. A significant challenge is selecting an appropriate
+% fuzzing tool from the multitude of available options. This study, therefore,
+% adopts a practical, hands-on approach, conducted within the unique environment
+% of a case company.
 
-\hspace{0.5cm}Following a literature review of various fuzzing tools,
-two popular fuzzing engines-American Fuzzy Lop (AFL++) and libFuzzer,
-were selected for the proof-of-concept.
-These tools were chosen based on their reputation, widespread use,
-and community support. The study examines critical factors such as
-ease of integration, efficiency, speed, code coverage, and ability to
-identify vulnerabilities. This provides an impartial perspective to assist
-the decision-making process.
+% \hspace{0.5cm}Following a literature review of various fuzzing tools,
+% two popular fuzzing engines-American Fuzzy Lop (AFL++) and libFuzzer,
+% were selected for the proof-of-concept.
+% These tools were chosen based on their reputation, widespread use,
+% and community support. The study examines critical factors such as
+% ease of integration, efficiency, speed, code coverage, and ability to
+% identify vulnerabilities. This provides an impartial perspective to assist
+% the decision-making process.
 
-\hspace{0.5cm}\hspace{0.5cm}In conclusion, this study offers valuable insights
-into the intricacies of fuzzing, demonstrating the capabilities of tools such as
-AFL++ and libFuzzer. Future research could delve deeper into
-integration of these tools, exploring their scalability and
-effectiveness in CI/CD, and possibly identifying
-areas where new fuzzing techniques or tools might be developed for the case company.
+% \hspace{0.5cm}\hspace{0.5cm}In conclusion, this study offers valuable insights
+% into the intricacies of fuzzing, demonstrating the capabilities of tools such as
+% AFL++ and libFuzzer. Future research could delve deeper into
+% integration of these tools, exploring their scalability and
+% effectiveness in CI/CD, and possibly identifying
+% areas where new fuzzing techniques or tools might be developed for the case company.
 
+%%%%%% version 5
+
+In today's digital era, ensuring the security and reliability of embedded software systems is
+crucial. These systems are integral to various applications and industries, including automotive,
+aviation, and consumer electronics. As systems become more complex, they face an increasing number
+of cybersecurity threats. This thesis aims to improve the testing methods for embedded software
+systems at a specific case company by introducing fuzz testing—an automated technique that
+identifies vulnerabilities using unexpected or invalid data.
+
+\hspace{0.5cm}This study follows a practical approach within the company's environment.
+A literature review guided the selection of American Fuzzy Lop (AFL++) and libFuzzer for
+the proof-of-concept. Factors such as ease of integration, efficiency, and vulnerability
+identification were considered in the tool selection process.
+
+\hspace{0.5cm}The decision-making process evaluates AFL++ and libFuzzer's capabilities
+and their alignment with the company's software needs and security goals. It also assesses
+their feasibility for integration into the software development workflow. Through a careful
+assessment of their performance in identifying vulnerabilities using test cases, the company
+can decide whether to integrate one or both tools to enhance software security through automated fuzz testing.
+
+\hspace{0.5cm}In conclusion, this study provides an overview of the fuzz testing process and
+demonstrates the capabilities of AFL++ and libFuzzer. Future research could explore their
+integration into CI/CD pipelines, scalability, and real-world effectiveness. There is potential
+for further exploration of fuzzing techniques or tools tailored to the cybersecurity needs of the
+case company.
 }
 \def\metropoliakeywords{fuzzing, embedded system, AFL++, libFuzzer}
 \def\subject{short description of the thesis. Max 255 characters.}%for the pdf metadata/properties. If not used, empty it and also the \def\aihe.

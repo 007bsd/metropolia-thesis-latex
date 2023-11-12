@@ -1,0 +1,54 @@
+% % Appendix
+% % And demonstrate text references and bibliography references in appendix
+
+
+\chapter{Test Data Creation for AFL++-QEMU mode}\label{appx:third}
+The following python program to create test data for AFL++-QEMU mode.
+
+\section*{generate\_files.py}
+\begin{minted}{python}
+import os
+import random
+import secrets
+import struct
+
+# Number of files to generate
+num_files = 10
+
+# Size of the buffer in bytes
+buffer_size = 1024
+
+for i in range(num_files):
+
+    # Generate a random integer
+    random_int = random.randint(-2147483648, 2147483647)
+    int_str = str(random_int)
+
+    # Generate a random float
+    random_float = random.uniform(-1e5, 1e5)
+    float_str = f"{random_float:.2f}"
+
+    # Generate a random string
+    random_string = secrets.token_urlsafe(random.randint(1, 50))
+
+    # Generate random bytes
+    random_bytes = os.urandom(random.randint(1, 50))
+
+    # Generate a random boolean
+    random_bool = random.choice([True, False])
+    bool_str = str(random_bool)
+
+    # Combine all data into one string
+    combined_data = f"{int_str}\n{float_str}\n{random_string}\n{random_bytes}\n{bool_str}\n".encode('utf-8')
+
+    # Check buffer size and truncate if necessary
+    if len(combined_data) > buffer_size:
+        combined_data = combined_data[:buffer_size]
+
+    # Create a file and write the data to it
+    with open(f"input/file_{i}.bin", "wb") as f:
+        f.write(combined_data)
+
+\end{minted}
+
+%\clearpage

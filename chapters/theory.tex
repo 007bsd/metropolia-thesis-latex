@@ -4,7 +4,7 @@
 \chapter{Theoretical background: Software And Software Testing}
 
 This chapter explores the concept of computer software and its foundational
-theory as it applies to software testing. The discussion commences with a
+theory as it applies to software testing. The discussion begins with a
 comprehensive overview of computer software and its historical progression.
 Subsequently, the focus shifts to the crucial aspects of software testing.
 The discourse culminates in an exploration of software quality from the
@@ -15,114 +15,110 @@ significance in the development and maintenance of high-quality software systems
 \section{Computer Software}
 Computer software, also known as programs or applications, encapsulates a set of instructions that
 enable interaction with a computer or digital device to accomplish a broad array of
-tasks\cite{Software76:online}. This could span operating systems\cite{stallings1998operating},
-application software\cite{Definiti63:online} such as
+tasks~\cite{Software76:online}. This includes operating systems~\cite{stallings1998operating},
+application software~\cite{Definiti63:online} such as
 word processors or graphic design tools, and more complex systems like databases or
-scientific simulations\cite{Definiti63:online}.
+scientific simulations~\cite{Definiti63:online}.
 
 Software can be classified into various categories, with one crucial distinction
 being between system software, which governs the fundamental functions of a
 computer or network, and application software, which executes tasks for the
-user\cite{WhatisSy89:online}\cite{Definiti63:online}.
+user~\cite{WhatisSy89:online}\cite{Definiti63:online}.
 Additionally, software can be classified as local, denoting that it operates on
 the user's device, or web-based, meaning it functions on remote servers and is
 accessed via the internet. A growing amount of software is crafted for handheld
 devices such as smartphones and tablets, commonly referred to as mobile
-applications or `apps'\cite{yetisen2014regulation}.
+applications or `apps'~\cite{yetisen2014regulation}.
 
-The evolution of software development dates back to the 1950s and 60s, low-level assembly
-languages were prevalent\cite{lehman2002software}. However, from the 1970s onward,
-high-level languages providing a greater degree of abstraction from the hardware\cite{WhatisHa66:online}
-have come to be the norm. For instance, the C programming language, developed at Bell Labs in the
-early 1970s, has been extensively used for system programming and embedded systems\cite{kernighan2002c}.
+The evolution of software development dates back to the 1950s and 60s when low-level assembly
+languages were prevalent~\cite{lehman2002software}. However, from the 1970s onward, high-level
+languages providing a greater degree of abstraction from the hardware~\cite{WhatisHa66:online}
+have become the norm. For instance, the C programming language, developed at Bell Labs in the
+early 1970s, has been extensively used for system programming and embedded systems~\cite{kernighan2002c}.
 Python, introduced in 1991, has gained popularity in fields like web development,
 data analysis, and artificial intelligence due to its emphasis on code readability and a
-comprehensive standard library\cite{van2007python}. Programming Languages like
-Swift\cite{rebouccas2016empirical} and Kotlin\cite{samuel2017programming},
+comprehensive standard library~\cite{van2007python}. Programming languages like
+Swift~\cite{rebouccas2016empirical} and Kotlin~\cite{samuel2017programming},
 introduced in 2014 and 2011 respectively, have been officially adopted by Apple and Google
-for iOS\cite{WhatIsSw25:online} and Android mobile app development\cite{WhatIsKo37:online}.
+for iOS~\cite{WhatIsSw25:online} and Android mobile app development~\cite{WhatIsKo37:online}.
 These languages, while newer, have quickly gained traction due to their ease of use,
 modern features, and support from their respective tech giants.
 
-The emergence of these languages and many others have contributed to the rich,
+The emergence of these languages and many others has contributed to the rich,
 diverse landscape of software development. The evolution and selection of programming
 languages continue to be driven by factors such as project requirements,
-efficiency, ease of use, and the ongoing growth and transformation of technology\cite{goosen2008brief}.
+efficiency, ease of use, and the ongoing growth and transformation of
+technology~\cite{goosen2008brief}.
 
-The integration of software into almost every facet of modern life and
-business operations has amplified the importance of delivering high-quality,
-error-free software applications\cite{kahn2002information}. This emphasis is
-driven by a multitude of factors. User expectations, for instance, have become
-increasingly high, requiring software to not only meet functional needs but
-also offer seamless and intuitive interfaces\cite{ryker1997determinants}.
-System reliability\cite{pham2007system} is essential as software failures can have severe
-ramifications, including financial losses, compromised safety, or
-negative impacts on company reputation. Additionally, regulatory and compliance requirements
-mandate certain standards of performance and reliability, particularly in industries such as
-healthcare, finance, and aviation\cite{mishra2022cybersecurity}. Furthermore, in a
-competitive business environment, the quality of software can be a key differentiator
-that influences customer loyalty and market share\cite{rust1993customer}. Despite the obvious
-significance of these factors, numerous software applications still experience
-operational failures due to inadequate adherence to rigorous software
-engineering processes, including critical stages such as
-requirements elicitation, system design, implementation, testing, and subsequent
-maintenance. Consequently, ensuring robust software engineering methodologies is
-of paramount importance in order to mitigate potential system failures and to
-foster the development of robust, reliable software systems.
+The integration of software into various aspects of modern life and business operations
+has highlighted the importance of delivering high-quality, error-free software
+applications~\cite{kahn2002information}. This need stems from several factors.
+User expectations have heightened, necessitating software that meets functional
+requirements while providing seamless and intuitive interfaces~\cite{ryker1997determinants}.
+Furthermore, system reliability is crucial as software failures can result in significant
+consequences such as financial losses, compromised safety, and
+tarnished company reputations~\cite{pham2007system}.
+Regulatory and compliance requirements also mandate specific performance and reliability standards,
+especially in sectors like healthcare, finance, and aviation~\cite{mishra2022cybersecurity}. Moreover,
+in today's competitive business environment, the quality of software can be a key differentiator
+that affects customer loyalty and market share~\cite{rust1993customer}. Despite the importance of these
+factors, many software applications still face operational failures due to insufficient adherence to
+rigorous software engineering processes, such as requirements elicitation, system design,
+implementation, testing, and maintenance. Therefore, robust software engineering methodologies are
+crucial in mitigating potential system failures and fostering the development of reliable
+software systems.
 
-Software quality is a multifaceted construct encompassing various attributes
-that determine the degree to which a software product meets the needs and expectations
-of its users\cite{boehm1976quantitative}. These attributes can be broadly categorized into
-functional and non-functional aspects. Functional quality refers to how well the
-software performs its intended tasks, including factors such as accuracy, reliability,
-and correctness of output\cite{kiruthika2015software}. Non-functional quality,
-on the other hand, relates to the overall performance and usability of the software,
-including aspects like efficiency, scalability, maintainability, usability,
-security, and portability\cite{chung2012non}. Evaluating software quality
-is a complex task that requires comprehensive testing and analysis methodologies. It is integral
-to the entire \acrshort{sdlc}, from initial requirements gathering to system design,
-implementation, and maintenance stages. Ensuring high software quality is critical, as it
-directly impacts user satisfaction, system reliability, and the ultimate success of
-the software in fulfilling its intended purpose. As such, investing in quality assurance and
-testing procedures is an essential aspect of software engineering, aimed at identifying and
-rectifying defects, improving the user experience, and assuring the delivery of robust,
-high-performing software products\cite{cavano1978framework}.
-
-The figure:\ref{fig:software_quality_perspective_1} describes different software quality perspectives
-and its dependencies.
-
-\begin{figure}[h]
-    \centering
-    \adjustbox{width=\textwidth}{\includegraphics{software_quality_perspective_1}}
-    \caption{Software Quality Perspective}\label{fig:software_quality_perspective_1}
-\end{figure}
+Software quality is a multi-faceted concept that encompasses various attributes determining the
+extent to which a software product meets its users' needs and expectations~\cite{boehm1976quantitative}.
+These attributes can be broadly categorized into functional and non-functional aspects. Functional
+quality refers to the degree to which the software performs its intended tasks, encompassing factors
+such as accuracy, reliability, and correctness of output~\cite{kiruthika2015software}. On the other hand,
+non-functional quality pertains to the overall performance and usability of the software,
+including efficiency, scalability, maintainability, usability, security, and portability~\cite{chung2012non}.
+Evaluating software quality is a complex task that requires comprehensive testing and analysis
+methodologies. It is integral to the entire \acrlong{sdlc}, from initial
+requirements gathering to system design, implementation, and maintenance stages. High software quality
+is vital as it directly impacts user satisfaction, system reliability, and the ultimate success of the
+software in achieving its intended purpose. Therefore, investing in quality assurance and testing
+procedures is a crucial aspect of software engineering, aimed at identifying and rectifying defects,
+improving the user experience, and ensuring the delivery of robust, high-performing software
+products~\cite{cavano1978framework}.
 
 High-quality software leads to customer satisfaction, retention, and ultimately, increased profits.
-\citeauthor{8748529} argue that ``a process with high quality standards yields products with high
+\citeauthor{8748529} argue that ``a process with high-quality standards yields products with high
 quality standards''.
 To ensure that software is of high quality, testing is an essential step in the software development
-process\cite{8748529}.
+process~\cite{8748529}.
+
+The Figure:~\ref{fig:software_quality_perspective_1} describes different software quality perspectives
+and its dependencies.
+
+\begin{figure}[H]
+    \centering
+    \adjustbox{width=\textwidth}{\includegraphics{software_quality_perspective_1}}
+    \caption{Software Quality Perspective}~\label{fig:software_quality_perspective_1}
+\end{figure}
+
+
 
 \section{Software Testing}
 
 According to \citeauthor{whittaker2000software}, the software testing process is often misunderstood
-within the realm of software development\cite{whittaker2000software}. It serves as a means of
+within the realm of software development~\cite{whittaker2000software}. It serves as a means of
 evaluating and verifying a software program to determine its alignment with technical and business
-requirements, as well as user expectations and overall functionality\cite{bentley2005software}.
+requirements, as well as user expectations and overall functionality~\cite{bentley2005software}.
 Additionally, as noted by \citeauthor{jamil2016software}, software testing is a risk-based activity
 that aims to uncover bugs, errors, unmet requirements, and vulnerabilities. Through this process,
-confidence in the behavior and requirements of the program can be gained\cite{jamil2016software}.
-
+confidence in the behavior and requirements of the program can be gained~\cite{jamil2016software}.
 
 Software testing is a costly endeavor, and it is impossible for any software program to be completely
-devoid of bugs or errors. As depicted in figure:\ref{fig:software_testing_quality} there exists a
+devoid of bugs or errors. As depicted in Figure:~\ref{fig:software_testing_quality}, there exists a
 correlation between the quality of software and the effort invested in testing. Specifically,
 as the cost of testing increases, the quality of the software improves and the number of bugs
 decreases in proportion to the amount of testing conducted. The criteria for the termination of
 testing is contingent upon various factors, including time constraints, budget limitations, and the
 scope of testing.
 
-The figure:\ref{fig:software_testing_quality} shows quality vs testing.
 
 % \begin{figure}[ht]
 % \centering
@@ -132,23 +128,23 @@ The figure:\ref{fig:software_testing_quality} shows quality vs testing.
 
 \begin{figure}[h]
     \adjustbox{width=\textwidth}{\includegraphics{software_testing_quality}}
-    \caption{Testing Effort vs Quality\cite{arumugam2019software}}\label{fig:software_testing_quality}
+    \caption{Testing Effort vs Quality~\cite{arumugam2019software}}~\label{fig:software_testing_quality}
 \end{figure}
 
 \subsection{Software Testing Quality Attributes}
 
-Software testing methods and attributes play a crucial and integral role within the \acrlong{sdlc},
-contributing to the enhancement of quality processes and techniques. One key component of software
-testing is static analysis techniques, which encompass inspections and reviews, and are essential
-attributes in ensuring the quality of the software. These techniques serve as a complement to
+Software testing methods and attributes play a crucial role within the \acrlong{sdlc},
+contributing to the enhancement of quality processes and techniques. A key component of software
+testing is static analysis techniques~\cite{zheng2006value}, which encompass inspections and reviews.
+These techniques are essential attributes in ensuring the quality of the software and serve as a complement to
 traditional software testing methods.
 
-
 \subsubsection{Software Attributes}
+
 Software attributes are characteristics of software testing that assist in describing the
 overall quality of a software program.
 
-Table \ref{tab:software-attributes} shows the attributes of software quality\cite{mili2015software}.
+The Table:~\ref{tab:software-attributes} shows the attributes of software quality~\cite{mili2015software}.
 
 \begin{table}[H]
 \caption{Software Quality Attributes}
@@ -158,20 +154,20 @@ Table \ref{tab:software-attributes} shows the attributes of software quality\cit
 \textbf{Attribute} & \textbf{Description} \\
 \midrule
 Interoperability & The ability of the software to operate seamlessly in different operating systems and machines. \\
-Simplicity & The ease of use and avoidance of misuse, as well as interactions with other systems. \\
+Simplicity & The ease of use, avoiding misuse, and interactions with other systems. \\
 Ease of Learning & The ability of the software to adapt and improve through system interactions and output logs. \\
-Customizability & The ability of the software to be configured or adjusted to meet the specific needs of a particular user or organization. \\
+Customizability & The ability of the software to be configured or adjusted to meet the specific needs of a user or organization. \\
 Calibrability & The ability of the software to be fine-tuned for optimal performance and accuracy. \\
 Reliability & The ability of the software to perform its intended functions without failure or external influence. \\
-Functionality & The features and capabilities of the software, which are organized in a modular manner to conceal information. \\
+Functionality & The features and capabilities of the software, organized in a modular manner to conceal information. \\
 Portability & The ability of the software to run on different platforms and hardware configurations. \\
 Reusability & The ease with which the software can be modified, adapted, and reused. \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-All of these attributes play a crucial role in the software development process to ensure that the
-software meets the desired quality standards and that it's user-friendly.
+All these attributes play a crucial role in the software development process, ensuring that the
+software meets desired quality standards and is user-friendly.
 
 % \subsection{Software Testing Methods}
 % Software Testing is classified into different testing methods to evaluate the correctness of the software
@@ -221,7 +217,7 @@ software meets the desired quality standards and that it's user-friendly.
 % stages of the software development life cycle and can be automated through the use of specialized
 % tools and frameworks.
 
-% The figure:\ref{fig:software_testing_types} illustrates different functional and non-functional
+% The Figure~\ref{fig:software_testing_types} illustrates different functional and non-functional
 % testing.
 
 % \begin{figure}[ht]
@@ -295,7 +291,7 @@ software meets the desired quality standards and that it's user-friendly.
 % testing process.
 % \clearpage
 
-% The figure:\ref{fig:software_testing_categories} illustrates different software categories.
+% The Figure~\ref{fig:software_testing_categories} illustrates different software categories.
 
 % \begin{figure}[ht]
 %         \centering
