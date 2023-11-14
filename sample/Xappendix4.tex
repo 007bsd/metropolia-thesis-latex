@@ -1,0 +1,87 @@
+% % Appendix
+% % And demonstrate text references and bibliography references in appendix
+\clearpage
+\vspace{21.5pt}
+\chapter{More Open-source Projects and Ongoing Research}\label{appx:fourth}
+
+This chapter explains about more on the different ongoing the Open-source Projects
+and Researches on the fuzzing. More on the Open-source Projects and Ongoing
+Research given below.
+
+
+\textbf{OSS-Fuzz:~\cite{GitHubgo49:online}} \\
+
+Google's OSS-Fuzz represents a pioneering initiative in the domain of open-source fuzzing.
+Its uniqueness lies not merely in its goal of enhancing security and stability—which is indeed a
+common objective across all fuzzing projects—but in its commitment to continuous,
+automated fuzzing for selected open-source software projects.
+
+OSS-Fuzz stands out in its adaptability, integrating with a variety of fuzzing engines such as
+libFuzzer~\cite{libFuzze17:online} and AFL++~\cite{257204}.
+Furthermore, it supports multiple programming languages, demonstrating its versatility in accommodating
+projects written in C, C++, Rust~\cite{klabnik2023rust}, and Go~\cite{donovan2015go}. This broad compatibility reinforces its value to the diverse
+landscape of open-source software~\cite{ShortInt96:online}.
+
+
+\textbf{OneFuzz:~\cite{GitHubmi60:online}}\\
+
+The OneFuzz~\cite{GitHubmi60:online} is a fuzzing-as-a-service platform developed by Microsoft, that aims to
+automate the detection and reporting of software bugs. It is a self-hosted
+platform that provides a range of features, including task scheduling,
+crash analysis, and distributed fuzzing. OneFuzz can be integrated with
+existing development workflows, making it a useful tool for organizations
+looking to improve the security and stability of their software systems.
+
+
+\textbf{Afl Based Fuzzers:}\\
+
+\acrlong{afl}~\cite{american20:online} is a coverage-guided~\cite{lyu2022ems}, or feedback-based fuzzer that utilizes a
+dynamic approach to identify potential vulnerabilities in software applications.
+It modifies the target executable to measure and optimize code coverage,
+mutating input data in a manner that maximizes the coverage achieved.
+This process is iteratively repeated, seeking to uncover instances in
+which the program crashes, thereby identifying potential security vulnerabilities.
+AFL has proven to be highly effective in practice, as evidenced by its extensive
+usage and success in uncovering numerous vulnerabilities in widely-used software.
+Furthermore, AFL is renowned for its ease of use, making it a popular choice
+among security researchers and practitioners~\cite{american20:online}~\cite{fuzzinga40:online}.
+
+Several fuzzers have been developed based on AFL's architecture~\cite{american20:online}, enhancing its
+capabilities or tailoring it for specific use cases. Some notable AFL-based
+fuzzers mentioned below:
+
+
+\textbf{AFL++:~\cite{257204}~\cite{GitHubAF78:online}} \\
+An enhanced version of AFL which
+introduces various performance improvements and new features, such as improved mutation strategies,
+faster execution, more and better mutations, improved instrumentation, and custom module
+support~\cite{257204}~\cite{GitHubAF78:online}.
+
+
+\textbf{AFLFast:~\cite{GitHubmb97:online}} \\
+A fuzzer that introduces a power schedule, aiming to prioritize
+seeds that are more likely to explore new paths and increase coverage.
+By doing so, the AFLFast~\cite{GitHubmb97:online} aims to improve the efficiency of fuzzing and maximize
+the code coverage in a shorter time frame~\cite{bohme2016coverage}~\cite{GitHubmb97:online}.
+
+\textbf{TriforceLinuxSyscallFuzzer:~\cite{GitHubnc62:online}} \\
+
+This fuzzing technique specifically targets Linux system calls,
+aiming to identify potential vulnerabilities in the system call interface\cite{GitHubnc62:online}.
+
+\textbf{AFL-unicorn:~\cite{GitHubBa48:online}} \\
+
+AFL-Unicorn~\cite{GitHubBa48:online} represents a noteworthy extension of the American Fuzzy Lop (AFL) framework,
+characterized by its versatility across various architectures, data input formats, and
+binary formats—including the firmware~\cite{WhatIsFi49:online} of bare-metal devices
+such as Wi-Fi components and baseband~\cite{Baseband1:online} processors in mobile phones.
+This utility is designed to examine binary files and then create a fuzzer that
+emulates the state at the entry point of the parsing routine.
+
+The efficacy of AFL-Unicorn is underpinned by the successful integration of
+AFL's coverage-guided fuzzing technique and the~\cite{Unicorn–92:online} engine.
+This synergistic combination facilitates the exploration of multiple execution
+paths within the targeted binary, including those within proprietary,
+closed-source firmware like that running on baseband processors~\cite{tell2005design}. This capability
+contributes to a thorough and comprehensive fuzzing process, even in the context
+of complex and traditionally opaque systems~\cite{maier2019unicorefuzz}~\cite{aflunico82:online}.

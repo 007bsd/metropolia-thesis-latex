@@ -1,69 +1,183 @@
-{
-        ///////////////////////////////////////////////////////
 
-//////////////////// LATEX CHANGE START
+//////////////////STARTTTTTTTTTTTTTTTTTTTTTTTTTTTTT Normal latex setting
+// {
+//     // ... (other VS Code settings) ...
+
+//     "latex-workshop.latex.recipes": [
+//         {
+//             "name": "My Custom Recipe",
+//             "tools": [
+//                 "lualatex",
+//                 "biber",
+//                 "makeglossaries",
+//                 "lualatex"
+//             ]
+//         }
+//         // ... (any other recipes you might have) ...
+//     ],
+//     "latex-workshop.latex.tools": [
+//         {
+//             "name": "lualatex",
+//             //"command": "lualatex",
+//             "command": "lualatex-dev",
+//             "args": [
+//                 "-shell-escape",
+//                 "-8bit",
+//                 "-synctex=1",
+//                 "-interaction=nonstopmode",
+//                 "-file-line-error",
+//                 "%DOC%"
+//             ]
+//         },
+//         {
+//             "name": "biber",
+//             "command": "biber",
+//             "args": ["%DOCFILE%"]
+//         },
+//         {
+//             "name": "makeglossaries",
+//             "command": "makeglossaries",
+//             "args": ["%DOCFILE%"]
+//         }
+//         // ... (any other tools you might use) ...
+//     ],
+//     "latex-workshop.latex.autoBuild.run": "never",
+//     "latex-workshop.latex.autoClean.run": "onBuilt",
+//     "latex-workshop.view.pdf.viewer": "tab",
+//     "latex-workshop.latex.rootFile.doNotPrompt": true,
+//     "latex-workshop.latex.rootFile.useSubFile": true,
+//     // ... (any other LaTeX Workshop specific settings) ...
+// }
+
+
+
+ ///////////////////////////////////////////////////////
+
+//////////////////// LATEX CHANGE START without DEV
+// ######## comment-out the \DocumentMetadata{testphase={phase-III, math}} from 0info.txt
 
 //////////////////////////////////////////////////////
-// Define which recipe is used by `latex-workshop.build#`. It also applies to auto build. Recipes are referred to by their names as defined in `#latex-workshop.latex.recipes`. Note there are two particular values:
-	// - `first` means to use the first recipe in `latex-workshop.latex.recipes`;
-	// - `lastUsed` means to use the last run recipe.
-	"latex-workshop.latex.recipe.default": "first",
 
-	// Define LaTeX compiling recipes. Each recipe in the list is an object containing its name and the names of tools to be used sequentially, which are defined in `latex-workshop.latex.tools`. By default, the first recipe is used to compile the project. For details, please visit https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-recipes.
-	"latex-workshop.latex.recipes": [
-		// {
-		// 	"name": "latexmk (lualatex)",
-		// 	"tools": [
-		// 		"lualatexmk"
-		// 	]
-		// },
-		{
-			"name": "latexmk (lualatex), biber, makeglossaries",
-			"tools": [
-				"lualatexmk"
-			]
-		},
-	],
-        "latex-workshop.latex.rootFile.doNotPrompt": true,
-        "latex-workshop.latex.rootFile.useSubFile": true,
+// Define which recipe is used by `latex-workshop.build#`. It also applies to
+// auto build. Recipes are referred to by their names as defined in
+// `#latex-workshop.latex.recipes`. Note there are two particular values:
+// - `first` means to use the first recipe in `latex-workshop.latex.recipes`;
+// - `lastUsed` means to use the last run recipe.
+// Define LaTeX compiling recipes. Each recipe in the list is an object
+// containing its name and the names of tools to be used sequentially,
+// which are defined in `latex-workshop.latex.tools`. By default, the
+// first recipe is used to compile the project. For details, please
+// visit https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-recipes.
 
-        // Define LaTeX compiling tools to be used in recipes. Each tool is labeled by its `name`. When invoked, `command` is spawned with arguments defined in `args` and environment variables defined in `env`. Typically no spaces should appear in each argument unless in paths. List of available placeholders: `%DOC%`, `%DOC_W32%, %DOC_EXT%`, `%DOC_EXT_W32%`, `%DOCFILE%`, `%DOCFILE_EXT%`, `%DIR%`, `%DIR_W32%`, `%TMPDIR%` and `%OUTDIR%`, `%OUTDIR_W32%`. For more details, please visit https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#placeholders.
-	"latex-workshop.latex.tools": [
-		{
-			"name": "lualatexmk",
-			"command": "latexmk",
-			"args": [
-				"-shell-escape",
-				"-8bit",
-                		"-synctex=1",
-				"-interaction=nonstopmode",
-				"-file-line-error",
-				"-lualatex",
-				"-outdir=%OUTDIR%",
-				"%DOC%"
-			],
-			"env": {}
-		},
-        {
-            "name": "biber",
-            "command": "biber",
-            "args": [
-              "%DOC%"
-            ]
-          },
-          {
-            "name": "makeglossaries",
-            "command": "makeglossaries",
-            "args": [
-                "-d%OUTDIR%", "%DOC%",
-            ]
-          }
+// Define LaTeX compiling tools to be used in recipes.
+// Each tool is labeled by its `name`.
+// When invoked, `command` is spawned with arguments defined in `args` and
+// environment variables defined in `env`. Typically no spaces should appear
+// in each argument unless in paths. List of available placeholders:
+// `%DOC%`, `%DOC_W32%, %DOC_EXT%`, `%DOC_EXT_W32%`, `%DOCFILE%`,
+// `%DOCFILE_EXT%`, `%DIR%`, `%DIR_W32%`, `%TMPDIR%` and `%OUTDIR%`,
+// `%OUTDIR_W32%`. For more details, please visit
+//https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#placeholders.
 
-	],
-	"latex-workshop.latex.autoBuild.run": "never",
+//////////////////STARTTTTTTTTTTTTTTTTTTTTTTTTTTTTT VS code setting
+
+// {
+// "latex-workshop.latex.recipe.default": "first",
+// "latex-workshop.latex.recipes": [
+//     {
+//         "name": "latexmk (lualatex), biber, makeglossaries",
+//         "tools": [
+//             "lualatexmk"
+//         ]
+//     },
+// ],
+//     "latex-workshop.latex.rootFile.doNotPrompt": true,
+//     "latex-workshop.latex.rootFile.useSubFile": true,
+
+// "latex-workshop.latex.tools": [
+//     {
+//         "name": "lualatexmk",
+//         "command": "latexmk",
+//         "args": [
+//             "-shell-escape",
+//             "-8bit",
+//             "-synctex=1",
+//             "-interaction=nonstopmode",
+//             "-file-line-error",
+//             "-lualatex",
+//             "-outdir=%OUTDIR%",
+//             "%DOC%"
+//         ],
+//         "env": {}
+//     },
+//     {
+//         "name": "biber",
+//         "command": "biber",
+//         "args": [
+//           "%DOC%"
+//         ]
+//       },
+//       {
+//         "name": "makeglossaries",
+//         "command": "makeglossaries",
+//         "args": [
+//             "-d%OUTDIR%", "%DOC%",
+//         ]
+//       }
+
+// ],
+// "latex-workshop.latex.autoBuild.run": "never",
+// }
 ///////////////////////////////////////////////////////
 
 //////////////////// LATEX CHANGE END
 
 //////////////////////////////////////////////////////
+
+//////////////////STARTTTTTTTTTTTTTTTTTTTTTTTTTTTTT Normal latex-dev setting
+
+
+{
+    "latex-workshop.latex.recipe.default": "first",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk (lualatex-dev), biber, makeglossaries",
+            "tools": [
+                "lualatexmk-dev"
+            ]
+        },
+        // ... any other recipes
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "lualatexmk-dev",
+            "command": "latexmk",
+            "args": [
+                "-shell-escape",
+                "-8bit",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex=lualatex-dev",  // Specify lualatex-dev here
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": ["%DOC%"]
+        },
+        {
+            "name": "makeglossaries",
+            "command": "makeglossaries",
+            "args": ["-d%OUTDIR%", "%DOC%"]
+        }
+        // ... any other tools
+    ],
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.rootFile.doNotPrompt": true,
+    "latex-workshop.latex.rootFile.useSubFile": true
+    // ... any other settings
 }

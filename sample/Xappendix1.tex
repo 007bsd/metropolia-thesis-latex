@@ -1,12 +1,15 @@
 % Appendix
 % And demonstrate text references and bibliography references in appendix
-
+\vspace{21.5pt}
+\clearpage
 \chapter{AFL++ Target Program}~\label{appx:first}
 The following is the detailed implementation of the
 target program~\cite{FuzzingE54:online}~\cite{zephyrsa35:online} used in
 the fuzz testing with Zephyr apps by utilizing the AFL++~\cite{257204}:
 
+The below given is the target program for the AFL++.
 \section*{main.c}
+
 \begin{minted}[linenos,frame=lines,baselinestretch=1.2,breaklines]{c}
 #include <stdio.h>
 #include <stdbool.h>
@@ -18,7 +21,7 @@ the fuzz testing with Zephyr apps by utilizing the AFL++~\cite{257204}:
  * tree in such a way that it would be very unlikely to be found by
  * randomly-selected input.  But the fuzzer can still find it in
  * linear(-ish) time by discovering each new function along the way
- * and then probing that new space.  The 1 in 2^56 case here would
+ * and then probing that new space. The 1 in 2^56 case here would
  * require months-to-years of work for a large datacenter, but the
  * fuzzer gets it in 20 seconds or so. This requires that the code for
  * each case be distinguishable/instrumentable though, which is why we
@@ -115,9 +118,14 @@ int main(int argc, char **argv)
 }
 
 \end{minted}
+\captionof{listing}{main.c of AFL++ target}\label{lst:main_program_afl}
 
+\pagebreak
+
+The below is the \textit{CMakeLists.txt} use for compiling the
+AFL++ target program.
 \section*{CMakeLists.txt}
-\begin{minted}{cmake}
+\begin{minted}[linenos,frame=lines,baselinestretch=1.2,breaklines]{cmake}
     cmake_minimum_required(VERSION 3.20.0)
     project(sample_zephyr_afl)
 
@@ -132,5 +140,4 @@ int main(int argc, char **argv)
 
     add_executable(zephyr_aflfuzzer src/main.c)
     \end{minted}
-
-\clearpage
+    \captionof{listing}{CMakeLists.txt of AFL++}\label{lst:cmake_list_txt_afl}

@@ -1,37 +1,39 @@
 % Introduction
 
-\chapter{Introduction}
-\label{sec:sec_introduction}
+\vspace{21.5pt}
+\chapter{Introduction}\label{sec:sec_introduction}
+
 Embedded systems are specialized computer systems designed to perform specific tasks or functions
-within a larger system~\cite{muench2018you}. They are integral to a wide variety of devices and
-applications, enabling seamless functionality and efficiency in our daily lives. These systems
-tightly integrate hardware and software components to optimize performance, power consumption,
-and system size~\cite{eisele2022embedded}. The importance of embedded systems lies in their
-ubiquity and versatility. They are found in numerous devices and industries, including consumer
-electronics~\cite{andrae2010life}, telecommunications~\cite{paulin1995dsp},
+within a larger system~\cite{muench2018you}. They are essential for many devices
+and applications, making things work smoothly and efficiently in our everyday
+lives. These systems tightly integrate hardware and software components to optimize performance,
+power consumption, and system size~\cite{eisele2022embedded}. The importance of embedded systems
+lies in their ubiquity and versatility. They are found in numerous devices and industries,
+including consumer electronics~\cite{andrae2010life}, telecommunications~\cite{paulin1995dsp},
 automotive~\cite{Automoti68:online}, aerospace~\cite{bieber2012security},
 medical~\cite{jafari2007medical}, and industrial automation~\cite{thramboulidis2007soa}.
 Examples of embedded systems include microcontrollers~\cite{gridling2007introduction} in
 smart home appliances~\cite{kang2017enhanced}, digital signal processors in wireless
 communication devices~\cite{kostic1997digital}, control systems in autonomous
 vehicles~\cite{kostic1997digital}, and sensor networks for monitoring and
-automation~\cite{marwedel2021embedded}.
+automation~\cite{marwedel2021embedded}. This is just to show some applications of
+embedded systems as this list is far from exhaustive
 
 
-As the world becomes increasingly interconnected and reliant on technology,
-the role of embedded systems continues to expand. They are essential for
-enabling the \gls{iot}, as well as advancements in artificial intelligence,
-robotics, medical instruments, and smart cities~\cite{camposano1996embedded:ARTICLE}.
+As the world gets more connected and depends more on technology, embedded
+systems are becoming even more important. They are essential for
+enabling the \gls{iot}, robotics, medical instruments, and smart cities~\cite{camposano1996embedded:ARTICLE}.
 As of February 2023, an estimated 21.5 billion interconnected devices
 exist worldwide, according to Statista~\cite{IoTconne16:online}~\cite{HowManyI1:online}.
 This number is expected to continue increasing as internet consumption rises, and
-new gadgets and machinery are introduced to the market. By 2025,
-it is projected that 75.44 billion \acrshort{iot} devices will be
-installed worldwide~\cite{HowManyI1:online}.
+new devices and machinery are introduced to the market. By 2025, it's expected
+that about 75.44 billion IoT (Internet of Things) devices will be set up all
+over the world~\cite{HowManyI1:online}.
 
 The number of embedded devices per person is significantly higher in developed
-countries than in developing nations. For example, in the United States, there
-were approximately 13 \acrshort{iot} devices per person in 2020~\cite{Stateoft48:online}.
+countries than in developing nations. For instance, in
+the United States, there were about 13 \acrshort{iot} devices for each
+person in 2020~\cite{Stateoft48:online}.
 In comparison, the global average was around 3.5 \acrshort{iot} devices per person during
 the same year~\cite{CiscoAnn1:online}. In developed countries, prevalent devices
 typically include intelligent home appliances~\cite{wang2015anycontrol},
@@ -42,16 +44,14 @@ devices that support key sectors such as
 agriculture~\cite{baranwal2016development}, healthcare~\cite{pradhan2021iot},
 and the monitoring of critical infrastructure~\cite{patil2012internet}.
 
-
-The exponential growth of embedded systems necessitates robust security,
-reliability, and efficiency measures to ensure the safety and functionality of
-the technology we rely on daily~\cite{muench2018you}. Mirai malware attacks have
-demonstrated their potential for large-scale disruption, targeting devices like
-routers, cameras, and DVRs to execute \gls{ddos} attacks~\cite{KrebsOnS42:online}~\cite{antonakakis2017understanding}.
-In 2016, a \acrshort{ddos} attack on Dyn~\cite{LargeDDo94:online}, a DNS provider, significantly
+The rapid growth of embedded systems calls for strong security, reliability, and
+efficiency to keep the technology we use daily safe and working properly~\cite{muench2018you}.
+Mirai malware attacks have demonstrated their potential for large-scale disruption, targeting devices like
+routers, cameras, and DVRs to execute \gls{DDOS} attacks~\cite{KrebsOnS42:online}~\cite{antonakakis2017understanding}.
+In 2016, a \acrshort{DDOS} attack on Dyn~\cite{LargeDDo94:online}, a DNS provider, significantly
 hindered user access to prominent services such as Twitter, Amazon, Tumblr, Reddit, Spotify, and
 Netflix~\cite{muench2018you}~\cite{lindqvist2017future}. \textit{Ripple20},
-a set of 19 critical vulnerabilities in the Treck TCP/IP library~\cite{TreckTCP63:online},
+a group of 19 serious weaknesses found in the Treck TCP/IP library~\cite{TreckTCP63:online},
 impacted IoT devices used in industrial control systems, healthcare devices,
 and home appliances. The vulnerabilities known as URGENT/11~\cite{WhatisUR60:online}
 and BadAlloc~\cite{IoTriddl27:online}, identified in the VxWorks
@@ -62,47 +62,47 @@ functions, these vulnerabilities could enable remote code execution, thus
 permitting attackers to gain control over the affected
 devices~\cite{1NewMess42:online}.
 
-As data breaches have become a prevalent issue in the digital age,
-impacting individuals, businesses, and even governments~\cite{10oftheB31:online},
-the following Table:~\ref{tab:data_breaches} highlights some of the most
-significant data breaches that have occurred in
-the 21st century~\cite{The15big77:online}~\cite{10oftheB31:online}.
-These incidents serve as a reminder of the importance of robust
-cybersecurity measures and the ongoing need for vigilance in
-protecting sensitive information.
+In the digital age, data breaches have become a common problem, affecting
+individuals, businesses, and governments~\cite{10oftheB31:online},
+the following Table:~\ref{tab:data_breaches} points out some of the biggest data
+breaches that have happened in the 21st century~\cite{The15big77:online}~\cite{10oftheB31:online}.
+These events remind us how important strong cybersecurity is and that we always
+need to be careful in protecting private information.
 
 \begin{table}[ht]
-\caption{Data Breaches in the 21st Century}
-\label{tab:data_breaches}
-\begin{tabularx}{\textwidth}{|l|X|}
-\hline
-\textbf{Company} & \textbf{Description} \\
-\hline
-Yahoo & In 2013 and 2014, Yahoo experienced two significant data breaches that affected approximately 3 billion user accounts. The breaches exposed users' personal information, including names, email addresses, and hashed passwords. \\
-\hline
-Equifax & In 2017, Equifax, one of the largest credit reporting agencies, suffered a breach compromising the personal data of approximately 147 million Americans. The breach exposed sensitive information such as Social Security numbers, birth dates, and addresses. \\
-\hline
-Marriott International & In 2018, Marriott disclosed a data breach affecting approximately 500 million customers. The breach involved unauthorized access to the Starwood guest reservation database, exposing personal details, passport numbers, and payment card information. \\
-\hline
-Capital One & In 2019, a hacker accessed Capital One's systems, resulting in the exposure of personal information of approximately 106 million individuals in the United States and Canada. The breach included names, addresses, credit scores, and Social Security numbers. \\
-\hline
-Facebook/Cambridge Analytica & In 2018, it was revealed that Cambridge Analytica harvested personal data from millions of Facebook users without their consent. The incident raised concerns about privacy and data protection on social media platforms. \\
-\hline
-Target & In 2013, Target experienced a breach affecting approximately 41 million customer payment card accounts. The attack exploited vulnerabilities in the company's payment system, resulting in the theft of credit and debit card information. \\
-\hline
-\end{tabularx}
+      \centering
+      \caption{Data Breaches in the 21st Century}
+      \label{tab:data_breaches}
+      \begin{tabularx}{\textwidth}{|l|X|}
+      \hline
+      \textbf{Company} & \textbf{Description} \\
+      \hline
+      Yahoo & In 2013 and 2014, Yahoo experienced two significant data breaches affecting approximately 3 billion user accounts. The breaches exposed users' personal information, including names, email addresses, and hashed passwords. \\
+      \hline
+      Equifax & In 2017, Equifax, a major credit reporting agency, suffered a data breach compromising the personal data of approximately 147 million Americans, exposing sensitive information such as Social Security numbers, birth dates, and addresses. \\
+      \hline
+      Marriott International & In 2018, Marriott disclosed a data breach affecting approximately 500 million customers. The breach involved unauthorized access to the Starwood guest reservation database, exposing personal details, passport numbers, and payment card information. \\
+      \hline
+      Capital One & In 2019, Capital One's systems were accessed by a hacker, resulting in the exposure of personal information of approximately 106 million individuals in the United States and Canada, including names, addresses, credit scores, and Social Security numbers. \\
+      \hline
+      Facebook/Cambridge Analytica & In 2018, Cambridge Analytica harvested personal data from millions of Facebook users without their consent, raising concerns about privacy and data protection on social media platforms. \\
+      \hline
+      Target & In 2013, Target experienced a breach affecting approximately 41 million customer payment card accounts. The attack exploited vulnerabilities in the company's payment system, resulting in the theft of credit and debit card information. \\
+      \hline
+      \end{tabularx}
 \end{table}
 
-%\clearpage
 
-Software testing~\cite{myers2011art} is a crucial process in the development of embedded systems,
-especially as the number of embedded and software-controlled devices continues
-to increase. With this expansion, there is a growing potential for
-illicit activities~\cite{broekman2003testing}. To mitigate the risks associated with these devices,
-it is essential to enhance the quality and security of the produced software.
+Software testing~\cite{myers2011art} is a very important step in making embedded
+systems, especially as the number of these systems and devices controlled by
+software keeps growing. With this expansion, there is a growing potential for
+illicit activities~\cite{broekman2003testing}. To reduce the risks that come
+with these devices, it's important to improve the quality and security of the
+software being made.
 While traditional testing methods, such as manual~\cite{itkonen2009testers} and automated testing~\cite{asfaw2015benefits},
-have been widely adopted, they have limitations in identifying all potential
-vulnerabilities and edge cases, especially in terms of software security~\cite{819971}.
+have been widely adopted, they have limitations in identifying
+enough vulnerabilities to be comprehensive enough for the device to be released
+and edge cases, especially in terms of software security~\cite{819971}.
 
 The \gls{Edge Cases} refer to scenarios or inputs that are at or beyond the outer limits or boundaries
 of what is considered normal or typical. These edge cases explore the software's behavior when
@@ -111,73 +111,57 @@ inputs near the upper and lower limits, unusual values, or unexpected scenarios,
 can identify potential issues or unexpected behaviors that may not be evident
 during regular testing~\cite{deng2023large}~\cite{cunningham2019software}~\cite{koopman2016challenges}.
 
-Fuzz testing, also known as fuzzing, is a dynamic testing technique that feeds random data into a
-program and monitors the results~\cite{felderer2016security}\cite{yun2022fuzzing}.
-Fuzz testing involves in generating input data variations based on valid inputs.
+Fuzz testing as discussed earlier is a dynamic testing method where random
+data is inputted into a program to observe the outcomes~\cite{felderer2016security}\cite{yun2022fuzzing}.
+Fuzz testing involves generating input data variations based on valid inputs.
 This process enables the exploration of edge cases and the detection of bugs that are not directly
 related to
 functional requirements~\cite{eisele2022debugger}~\cite{fowler2018fuzz}~\cite{deng2023large}~\cite{eisele2022embedded}.
 
 Despite its success in general software testing, fuzz testing has not been widely adopted by
-companies as part of their development lifecycle\cite{liang2018fuzz}.
-
+companies as part of their \gls{sdlc}\cite{liang2018fuzz}.
 This study embarks on a journey to examine the potential benefits and implications
-associated with the incorporation of fuzz testing techniques into the development
-lifecycle of a specific case company. Operating in the semiconductor sector,
+associated with the incorporation of fuzz testing techniques into the \acrshort{sdlc}
+of a specific case company. Operating in the semiconductor sector,
 this company specializes in embedded software development. Although it currently
 utilizes traditional testing methods, such as manual and automated testing, it
 has yet to explore and adopt fuzz testing within its development processes.
-This gap in testing practices, amidst rising cyber threats, fuels the motivation
-for this study.
+This increase in cyber threats, combined with the lack of thorough testing
+methods, is the main reason for conducting this research.
 
-This study aims to explore the potential benefits and implications of introducing
-fuzz testing into the company's development lifecycle. The pivotal research
-question is: ``Can the implementation of fuzz testing techniques significantly
-strengthen the security and quality of embedded systems developed by the case
-company?'' The importance of this question is notable given the
+The pivotal research question is: ``Can the implementation of fuzz testing
+techniques significantly strengthen the security and quality of embedded systems
+developed by the case company?'' The importance of this question is notable given the
 role of the company's systems across numerous critical applications and industries.
 
 To address the research question, this study will initiate with a thorough
 literature review on fuzz testing, encompassing its methodologies, applications,
-and a range of tools utilized in the industry. Following the literature review,
-a \gls{csa} of the company's existing software
-testing practices will be conducted. This \acrshort{csa} aims to provide a
-understanding of the current state of software testing within the
-organization, identifying key areas where the adoption of fuzz testing could be
-particularly advantageous. The analysis will explore the compatibility of
-various fuzz testing tools with the company's software development lifecycle,
-aiming to integrate the most effective practices to enhance the overall security
-posture.
+and a range of tools utilized in the industry.
+After reviewing existing research, a \gls{csa} of the
+company's current software testing practices will be carried out. The aim of this \acrshort{csa}
+is to get a clear understanding of the current software testing scenario in the organization.
+It will focus on identifying important areas where
+implementing fuzz testing could be especially beneficial.
+The analysis will examine how different fuzz testing tools fit with the
+company's software development process.
 
 Following the \gls{csa}, the research will advance to a proof-of-concept case
 study, employing widely-used fuzz testing tools such as AFL++~\cite{257204},
 LibFuzzer~\cite{libFuzze17:online}, and the QEMU mode of AFL++~\cite{AFLplusp57:online}.
-This exercise aims to assess the effectiveness and feasibility of fuzz testing
-within the company's specific development environment.
+The purpose of this exercise is to evaluate how effective and practical fuzz
+testing is in the company's \gls{sdlc}.
 
-The ultimate objective of this study is to highlight the potential benefits of
-integrating fuzz testing into the embedded software development lifecycle, thus
-providing valuable insights and a clear strategy for how fuzz testing can be
-employed to enhance software quality and security. This study strives to serve as
-a practical guideline for the case company, equipping them with actionable
-insights for incorporating fuzz testing into their software development process.
+The scope of this thesis is to show the advantages of including fuzz testing
+in the embedded \gls{sdlc}. It aims to offer useful
+information and a detailed plan for using fuzz testing. The study is then will be used
+as a practical guide for the
+company in question, giving them useful tips and methods for adding fuzz testing
+to their software development workflow
 
 \section{Background}
 
-The focus of this study is a company located in Helsinki, Finland, specializing in designing
-and developing embedded secure silicon \acrlong{ip} solutions~\cite{Whatisan76:online}.
-These solutions find extensive application across various domains, including:
-
-\begin{itemize}
-\item Key Management Solutions~\cite{WhatisKe81:online} for securing key provisioning
-      management services~\cite{WhatisPr3:online}.
-\item Security Protocol Solutions~\cite{TypesofS33:online} for safeguarding
-      networking services~\cite{kwon2014drives}.
-\item \gls{dpa} Solutions~\cite{Differen58:online}~\cite{SIDECHAN21:online} for
-      protecting against side-channel attacks~\cite{SIDECHAN21:online}~\cite{standaert2010introduction}.
-\item Anti-Counterfeiting Products~\cite{PuttingA14:online} and \gls{rot}~\cite{WhatisRo39:online} products,
-      which provide highly secure hardware~\cite{WhatisHa66:online}, software, and firmware components~\cite{WhatIsFi49:online}.
-\end{itemize}
+This case in company is specializes
+in creating and developing secure silicon \acrlong{ip} solutions~\cite{Whatisan76:online}.
 
 The company holds an \acrlong{iso} 9001 standard certification~\cite{ISOISO9044:online}.
 This internationally recognized certification for quality management
@@ -189,19 +173,18 @@ boosting the security and quality of its products.
 
 Regarding software testing, the company employs a variety of methodologies,
 including manual, integration, automation, and exploratory testing~\cite{WhatisEx64:online}.
-A significant emphasis is placed on security testing~\cite{baker2013analyzing} to proactively
-identify and mitigate potential vulnerabilities and risks. Moreover,
-the company implements \gls{ci/cd} practices,
+Considerable importance is given to security testing to actively find and reduce
+possible vulnerabilities and risks~\cite{baker2013analyzing}.
+Moreover, the company implements \gls{ci/cd} practices,
 facilitating incremental development, integration, and testing. This approach
-enables early error detection, efficient location of issues, and
+enables early error detection, efficient locating of issues, and
 ultimately enhances testing efficiency~\cite{DevOpsin19:online}.
 
 In the evolving landscape of automated security testing, fuzzing has
 gained substantial attention for its potential. With this in mind,
 the company is evaluating various fuzzing tools and techniques for its
-embedded products. The objective of this evaluation is to investigate the
-potential enhancements in the quality and coverage of their existing
-testing processes.
+embedded products. The goal of this evaluation is to examine ways to enhance the
+quality and scope of their existing testing processes.
 
 \section{Objectives, Purpose, and Scope}
 
@@ -211,15 +194,7 @@ Embedded systems, being integral to countless applications and industries,
 demand thorough testing to ensure their reliability, functionality, and most
 importantly, security. Traditional software testing methods, while effective to
 an extent, may not be sufficient to uncover all vulnerabilities in these
-complex systems. Therein lies the necessity for advanced testing techniques
-such as fuzz testing, which are designed to thoroughly probe software and uncover
-issues that could potentially be exploited, leading to system breakdowns or breaches.
-
-Fuzz testing, or fuzzing, has demonstrated its potential in enhancing software
-quality and security, garnering significant interest
-in the field of software testing. Despite this interest, its application, particularly in
-embedded systems, remains somewhat limited due to a general lack of
-understanding and awareness of the technique~\cite{liang2018fuzz}.
+complex systems.
 
 \subsection{Objectives}
 \begin{itemize}
@@ -247,23 +222,19 @@ understanding and awareness of the technique~\cite{liang2018fuzz}.
 \end{itemize}
 
 \subsection{Scope}
-This study will focus on the evaluation and application of fuzzing as a software
-testing technique for embedded systems within the specific context of the
-case company. The research will involve a comparative analysis of three leading
+This research will concentrate on assessing and applying fuzz testing as a
+method for testing software in embedded systems, specifically within the context
+of the company being studied. The research will involve a comparative analysis of three leading
 fuzz testing tools—AFL++, libFuzzer and AFL++-QEMU mode, and will include a proof-of-concept
 case study including these tools.
-
-Additionally, while this study will provide guidelines for
-integrating the chosen fuzz testing tool into \acrshort{ci/cd} practices. But,
-it will not cover the actual implementation or assessment of these practices.
 
 However, the case company should also be aware of the following challenges
 associated with fuzz testing~\cite{liang2018fuzz}~\cite{takanen2018fuzzing}:
 
 \begin{itemize}
-\item Fuzz testing can be time-consuming and resource-intensive.
-\item It requires specialized expertise to implement and manage.
-\item False positives can be a challenge to filter out.
+      \item Fuzz testing may take a lot of time and resources.
+      \item Specialized knowledge is needed to set up and maintain it.
+      \item It can be difficult to distinguish between real issues and false alarms.
 \end{itemize}
 
 
@@ -272,8 +243,13 @@ associated with fuzz testing~\cite{liang2018fuzz}~\cite{takanen2018fuzzing}:
 \section{Structure of the Thesis}
 \begin{figure}[H]
       \centering
-      \adjustbox{width=\textwidth}{\includegraphics{thes_str.png}}
-      \caption{Thesis Flow Chart}\label{fig:thes_str.png}
+      \AltText{A flow chart outlining the structure of the thesis. It
+      starts with an Introduction, followed by a Theoretical Background,
+      Literature Review, Scope And Challenges, Current vs Proposed, Design, Implementation and Results,
+      and concludes with a discussion and conclusion.
+      Each section is connected in a linear progression,
+      indicating the logical flow of the document}{\adjustbox{width=\textwidth}{\includegraphics{illustration/thes_str.png}}}
+      \caption{Thesis Flow Chart}\label{fig:thes_str}
 \end{figure}
 
 \clearpage

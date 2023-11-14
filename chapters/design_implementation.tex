@@ -5,8 +5,8 @@
 \chapter{Design, Implementations and Results}
 
 This chapter details the methodology adopted for incorporating fuzzing into
-sample targets known as \gls{fuzz_target} operating on the Zephyr Real-Time Operating System
-(RTOS)~\cite{Security75:online}. These targets were selected to demonstrate the
+sample targets known as \gls{fuzz_target} operating on the
+Zephyr \gls{rtos}~\cite{Security75:online}. These targets were selected to demonstrate the
 practical applicability of the research.
 
 Various fuzzers have been discussed in preceding sections, but
@@ -59,16 +59,18 @@ streamlining the setup process for fuzzing tests.
 \subsection*{Step 2: List of Files}
 The relevant files for the next step are:
 \begin{itemize}
-    \item \texttt{main.c}: The target program in Appendix:~\ref{appx:first}.
-    \item \texttt{CMakeLists.txt}: Build configuration file.
+    \item \texttt{main.c}: The target program
+    in Appendix:~\ref{appx:first} in Listing~\ref{lst:main_program_afl}.
+    \item \texttt{CMakeLists.txt}: Build configuration file
+    in Appendix:~\ref{appx:first} in Listing~\ref{lst:cmake_list_txt_afl}..
 \end{itemize}
 
 The detailed implementation of the target program can be
-found in Appendix:~\ref{appx:first}. This program, written
+found in Appendix:~\ref{appx:first} in Listing~\ref{lst:main_program_afl}. This program, written
 in C, exemplifies the integration of fuzz testing for a sample application.
 
 \subsection*{Explanation of the Main Program:}
-The \texttt{main.c} program serves as the target for the fuzz testing,
+The \texttt{main.c}~\ref{lst:main_program_afl} program serves as the target for the fuzz testing,
 designed to illustrate potential vulnerabilities.
 It's structured to simulate a scenario where specific inputs could trigger a
 failure case, providing a practical example for the fuzzing tests conducted.
@@ -78,7 +80,7 @@ essential for fuzz testing. Fuzz testing is coverage-based and requires hiding a
 failure point— in this case, a write through a null pointer~\cite{spoto2011precise}—deep within the call
 structure of the program. Such concealed failures can be challenging to reveal
 with randomly-selected input, yet a fuzzer aims to uncover them in a relatively
-linear time by systematically exploring each function~\cite{FuzzingE54:online}.
+linear time by systematically exploring each function~\cite{FuzzingE54:online0}\cite{linssen2020snpfuzz}.
 
 Even in situations where the probability of discovering the failure is low,
 such as \(1 \times 2^{56}\), which typically requires significant computational
@@ -103,10 +105,11 @@ The failure case is hidden deep within the call tree, making it difficult to
 discover through the random inputs but still discoverable through fuzz testing.
 
 For a more detailed view of the \texttt{main.c} file, refer to
-Appendix~\ref{appx:first}.
+Appendix~\ref{appx:first} in Listing ~\ref{lst:main_program_afl}.
 
 \textbf{Explanation of the CMakeLists.txt:}
-The \texttt{CMakeLists.txt} file is used for configuring the build system
+The \texttt{CMakeLists.txt} in Appendix:~\ref{appx:first} in
+Listing:~\ref{lst:cmake_list_txt_afl}, file is used for configuring the build system
 of the \texttt{sample\_zephyr\_afl} project in the zephyr RTOS. Here is an
 explanation of its components:
 
@@ -126,11 +129,13 @@ explanation of its components:
     the compiler is set to \texttt{gcc}~\cite{GCCtheGN9:online}.
     \item \texttt{add\_executable(zephyr\_aflfuzzer src/main.c)}: This
     command specifies that an executable named \texttt{zephyr\_aflfuzzer}
-    should be created from the source file \texttt{src/main.c}.
+    should be created from the source file \texttt{src/main.c} in
+    Listing:~\ref{lst:main_program_afl}.
 \end{itemize}
 
 For a more detailed view of the \texttt{CMakeLists.txt} file, refer to
-Appendix:~\ref{appx:first}.
+Appendix:~\ref{appx:first} in
+Listing:~\ref{lst:cmake_list_txt_afl}.
 
 \subsection*{Step 3: Build and Compile}
 A new directory, \texttt{build}, is created to contain all the build files.
@@ -188,8 +193,13 @@ This section breaks down the components of this command~\cite{257204}:
 \subsection*{Step 6: Results, Analysis and Report}~\label{subsec:execution afl-fuzz}
 The Figure:~\ref{fig:afl_execute_1} shows the AFL++ execution screen.
 \begin{figure}[H]
-        \adjustbox{width=\textwidth}{\includegraphics{afl_execute_1}}
-        \caption{AFL++ Execution Screen}~\label{fig:afl_execute_1}
+    \centering
+    \AltText{Screenshot of the AFL++ Execution Screen displaying the fuzzer's runtime interface.
+    Key elements include the status of the fuzzing process, such as cycle progress, paths discovered,
+    and crash statistics. The screen reflects the dynamic nature of fuzzing with continuous
+    updates on test cases and outcomes.}
+    {\adjustbox{width=\textwidth}{\includegraphics{afl_execute_1}}}
+    \caption{AFL++ Execution Screen}~\label{fig:afl_execute_1}
 \end{figure}
 
 Important elements of the user interface shown below~\cite{257204}:
@@ -220,7 +230,7 @@ Important elements of the user interface shown below~\cite{257204}:
 \end{itemize}
 
 As depicted in Figure:~\ref{fig:afl_execute_1}, the binary generated
-(as detailed in Appendix~\ref{appx:first}) resulted in AFL++ creating a total of
+(as detailed in Appendix:~\ref{appx:first}) resulted in AFL++ creating a total of
 13 corpus and identifying one crash. Remarkably, a scenario with a
 probability of \(1\) in \(2^{56}\), which would traditionally
 require several months to years of computation in a large datacenter,
@@ -236,8 +246,14 @@ The corresponding command is as follows:
 
 The Figure~\ref{fig:afl_cov} shows the \texttt{afl-cov} report of the execution.
 \begin{figure}[H]
-        \adjustbox{width=\textwidth}{\includegraphics{afl_cov}}
-        \caption{LCOV Coverage Report~\cite{UbuntuMa97:online}}\label{fig:afl_cov}
+    \centering
+    \AltText{Screenshot of an LCOV Coverage Report showing the code coverage analysis.
+    It includes statistics like the percentage of lines, functions, and branches covered,
+    along with visual indicators such as color-coded line coverage highlighting the executed and
+    non-executed parts of the code. The report provides a detailed overview of test coverage in
+    various code modules.}
+    {\adjustbox{width=\textwidth}{\includegraphics{afl_cov}}}
+    \caption{LCOV Coverage Report~\cite{UbuntuMa97:online}}\label{fig:afl_cov}
 \end{figure}
 
 AFL++ includes a visualization tool called \texttt{afl-plot}~\cite{AFLFunct92:online},
@@ -253,18 +269,16 @@ the speed of execution, and the progression of path discovery over time.
 
 The Figure:~\ref{fig:afl_plot} shows the \texttt{afl-plot} report of the execution.
 \begin{figure}[H]
-        \adjustbox{width=\textwidth}{\includegraphics{afl_plot}}
-        \caption{\texttt{afl-plot} Report}~\label{fig:afl_plot}
+    \centering
+    \AltText{Graphical afl-plot Report illustrating the progress and results of a fuzzing session
+    with AFL. The report includes plots showing the number of unique crashes and hangs over time,
+    paths discovered, and execution speed. Each plot uses distinct color coding and line styles to
+    represent different metrics, highlighting trends and insights in the fuzzing process.}
+    {\adjustbox{width=\textwidth}{\includegraphics{afl_plot}}}
+    \caption{\texttt{afl-plot} Report}~\label{fig:afl_plot}
 \end{figure}
 
-The fuzzing tests effectively utilize the AFL++ fuzzer, along with tools such as
-``afl-cov''~\cite{GitHubmr91:online} and ``afl-plot''~\cite{AFLFunct92:online}.
-These tools highlight vulnerabilities while also providing comprehensive
-coverage reports and graphical representations of the test data. The AFL++
-fuzzer is notable for its ability to quickly identify vulnerabilities, even
-those deeply embedded within the code structure. This process is enhanced by
-``afl-cov'' and ``afl-plot'', which offer detailed insights into the system's
-susceptibility to potential threats. The findings of this study reveal the
+The findings of this study reveal the
 significant advantages of incorporating AFL++ into the development cycle,
 emphasizing its potential to fortify system security.
 
@@ -289,15 +303,21 @@ libFuzzer~\cite{ClangCLa81:online}.
 \subsection*{Step 2: List of Files}
 The relevant files for the next step are:
 \begin{itemize}
-    \item \texttt{main.c}: The target program in Appendix:~\ref{appx:second}.
+    \item \texttt{main.c}: The target program
+    in Appendix:~\ref{appx:second} in
+    Listing:~\ref{lst:main_program_libfuzzer}.
     \item \texttt{CMakeLists.txt}: Build configuration file.
+    Refer to Appendix:~\ref{appx:second} in
+    Listing:~\ref{lst:cmake_list_txt_libfuzzer}.
 \end{itemize}
 
 The detailed implementation of the target program can be
 found in Appendix:~\ref{appx:second}.
 
-Comparing this program in Appendix:~\ref{appx:second} to the one utilized for
-AFL++ in Appendix:~\ref{appx:first}, there are fundamental differences that
+Comparing this program in Appendix:~\ref{appx:second} in
+Listing:~\ref{lst:main_program_libfuzzer} to the one utilized for
+AFL++ in Appendix:~\ref{appx:first}, in
+Listing:~\ref{lst:main_program_libfuzzer} there are fundamental differences that
 can be highlighted:
 
 
@@ -340,7 +360,7 @@ Here is an explanation of its components:
         \item \texttt{set(CMAKE\_C\_FLAGS "... -fprofile-instr-generate -fcoverage-mapping")}: Enables flags for generating profile instrumentation and coverage mapping.
     \end{itemize}
 
-    \item \texttt{add\_executable(zephyr\_libfuzzer src/main.c)}: Defines an executable target named \texttt{zephyr\_libfuzzer} from the source file \texttt{src/main.c}.
+    \item \texttt{add\_executable(zephyr\_libfuzzer src/main.c)}: Defines an executable target named \texttt{zephyr\_libfuzzer} from the source file \texttt{src/main.c}~\ref{lst:main_program_libfuzzer}.
 
     \item \texttt{if(USE\_LIBFUZZER)}: If \texttt{USE\_LIBFUZZER} is enabled, sets additional linker flags for the target \texttt{zephyr\_libfuzzer} to enable the necessary sanitizers for fuzzing.
 \end{itemize}
@@ -379,10 +399,16 @@ ultimately offering a valuable report on its security status.
 
 The Figure:~\ref{fig:lib_fuzzer} shows the libFuzzer execution output.
 \begin{figure}[H]
-    \adjustbox{width=\textwidth}{\includegraphics{lib_fuzzer}}
+    \centering
+    \AltText{Screenshot of the libFuzzer Execution Screen, showing real-time fuzz testing output.
+    The display includes information on the number of test cases executed, coverage statistics,
+    and any detected bugs or crashes. Key metrics are highlighted, illustrating the ongoing process
+    of fuzz testing and its immediate results.}
+    {\adjustbox{width=\textwidth}{\includegraphics{lib_fuzzer}}}
     \caption{libFuzzer Execution Screen}~\label{fig:lib_fuzzer}
 \end{figure}
-The fuzzer initialized its execution with a specific random seed,
+
+Below code block shows that, the fuzzer initialized its execution with a specific random seed,
 identified as 758034908~\ref{fig:lib_fuzzer}. To reproduce the same
 sequence of fuzzing events and outcomes, one may rerun the fuzzer
 specifying the argument \texttt{-seed=758034908}.
@@ -396,7 +422,8 @@ specifying the argument \texttt{-seed=758034908}.
     INFO: A corpus is not provided, starting from an empty corpus
 \end{minted}
 
-In its default configuration, \texttt{libFuzzer} operates under
+The below code block from the libFuzzer execution shows that,
+in its default configuration, \texttt{libFuzzer} operates under
 the assumption that the input size is constrained to 4096 bytes or less.
 To modify this default input size constraint, two potential strategies exist:
 the application of the \texttt{-max\_len=N} argument, where \texttt{N} represents
@@ -465,7 +492,13 @@ providing an insightful representation of the code's coverage.
 The Figure:~\ref{fig:llvm_cov_report} shows the libFuzzer coverage output in html format.
 
 \begin{figure}[H]
-    \adjustbox{width=\textwidth}{\includegraphics{llvm_cov_report}}
+    \centering
+    \AltText{Screenshot of the libFuzzer Coverage Report showing detailed code
+    coverage statistics. The report includes data on lines executed, branches
+    covered, and overall percentage of code tested. It often features
+    color-coded sections to indicate covered and uncovered code, providing a
+    visual assessment of the fuzz testing's thoroughness.}
+    {\adjustbox{width=\textwidth}{\includegraphics{llvm_cov_report}}}
     \caption{libFuzzer Coverage Report}~\label{fig:llvm_cov_report}
 \end{figure}
 
@@ -492,7 +525,10 @@ The Figure:~\ref{fig:simplified_closed_binaries} shows the workflow with the tar
 for the fuzzy testing with AFL++'s QEMU~\cite{AFLplusp57:online} mode.
 
 \begin{figure}[H]
-    \adjustbox{width=\textwidth}{\includegraphics{simplified_closed_binaries}}
+    \centering
+    \AltText{Graphic representation of a Closed Source Target Binary for the case in company
+    interacting with the application}
+    {\adjustbox{width=\textwidth}{\includegraphics{simplified_closed_binaries}}}
     \caption{Closed Source Target Binary}\label{fig:simplified_closed_binaries}
 \end{figure}
 
@@ -505,7 +541,7 @@ mkdir input
 python3 generate_files.py
 \end{minted}
 
-Refer to Appendix~\ref{appx:third} for the script.
+Refer to Appendix:~\ref{appx:third} in Listing~\ref{lst:python_code_qemu} for the script.
 
 \subsection*{Step 3: Docker Script for AFL++-QEMU}
 This step is same as that of the~\ref{subsec:docker script for afl-fuzz}.
@@ -536,7 +572,9 @@ The Figure:~\ref{fig:simplified_closed_binaries_qemu} shows the basic
 AFL++'s QEMU mode execution.
 
 \begin{figure}[H]
-    \adjustbox{width=\textwidth}{\includegraphics{simplified_closed_binaries_qemu}}
+    \centering
+    \AltText{Diagram showing the integration of AFL++-QEMU mode of the closed source binary}
+    {\adjustbox{width=\textwidth}{\includegraphics{simplified_closed_binaries_qemu}}}
     \caption{Basic AFL++-QEMU Execution }\label{fig:simplified_closed_binaries_qemu}
 \end{figure}
 
@@ -544,8 +582,13 @@ The explanation of the execution screen is same that of the~\ref{subsec:executio
 
 The Figure:~\ref{fig:afl_execute_qemu} shows the AFL++-QEMU execution screen.
 \begin{figure}[H]
-        \adjustbox{width=\textwidth}{\includegraphics{afl_execute_qemu}}
-        \caption{AFL++-QEMU mode Execution Screen}\label{fig:afl_execute_qemu}
+    \centering
+    \AltText{Screenshot of the AFL++-QEMU mode Execution Screen, showing the fuzzer's real-time
+    interface while operating in QEMU mode. The display includes live statistics such as the number
+    of executions per second, paths discovered, crashes found, and unique bugs identified. The interface
+    illustrates the active fuzzing process and its immediate results in a terminal view.}
+    {\adjustbox{width=\textwidth}{\includegraphics{afl_execute_qemu}}}
+    \caption{AFL++-QEMU mode Execution Screen}\label{fig:afl_execute_qemu}
 \end{figure}
 
 
@@ -578,7 +621,5 @@ While the fuzzer running, `afl-whatsup' is used to show the status.
 Upon further analysis, the files saved in `output/default/hangs/' were executed
 manually against the target binary, but no hangs were observed. This indicates
 that there might be a need for additional debugging in both the `afl-fuzz' tool
-and the target binary. This area could be explored in future research on the topic
-and not in current scope.
-
+and the target binary. 
 \clearpage

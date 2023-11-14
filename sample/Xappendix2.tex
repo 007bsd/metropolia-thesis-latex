@@ -1,4 +1,6 @@
 % Appendix
+\vspace{21.5pt}
+\clearpage
 % And demonstrate text references and bibliography references in appendix
 
 \chapter{libFuzzer Target Program}~\label{appx:second}
@@ -6,12 +8,14 @@ The following is the detailed implementation of the
 target program~\cite{FuzzingE54:online}~\cite{zephyrsa35:online} used in
 the fuzz testing with Zephyr apps by utilizing the libFuzzer:
 
+The below given is the target program for the libFuzzer.
 \section*{main.c}
+
 \begin{minted}[linenos,frame=lines,baselinestretch=1.2,breaklines]{c}
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
-
 
 /* Fuzz testing is coverage-based, so we want to hide a failure case
  * (a write through a null pointer in this case) down inside a call
@@ -79,11 +83,19 @@ int main(void)
     return 0;
 }
 #endif
-
 \end{minted}
+\captionof{listing}{main.c of libFuzzer target}\label{lst:main_program_libfuzzer}
+
+\pagebreak
+
+
+The below is the \textit{CMakeLists.txt} use for compiling the
+libFuzzer target program.
 
 \section*{CMakeLists.txt}
-\begin{minted}{cmake}
+
+\begin{minted}[linenos,frame=lines,baselinestretch=1.2,breaklines]{cmake}
+
     cmake_minimum_required(VERSION 3.20.0)
     project(sample_zephyr_libfuzzer)
 
@@ -105,4 +117,4 @@ int main(void)
     endif()
 
 \end{minted}
-\clearpage
+\captionof{listing}{CMakeLists.txt of libFuzzer}\label{lst:cmake_list_txt_libfuzzer}

@@ -1,3 +1,4 @@
+% !TeX root = main.tex
 %----------------------------------------------------------------------------------------
 %	Metropolia Thesis LaTeX Template
 %----------------------------------------------------------------------------------------
@@ -48,14 +49,18 @@
 % # minted require -shell-escape to run  external script.
 % # -8bit avoid ^^I for tabs in minted.
 % $ lualatex -shell-escape -8bit main
+% if interested in latex dev
+  % $ lualatex-dev -shell-escape -8bit main
 % # If any change in the bibliography
 % $ biber main
 % # If any change with the abbreviation or acronym
 % $ makeglossaries main
 % #Then compile again
 % $ lualatex -shell-escape -8bit main
+  % $ lualatex-dev -shell-escape -8bit main
 % #And if still some citation or label warnings, compile once more
 % $ lualatex -shell-escape -8bit main
+  % $ lualatex-dev -shell-escape -8bit main
 
 %----------------------------------------------------------------------------------------
 %	THESIS INFO
@@ -210,8 +215,10 @@
 
 \input{sample/Xappendix3.tex}
 
+
+\input{sample/Xappendix4.tex}
 % BSD change
-%\setlength{\footskip}{25pt}
+\setlength{\footskip}{25pt}
 %----------------------------------------------------------------------------------------
 %	THIS IS THE END
 %----------------------------------------------------------------------------------------

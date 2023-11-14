@@ -3,11 +3,11 @@
  %force a line break and remove the vertical vspace
 \vspace{21.5pt}
 \chapter{Embedded System, Challenges, Tools And Fuzzers}\label{sec:embedded_system}
-In this chapter, the critical role of fuzzing is illuminated as a mechanism to
-enhance the security and dependability of embedded systems. An initial
-comparative exploration is presented, distinguishing conventional fuzzing
-techniques and the unique challenges introduced when implementing fuzzing
-within the context of embedded systems. This is followed by an extensive
+In this chapter, the significant role of fuzz testing is highlighted as a method
+to enhance the safety and dependability of embedded systems. It begins with a
+comparative examination that differentiates traditional fuzz testing methods
+from the specific challenges that arise when applying fuzz testing in the
+context of embedded systems. This is followed by an extensive
 examination of a selection of widely-used fuzzing tools and fuzzers,
 assessing their operational competencies, user accessibility, efficacy, and
 potential limitations. Key tools encompassed within this analysis include
@@ -17,14 +17,13 @@ survey of relevant open-source initiatives and current research trajectories
 within the field of fuzzing.
 
 \section{Embedded System}
-
-Embedded systems, which are specialized computer systems engineered for specific
-tasks, diverge significantly from conventional, multi-purpose computers. These
-integrated systems are composed of hardware, software, and occasionally
-mechanical components, all designed to perform specific functions either
-autonomously or within a larger system. In contrast to general-purpose computers,
-which are designed for multitasking, embedded systems typically focus on
-executing a single task or a related group of
+Embedded systems are specific types of computer systems built for specific tasks and
+differ substantially from general-purpose computers~\cite{Top10Bes48:online}.
+These integrated systems
+consist of hardware, software, and sometimes mechanical parts, all engineered
+for particular functions, on their own or as part of a bigger system.
+Unlike general-purpose computers designed for multitasking, embedded systems
+typically concentrate on performing a single task or a closely related set of
 tasks~\cite{marwedel2021embedded}~\cite{yun2022fuzzing}~\cite{Introduc26:online}.
 
 The Figure:~\ref{fig:Embedded_System} shows the different components of embedded systems.
@@ -36,13 +35,17 @@ The Figure:~\ref{fig:Embedded_System} shows the different components of embedded
 % \end{figure}
 \begin{figure}[h]
         \centering
-        \adjustbox{width=\textwidth}{\includegraphics{Embedded_System}}
+        \AltText{Illustration of an Embedded System, showcasing its core components including the
+        input/output interfaces, and connections to external devices.
+        The diagram emphasizes the integration of hardware and software
+        in a compact form for specific functionalities.}
+        {\adjustbox{width=\textwidth}{\includegraphics{Embedded_System}}}
         \caption{Embedded System~\cite{Introduc82:online}}\label{fig:Embedded_System}
 \end{figure}
 
 Just like conventional computer systems, embedded systems's core components
-usually include a Central Processing Unit (CPU)~\cite{WhatisaC78:online},
-Random Access Memory (RAM), and input/output (I/O) interfaces. However,
+usually include a \gls{cpu}~\cite{WhatisaC78:online},
+\gls{ram}, and input/output (I/O) interfaces. However,
 embedded systems often lack user-friendly interfaces, and instead might
 feature a minimal user interface or none at all~\cite{MainType35:online}.
 
@@ -52,7 +55,7 @@ this chapter explores further the significance and methodology of fuzzing
 within the domain of embedded systems.
 
 \subsection{Types of Embedded Devices}
-Embedded systems can be classified into several types, such as standalone,
+There are several types of Embedded systems, such as standalone,
 real-time, networked, and mobile systems~\cite{Classifi68:online}. These systems
 play essential roles in various sectors, from consumer
 electronics~\cite{andrae2010life} like digital watches~\cite{Whatisas39:online},
@@ -69,14 +72,17 @@ The Figure:~\ref{fig:types_of_embedded_devices} shows the different types of emb
 
 \begin{figure}[h]
         \centering
-        \adjustbox{width=\textwidth}{\includegraphics{types_of_embedded_devices}}
+        \AltText{Diagram categorizing Types of Embedded Devices into three main
+        groups: based on microcontrollers, performance levels, and operating
+        system types.}
+        {\adjustbox{width=\textwidth}{\includegraphics{illustration/types_of_embedded_devices.jpg}}}
         \caption{Types of Embedded Devices~\cite{yun2022fuzzing}~\cite{WhatAreE30:online}}
         \label{fig:types_of_embedded_devices}
 \end{figure}
 
 \subsection*{Standalone Devices:}
 
-Standalone devices constitute a subset of embedded systems functioning
+These devices constitute a subset of embedded systems functioning
 independently, without the necessity for a host system. They process input data
 within their own interfaces, producing outputs to control or drive attached
 devices or to generate displays. These devices have found broad applicability in
@@ -85,7 +91,7 @@ lightweight user environments for
 optimal performance~\cite{yun2022fuzzing}\cite{WhatAreE30:online}\cite{TypesofE31:online}.
 
 \subsection*{Real-time Embedded Systems:}
-Real-time embedded systems deliver outputs within specific time constraints,
+These systems deliver outputs within specific time constraints,
 crucial for timely project completion. These systems interact with external
 environments via interfaces and often utilize sensors. They typically fall into
 two categories: soft systems, which prioritize process completion, and hard
@@ -96,7 +102,7 @@ consistency~\cite{Introduc22:online}\cite{yun2022fuzzing}\cite{WhatAreE30:online
 
 \subsection*{Networked embedded systems:}
 Networked embedded systems form key components of wired or wireless networks,
-heavily relying on web server communication. Ubiquitously found in security systems,
+heavily relying on web server communication. Commonly found in security systems,
 ATMs, and \acrlong{pos}\cite{WhatIsaP12:online} systems, these systems manage a network of devices or workstations
 to perform various functions. If an embedded system forms part of or depends on a device network,
 it is classified as a networked embedded
@@ -174,8 +180,8 @@ when doing the comparison.
 Hence, beyond the primary distinctions outlined in the Table~\ref{tab:fuzzing_comparison},
 additional considerations arise when comparing traditional and embedded fuzzing techniques.
 Traditional fuzzing tools typically offer a more straightforward setup than their embedded counterparts,
-which may necessitate extensive manual configuration due to the wide range of
-hardware and software components involved. Furthermore, integration of traditional
+which may necessitate extensive manual configuration they involve various
+hardware and software components. Furthermore, integration of traditional
 fuzzing into \acrlong{ci/cd} systems tends to be more straightforward,
 while embedded fuzzing often requires custom solutions to accommodate
 hardware specificities. Feedback in traditional fuzzing is typically
@@ -209,7 +215,8 @@ inventive approaches to effectively address these issues.
 
 ~\Citeauthor{eisele2022embedded} enumerates additional complexities:
 \begin{itemize}
-\item \textbf{Physical interaction:} Embedded systems often interact with the physical world, further complicating fuzzing tasks~\cite{eisele2022embedded}.
+\item \textbf{Physical interaction:} mbedded systems frequently communicate with
+the real world, further complicating fuzzing tasks~\cite{eisele2022embedded}.
 \item \textbf{Device-specific hardware and protocols:} Custom hardware components and communication protocols in embedded devices may not be compatible with existing fuzzing tools and techniques~\cite{eisele2022embedded}.
 \item \textbf{Lack of source code:} Absence of source code for embedded systems can hinder software analysis for potential vulnerabilities and hamper the development of appropriate fuzzing test cases~\cite{eisele2022embedded}.
 \end{itemize}
@@ -274,86 +281,16 @@ vulnerabilities unveiled by fuzzing techniques over time.
 
 This discussion highlights several notable open-source fuzzing initiatives,
 including Google's OSS-Fuzz~\cite{GitHubgo49:online}, a variety of AFL-based
-fuzzers~\cite{257204}, and a GitHub repository dedicated to fuzzing research. The
-primary objective of these projects is to expand the current capabilities of
-fuzzing. They aim to provide a collaborative platform that fosters knowledge
-sharing among the fuzzing community.
+fuzzers~\cite{257204}, and a GitHub repository dedicated to fuzzing research.
+The main goal of these projects is to enhance the existing capabilities of fuzz
+testing. They strive to create a collaborative platform that promotes the
+sharing of knowledge within the fuzzing community..
 
-The exploration of these open-source projects and the active research in
-fuzzing offered in this section aims to impart valuable insights into the
-current trends and potential future directions of fuzzing as a vital tool in
-software security testing.
+The examination of these open-source projects and the ongoing research in fuzz
+testing presented in this section intends to provide valuable insights into the
+current trends and possible future directions of fuzz testing as a crucial tool
+in software security testing.
 
-\textbf{OSS-Fuzz:~\cite{GitHubgo49:online}} \\
-
-Google's OSS-Fuzz represents a pioneering initiative in the domain of open-source fuzzing.
-Its uniqueness lies not merely in its goal of enhancing security and stability—which is indeed a
-common objective across all fuzzing projects—but in its commitment to continuous,
-automated fuzzing for selected open-source software projects.
-
-OSS-Fuzz stands out in its adaptability, integrating with a variety of fuzzing engines such as
-libFuzzer~\cite{libFuzze17:online} and AFL++~\cite{257204}.
-Furthermore, it supports multiple programming languages, demonstrating its versatility in accommodating
-projects written in C, C++, Rust~\cite{klabnik2023rust}, and Go~\cite{donovan2015go}. This broad compatibility reinforces its value to the diverse
-landscape of open-source software~\cite{ShortInt96:online}.
-
-\textbf{OneFuzz:~\cite{GitHubmi60:online}}\\
-
-The OneFuzz~\cite{GitHubmi60:online} is a fuzzing-as-a-service platform developed by Microsoft, that aims to
-automate the detection and reporting of software bugs. It is a self-hosted
-platform that provides a range of features, including task scheduling,
-crash analysis, and distributed fuzzing. OneFuzz can be integrated with
-existing development workflows, making it a useful tool for organizations
-looking to improve the security and stability of their software systems
-
-\textbf{Afl Based Fuzzers:}\\
-
-\acrlong{afl}~\cite{american20:online} is a coverage-guided~\cite{lyu2022ems}, or feedback-based fuzzer that utilizes a
-dynamic approach to identify potential vulnerabilities in software applications.
-It modifies the target executable to measure and optimize code coverage,
-mutating input data in a manner that maximizes the coverage achieved.
-This process is iteratively repeated, seeking to uncover instances in
-which the program crashes, thereby identifying potential security vulnerabilities.
-AFL has proven to be highly effective in practice, as evidenced by its extensive
-usage and success in uncovering numerous vulnerabilities in widely-used software.
-Furthermore, AFL is renowned for its ease of use, making it a popular choice
-among security researchers and practitioners~\cite{american20:online}~\cite{fuzzinga40:online}.
-
-Several fuzzers have been developed based on AFL's architecture~\cite{american20:online}, enhancing its
-capabilities or tailoring it for specific use cases. Some notable AFL-based
-fuzzers mentioned below:
-
-\textbf{AFL++:~\cite{257204}~\cite{GitHubAF78:online}} \\
-An enhanced version of AFL which
-introduces various performance improvements and new features, such as improved mutation strategies,
-faster execution, more and better mutations, improved instrumentation, and custom module
-support~\cite{257204}~\cite{GitHubAF78:online}.
-
-\textbf{AFLFast:~\cite{GitHubmb97:online}} \\
-A fuzzer that introduces a power schedule, aiming to prioritize
-seeds that are more likely to explore new paths and increase coverage.
-By doing so, the AFLFast~\cite{GitHubmb97:online} aims to improve the efficiency of fuzzing and maximize
-the code coverage in a shorter time frame~\cite{bohme2016coverage}~\cite{GitHubmb97:online}.
-
-\textbf{TriforceLinuxSyscallFuzzer:~\cite{GitHubnc62:online}} \\
-
-This fuzzing technique specifically targets Linux system calls,
-aiming to identify potential vulnerabilities in the system call interface\cite{GitHubnc62:online}.
-
-\textbf{AFL-unicorn:~\cite{GitHubBa48:online}} \\
-
-AFL-Unicorn~\cite{GitHubBa48:online} represents a noteworthy extension of the American Fuzzy Lop (AFL) framework,
-characterized by its versatility across various architectures, data input formats, and
-binary formats—including the firmware~\cite{WhatIsFi49:online} of bare-metal devices
-such as Wi-Fi components and baseband~\cite{Baseband1:online} processors in mobile phones.
-This utility is designed to examine binary files and then create a fuzzer that
-emulates the state at the entry point of the parsing routine.
-
-The efficacy of AFL-Unicorn is underpinned by the successful integration of
-AFL's coverage-guided fuzzing technique and the~\cite{Unicorn–92:online} engine.
-This synergistic combination facilitates the exploration of multiple execution
-paths within the targeted binary, including those within proprietary,
-closed-source firmware like that running on baseband processors~\cite{tell2005design}. This capability
-contributes to a thorough and comprehensive fuzzing process, even in the context
-of complex and traditionally opaque systems~\cite{maier2019unicorefuzz}~\cite{aflunico82:online}.
+More on the ongoing open-source projects and the active researches given in
+the Appendix:~\ref{appx:fourth}
 \clearpage

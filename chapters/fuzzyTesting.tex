@@ -2,13 +2,13 @@
  %if the chapter heading starts close to bottom of the page, force a line break and remove the vertical vspace
 \vspace{21.5pt}
 \chapter{Literature Review: Fuzzing as a Testing Technique}~\label{sec:sec_fuzzing}
-In this chapter, the focus shifts to fuzz testing as a specialized technique within the realm of
-software testing. The chapter begins with an introduction to fuzz testing, followed by a section that
-describes the history and evolution of this technique, providing a solid foundation for understanding
-its development over time. Subsequent sections delve into the reasons behind the utilization of fuzz
-testing, its process, and the aspects of software that can be targeted. The workings and components of
-fuzz testing are then explored in detail, including the \gls{fuzzers}, test harness, and monitoring tools.
-Finally, the chapter concludes with a discussion on the success of fuzz testing, particularly in embedded projects.
+This chapter turns its attention to fuzz testing, a specific type of software
+testing. It starts with an introduction to fuzz testing, then moves on to cover
+its history and development, giving a thorough background of how it has evolved.
+The next parts discuss why fuzz testing is used, how it works, and what parts of
+software it focuses on. The chapter goes into detail about the elements of fuzz
+testing, including \gls{fuzzers}, test harnesses, and monitoring tools. It ends with a
+discussion on the effectiveness of fuzz testing, especially in embedded projects.
 
 \section{Fuzzing: An Introduction, History, Successes, and Components}
 ``Fuzzy testing, often referred to as fuzzing'', has become an essential technique in
@@ -25,15 +25,17 @@ for intricate applications. The random and iterative characteristics of fuzzing 
 evaluating software with complex behavior patterns~\cite{klees2018evaluating}.
 
 While fuzzing is acknowledged for vulnerability discovery,
-it complements, rather than replaces, other testing methods. It often operates in tandem with other techniques, ensuring
-a well-rounded software testing strategy. As software
-systems become more sophisticated and varied, fuzzing plays a consistent role in maintaining the security
-and stability of contemporary software systems~\cite{kim2011efficient}.
+it complements, rather than replaces, other testing methods.
+It often operates in tandem with other techniques, ensuring
+a well-rounded software testing strategy. As software systems become more complex
+and varied, fuzz testing continues to be a vital tool for maintaining the
+security and stability of current software systems~\cite{kim2011efficient}.
 
 The fuzz testing method, a structured approach to identify software vulnerabilities,
 follows several distinct stages. Initially, the \gls{fuzz_target} is determined, which
 might be an entire application or just a specific file or library within it~\cite{segedyfuzz}.
-Then, the input data sent from the client to the target is ascertained.
+Next, the input data that is sent from the client to the target system is
+determined.
 
 The subsequent stage involves test case generation, producing various blends of
 valid and malformed data in forms like binary or files. Next, the fuzzers
@@ -50,21 +52,27 @@ The Figure:~\ref{fig:fuzzy_testing_phases_1} describes different stages of fuzzi
 
 \begin{figure}[h]
         \centering
-        \adjustbox{width=\textwidth}{\includegraphics{fuzzy_testing_phases_1}}
+        \AltText{Flow diagram of Fuzzing Stages.
+        It starts with `Start', followed by `Identify the Target',
+        `Identify the Input to Mutate', `Generate Fuzzed Data',
+        and `Execute Fuzzed Data'.
+        Based on execution, if exceptions are found,
+        it leads to `Report Bug' and then `End'.
+        If no exceptions, the process loops back to
+        `Identify the Input to Mutate'.}{\adjustbox{width=\textwidth}{\includegraphics{fuzzy_testing_phases_1}}}
         \caption{Fuzzing Stages~\cite{segedyfuzz}~\cite{9742291}}\label{fig:fuzzy_testing_phases_1}
 \end{figure}
 
-Overall, the use of fuzzy testing provides a valuable approach to identifying potential
-vulnerabilities in software systems. By generating many test cases with both
-valid and malformed data, fuzzing techniques can expose weaknesses in software that may not be
-detected through traditional testing methods. Additionally, the analysis of the results of the
-fuzzing process enables software developers to identify and address potential security issues
-before they can be exploited by malicious actors.
+Fuzz testing creates a large number of test cases using both correct and
+incorrect data. This method can uncover software vulnerabilities that
+traditional testing might miss. Moreover, analyzing the results of fuzz testing
+helps software developers find and fix security problems before attackers can
+take advantage of them.
 
 \subsection{History and Evolution of Fuzzy Testing}
-The term ``fuzzing'' or ``fuzz testing'', although a relatively recent addition
-to the lexicon of automation techniques, was first introduced by Barton Miller
-in 1988 as part of a class project~\cite{takanen2009fuzzing}. Initially,
+The concept of ``fuzzing'' or ``fuzz testing'', although a relatively new term
+in automated testing techniques, was first introduced by Barton Miller in 1988
+during a class project.~\cite{takanen2009fuzzing}. Initially,
 fuzzing was perceived as an ad-hoc or random testing method used within
 mission-critical applications~\cite{WhatisaM24:online}. Over time, however, it
 has developed into a specialized technique for the automated generation and
@@ -95,10 +103,10 @@ Section~\ref{par:success_of_fuzzing}, describes the accomplishments and
 vulnerabilities revealed by fuzzing techniques over time.
 
 \subsection{Successes Of Fuzzing}~\label{par:success_of_fuzzing}
-Fuzzy testing has proven to be an extremely effective technique since its inception in the
-late 1980s, discovering long-standing bugs, vulnerabilities, and thereby improving the
-quality and security of software. Over the years, a wide range of applications,
-as shown in Section~\ref{par:target_categories}, have been successfully fuzzed,
+Since its beginning in the late 1980s, fuzz testing has been a highly effective
+method, uncovering longstanding bugs and vulnerabilities, and thus enhancing the
+quality and security of software. Over the years, it has been applied in a
+variety of ways, as detailed in Section~\ref{par:target_categories}, have been successfully fuzzed,
 revealing critical security vulnerabilities that could have been exploited by malicious actors.
 
 The Table:~\ref{tab:vulnerabilities_examples} showcases examples of vulnerabilities discovered by
@@ -130,8 +138,8 @@ Honggfuzz & CVE-2017-15650  & Heap buffer overflow in Poppler, affecting PDF ren
 %\pagebreak
 
 %\clearpage
-The Table:~\ref{tab:bugs_found_overview} provides a broader overview of the number of bugs found by
-different fuzzing tools in various projects.
+The Table:~\ref{tab:bugs_found_overview} provides a reported bugs found by
+different fuzzing tools in various projects over the years.
 
 \begin{table}[h!]
 \centering
@@ -163,7 +171,7 @@ different fuzzing tools in various projects.
 \addlinespace
 2023 & Google & ClusterFuzz & More than 25000 bugs found in Google and Chrome~\cite{ClusterF78:online} \\
 \addlinespace
-2023 & Google & OSS-Fuzz & 36,000+ bugs in over 550 open source projects~\cite{ClusterF78:online} \\
+2023 & Google & OSS-Fuzz & more than 36,000 bugs in over 550 open-source projects~\cite{ClusterF78:online} \\
 \bottomrule
 \end{tabularx}
 \caption{Overview of Bugs Found by Fuzzing Tools in Various Projects}
@@ -183,13 +191,13 @@ specifying whether the fuzzing tools are open-source or closed-source:
 \midrule
 1 & AFLNet & FTP, HTTP, and SMTP implementations in IoT devices & Uncovered vulnerabilities and improved security in IoT devices\cite{lin2020aflnet} & Open-source \\
 \addlinespace
-2 & IoTcube & IoT devices including smart home appliances, medical devices, and industrial IoT devices & Identified and addressed security issues in IoT devices\cite{kim2019iotcube} & Closed-source \\
+2 & IoTcube & IoT devices, like smart home appliances, medical devices, and industrial IoT devices & Identified and addressed security issues in IoT devices\cite{kim2019iotcube} & Closed-source \\
 \addlinespace
 3 & FirmFuzz & Firmware in IoT devices including IP cameras and routers & Discovered 7 previously undisclosed vulnerabilities across 6 different devices\cite{srivastava2019firmfuzz} & Open-source \\
 \addlinespace
 4 & FUZZY & Zigbee implementations in IoT devices & Identified new security vulnerabilities in Zigbee, a widely used wireless communication protocol for IoT devices\cite{vidas2019fuzzy} & Closed-source \\
 \addlinespace
-5 & Atheris & Python programs, including embedded systems using MicroPython & Detected various types of vulnerabilities, such as buffer overflows and memory leaks, in Python-based embedded systems\cite{atheris2020} & Open-source \\
+5 & Atheris & Python programs, including embedded systems using Micro-Python & Found different kinds of weaknesses, like buffer overflows and memory leaks, in embedded systems that use Python\cite{atheris2020} & Open-source \\
 \bottomrule
 \end{tabularx}
 \caption{Fuzzing Success in Embedded Projects}
@@ -220,15 +228,17 @@ stress. By exposing the software to high volumes of varied inputs, this
 technique can identify potential performance or stability issues, arising
 from heavy usage or stress conditions~\cite{demott2006evolving}.
 
-However, it's important to understand that fuzzing is not a panacea for
-all software flaws. It's a specialized tool aimed at discovering errors
-and vulnerabilities that might not directly relate to the software's
-requirements or intended functionalities. While it's effective at uncovering
+However, it's crucial to recognize that fuzz testing is not a cure-all for every
+software defect. It's a targeted tool designed to find errors and
+vulnerabilities that may not be directly connected to the software's
+requirements or intended functions. While fuzz testing is helpful in identifying
 specific issues like memory leaks~\cite{shahriar2014testing},
-address corruptions~\cite{muench2018you}, and buffer overflows~\cite{godefroid2020fuzzing},
-it should complement other types of testing such as functional, unit,
-integration, and system testing, rather than replace
-them~\cite{pietikainen2016steps}~\cite{UnitTest25:online}~\cite{WhatisFu63:online}.
+address corruptions~\cite{muench2018you}, and
+buffer overflows~\cite{godefroid2020fuzzing}, it should not be the only method
+used for software testing. It is better used in addition to other testing
+methods such as functional, unit, integration, and system testing to ensure a
+more thorough check of the software's quality and
+security~\cite{pietikainen2016steps}\cite{UnitTest25:online}\cite{WhatisFu63:online}.
 
 To leverage fuzzing effectively, careful planning is essential to identify
 \gls{fuzz_target} for testing. Notably, identifying and defining entry points
@@ -255,13 +265,9 @@ Below given examples applications targets where fuzzing has been successful~\cit
 
 
 \section{Fuzzing Process, Components, and Various Approaches}\label{sec:fuzzing_methods}
-Fuzzing, a dynamic software testing technique, plays a crucial role in enhancing
-software reliability and security by detecting concealed bugs and
-vulnerabilities. Its importance has grown in tandem with the increasing
-complexity and pervasiveness of software systems, making it a prominent
-field of academic and practical interest. This section provides an exhaustive
-exploration of the fuzzing process, including its various stages, the evolution
-of its techniques, and the methodologies employed.
+Fuzz testing, a dynamic method for improving software reliability and security,
+has become increasingly important with more complex software systems. This
+section details the fuzz testing process, its evolution, and methodologies.
 
 \subsection{Test Case Generation: From Basic to Advanced Techniques}
 The process of fuzzing begins with the generation of numerous inputs
@@ -285,11 +291,13 @@ for fuzzers, serving as a crucial tool in the
 fuzzing process~\cite{li2018fuzzing}~\cite{miller2007analysis}~\cite{wang2017skyfire}.
 
 \subsection{Execution and Monitoring: Coverage-Guided Fuzzing and Sanitizers}
-After generating the inputs, the test cases are fed into the program, and the
-fuzzing process continues until a program crash or hang occurs. This
-stage involves monitoring crashes and exceptions using tools like
-sanitizers~\cite{GitHubgo55:online}~\cite{osterlund2020parmesan}, which can detect specific system signals,
-crashes, and other violations.
+
+Once the inputs are created, they are input into the program, and the fuzz
+testing goes on until the program either crashes or stops responding. During
+this phase, tools like sanitizers~\cite{GitHubgo55:online}~\cite{osterlund2020parmesan}
+are used to monitor for crashes and exceptions.
+These tools can identify specific system signals, crashes, and rule violations.
+
 
 \subsection*{Sanitizers}
 
@@ -302,12 +310,12 @@ sanitizers should be judiciously managed to prevent excessive resource consumpti
 \begin{itemize}
 
 \item \textit{Address Sanitizers (ASAN)~\cite{AddressS43:online}:} These tools
-are indispensable for uncovering vulnerabilities linked to memory corruption,
-such as use-after-free, NULL pointer dereferences, and buffer overflows~\cite{haller2013dowsing}.
+are essential for finding vulnerabilities related to memory corruption, such as
+use-after-free, NULL pointer dereferences, and buffer overflows~\cite{haller2013dowsing}.
 
-\item \textit{Memory Sanitizers (MSAN)~\cite{MemorySa64:online}:} They are designed
-to detect unauthorized read accesses to uninitialized memory, such as when a local
-variable is defined and read prior to being set~\cite{stepanov2015memorysanitizer}.
+\item \textit{Memory Sanitizers (MSAN)~\cite{MemorySa64:online}:} They are made
+to spot unauthorized reading of uninitialized memory, like when a local variable
+is defined and read before it's given a value~\cite{stepanov2015memorysanitizer}.
 
 \item \textit{Undefined Behavior Sanitizers (UBSAN)~\cite{Undefine50:online}:} These sanitizers are instrumental
 in pinpointing instances of undefined behavior as per the C and C++ standards,
@@ -319,10 +327,10 @@ fuzzing that specifically uses code coverage as its feedback mechanism. It repre
 the execution and monitoring phase. This technique involves monitoring the extent and
 sections of the \acrshort{sut} that are traversed by the inputs during the
 fuzzing campaign. Compiler instrumentation, employed by fuzzers like
-AFL/AFL++~\cite{257204} or libFuzzer~\cite{libFuzze17:online}, is commonly
-used to collect this data. External function calls are inserted at
-specific points during the compilation process to relay information to the fuzzer each
-time an edge or block is reached~\cite{libFuzze17:online}~\cite{bohme2016coverage}~\cite{257204}.
+AFL/AFL++~\cite{257204} or libFuzzer~\cite{libFuzze17:online}, the usual method
+for gathering this data is by using external function calls that are added at
+particular stages during compilation. These calls transmit information to the
+fuzzer whenever an edge or block is reached~\cite{libFuzze17:online}~\cite{bohme2016coverage}~\cite{257204}.
 
 
 The Figure:~\ref{fig:feedback-based-fuzzing} depicts a simple visual representation of the
@@ -336,7 +344,10 @@ feedback based fuzzing.
 
 \begin{figure}[h]
         \centering
-        \adjustbox{width=\textwidth}{\includegraphics{feedback-based-fuzzing}}
+        \AltText{Diagram of Feedback Based Fuzzing showing a
+        fuzzer sending inputs to, and receiving coverage
+        feedback from, the System Under Test, forming a
+        continuous feedback loop.}{\adjustbox{width=\textwidth}{\includegraphics{feedback-based-fuzzing}}}
         \caption{Feedback Based Fuzzing~\cite{TheMagic36:online}\cite{LucianoR49:online}}\label{fig:feedback-based-fuzzing}
 \end{figure}
 
@@ -354,14 +365,15 @@ to security-centric bugs.
 
 \subsection*{Visibility in Fuzzing}
 
-The term ``Visibility'' in the context of fuzzing refers to the extent of information about the
-\acrshort{sut} accessible to the fuzzer during runtime. There exist three primary levels of visibility in
+The term `Visibility' relates to the amount of information collected about the
+\acrshort{sut} that the fuzzer can access during runtime.
+There exist three primary levels of visibility in
 fuzzing: Blackbox~\cite{godefroid2007random}~\cite{manes2019art},
 Graybox~\cite{canakci2021directfuzz}~\cite{li2018fuzzing}, and
 Whitebox~\cite{godefroid2008automated}~\cite{godefroid2007random}~\cite{godefroid2008grammar} fuzzing,
-each proffering varying degrees of access to the source code of the \acrshort{sut}.
+each of them provides different levels of access to the source code of the \acrshort{sut}.
 
-The amalgamation of these methodologies—mutation-based~\cite{lyu2022ems}~\cite{miller2007analysis}
+The combination of these methodologies—mutation-based~\cite{lyu2022ems}~\cite{miller2007analysis}
 test case generation, coverage-guided~\cite{jaaskela2016genetic} execution and monitoring, in-depth bug analysis,
 and the consideration of visibility levels—positions fuzzing as a formidable instrument
 in bolstering the overall software quality and security. By diagnosing and
@@ -385,7 +397,10 @@ fuzzing process and its dependencies.
 
 \begin{figure}[h]
         \centering
-        \adjustbox{width=\textwidth}{\includegraphics{general_process_fuzzing}}
+        \AltText{Diagram illustrating the General Process of Fuzzing, which
+        typically includes stages like target program identification, input generation,
+        input execution, monitoring for exceptions or crashes, and logging outcomes.}
+        {\adjustbox{width=\textwidth}{\includegraphics{general_process_fuzzing}}}
         \caption{General Process Fuzzing~\cite{liang2018fuzzing}}\label{fig:general_process_fuzzing}
 \end{figure}
 
@@ -701,7 +716,7 @@ fuzzers~\cite{liang2018fuzzing}:
 \begin{itemize}
 \item How to select and generate \gls{seeds}?
 \item What characteristics define a good \gls{fuzz_target}, and how can one validate the inputs?
-\item What considerations should be taken into account when dealing with test cases causing crashes?
+\item What considerations must be considered when dealing with test cases causing crashes?
 \item How to effectively utilize information during runtime?
 \item How to achieve scalability improvements?
 \end{itemize}
@@ -710,16 +725,17 @@ revealing hidden vulnerabilities, thereby enhancing the security and reliability
 
 \subsection{Generation and Selection of Seed}
 The \gls{seeds} corpus in fuzz testing refers to a collection of representative input
-files that the target program is designed to process. The seed corpus selection
-can significantly influence the efficacy and efficiency of the fuzzing process,
-emphasizing its importance for maximizing test coverage~\cite{herrera2021seed}.
+files that the target program is designed to process. Choosing the right seed
+corpus is crucial as it greatly affects how effective and efficient the fuzz
+testing process is, underlining its significance in achieving maximum test
+coverage~\cite{herrera2021seed}.
 
 In an ideal scenario, a fuzzer aims for 100\% coverage, seeking to activate and
-examine as many code paths as possible within the target program. However, this
-is rarely achieved due to the complex and large-scale nature of contemporary
-software. Nonetheless, striving for high coverage significantly improves the
-chances of uncovering hidden bugs and vulnerabilities, enhancing the evaluation
-of system reliability and security~\cite{godefroid2012sage}.
+examine as many code paths as possible within the target program. However, due
+to the complexity achieving high coverage is
+often difficult. Still, aiming for high coverage greatly increases the
+likelihood of finding hidden bugs and vulnerabilities, which helps in getting
+the program's reliability and security~\cite{godefroid2012sage}.
 
 The size of the seed corpus must be chosen with careful consideration of
 its potential effect on coverage and computational resources. Larger seed files
@@ -728,7 +744,7 @@ files can provide similar coverage to larger ones, they are typically preferred
 for efficient testing~\cite{liang2018fuzzing}~\cite{jurczyk2016effective}.
 
 The initial seed corpus is particularly crucial when using a mutation-based
-fuzzer, which requires an initial set of inputs or \gls{seeds}. The quality of these
+fuzzer, which requires an initial set of \gls{seeds}. The quality of these
 \gls{seeds} substantially influences the fuzzer's capacity to explore the program's
 state space and detect bugs~\cite{miller2007analysis}. An efficient way of
 enhancing code coverage, proposed by~\Citeauthor{kim2011efficient}, involves a
@@ -743,8 +759,8 @@ of the \gls{fuzz_target} is crucial as it should accurately represent the behavi
 the real-world system or application being tested~\cite{238602}.
 
 \subsubsection{A Good Fuzz Target}
-Here is an example of a \gls{fuzz_target} written in C with
-LLVM libFuzzer~\cite{libFuzze17:online}:
+
+A \gls{fuzz_target} using LLVM's libFuzzer~\cite{libFuzze17:online}:
 
 \begin{minted}[linenos,frame=lines,baselinestretch=1.2,breaklines]{c}
 
@@ -757,8 +773,8 @@ return 0; // Values other than 0 and -1 are reserved for future use.
 
 In this case, the function \textit{LLVMFuzzerTestOneInput} takes two arguments,
 the address of the data to store and its size. The API of the fuzz target is
-called in subsequent steps of fuzzing. When creating a fuzz target, the
-following aspects should be taken into account~\cite{libFuzze17:online}~\cite{257204}:
+called in subsequent steps of fuzzing. When developing a fuzz target, given
+key aspects should be considered.~\cite{libFuzze17:online}~\cite{257204}:
 
 \begin{itemize}
 \item The \gls{fuzzing_engine} should be designed to execute the fuzz target
@@ -779,22 +795,22 @@ fuzzing process requires multiple iterations.
 \end{itemize}
 
 \subsubsection{Isolating Crashes and Test Cases}
-Fuzzing often results in many system crashes, which can be challenging and
-time-consuming to analyze. Therefore, due to time and budget constraints, it's
-important to isolate and filter crash-inducing test cases effectively. A
-ranking-based method to categorize these cases based on their bug-inducing
-capabilities and distinctiveness was proposed by~\Citeauthor{chen2013taming}~\cite{chen2013taming}.
+Fuzz testing frequently leads to numerous system crashes, which can be difficult
+and time-consuming to analyze. Given time and budget limitations, it's crucial
+to efficiently isolate and sort out test cases that cause crashes. A method~\cite{chen2013taming}
+for ranking these cases, based on their ability to induce bugs and their uniqueness,
+has been suggested by~\Citeauthor{chen2013taming}.
 
 Crashes can also be isolated through clustering methods, differentiating
 crashes based on uniqueness and debug information. For example, AFL uses the absence
 of a pre-existing execution path to define the uniqueness of a crash~\cite{GitHubgo92:online}.
 
 \subsubsection{Runtime Information During Fuzzing}
-Advanced fuzzing techniques, such as symbolic execution and dynamic analysis,
-are used to gather runtime information, such as code coverage and data flow.
-However, their efficiency can be limited due to challenges like path explosion,
-a phenomenon caused by the multiple execution paths that stem from a single
-conditional branch in the target program.
+Advanced fuzz testing methods, like symbolic execution and dynamic analysis,
+collect runtime information including code coverage and data flow. However,
+their effectiveness can be hindered by issues like path explosion. This issue
+arises from the numerous execution paths that originate from a single
+conditional branch in the program being tested.
 
 \Citeauthor{godefroid2007compositional} suggested using `function summaries'
 for lower-level functions to reduce the number of execution paths. This allows

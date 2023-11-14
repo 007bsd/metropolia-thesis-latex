@@ -24,17 +24,18 @@ embedded systems is paramount. Embedded systems, ranging from tiny
 systems, form the backbone of modern infrastructure. However,
 their pervasiveness also makes them a tempting target for attackers. Vulnerabilities such as
 Meltdown\cite{lipp2020meltdown} and Spectre\cite{kocher2020spectre} are some recent examples.
-From data theft to device manipulation, the potential implications of
-a successful attack are dire. Hence, there's a necessity for a robust
-and secure foundation upon which these systems operate. This is where a secure architecture,
-underpinned by a hardware \gls{rot}, becomes critical\cite{Introduc7:online}.
 
 The Figure:~\ref{fig:rot} illustrates high-level depiction of the architecture for
 the case in company.
 
 \begin{figure}[H]
     \centering
-    \AltText{Embedded Root of Trust Architecture}{\adjustbox{width=\textwidth}{\includegraphics{rot}}}
+    \AltText{Diagram illustrating the Embedded Root of Trust Architecture,
+    highlighting the core components such as secure boot, trusted execution
+    environment, cryptographic operations, and hardware-based key storage. The
+    architecture is depicted as a layered structure, emphasizing the
+    foundational role of trust in secure embedded systems.}
+    {\adjustbox{width=\textwidth}{\includegraphics{illustration/RoT.png}}}
     \caption{Embedded Root of Trust Architecture\cite{Introduc82:online}}\label{fig:rot}
 \end{figure}
 
@@ -52,18 +53,18 @@ rest of the system operates.
 
 \textbf{Hardware Root of Trust:} Roots of Trust refer to secure components within a computer system,
 encompassing hardware, software, or firmware~\cite{WhatIsFi49:online}, that carry out crucial
-security operations like data encryption, certificate validation and key management~\cite{Hardware83:online}.
+security operations like data encryption, certificate validation and key management~\cite{RootofTr86:online}.
 This is a principle that initiates a trust sequence, which is essential for verifying that
 computers start up using authentic code. They serve as the foundational elements upon which the
 security of other system components is established. Given their critical role, these elements must
 be designed with a high level of
-security~\cite{WhatisRo39:online}~\cite{Introduc7:online}~\cite{RootofTr86:online}~\cite{Hardware83:online}.
+security~\cite{WhatisRo39:online}~\cite{RootofTr86:online}.
 
 \textit{Hardware Root of Trust} ensures the integrity of the lower level system operations such as
 secure boot\cite{zimmer2016establishing}, Debug and JTAG access control, Key management and Crypto Co-processors.
 The \textit{secure boot} is a mechanism that the system uses to ensure that it ``boots'' in a known secure state.
 The \acrshort{rot} plays a critical role in this process, verifying the integrity of the boot firmware and
-subsequently loaded software~\cite{Hardware83:online}~\cite{zimmer2016establishing}.
+subsequently loaded software~\cite{zimmer2016establishing}.
 
 The \textit{debug and JTAG access control} needs careful handling as it can be used maliciously although
 an essential feature for debugging and troubleshooting purpose~\cite{WhatisJT98:online}~\cite{JTAGhard62:online}.
@@ -127,7 +128,13 @@ The Figure:~\ref{fig:CI_Infrastrcuture_2} presents the IT infrastructure of CI/C
 flow for the company.
 
 \begin{figure}[H] \centering
-\adjustbox{width=\textwidth}{\includegraphics{CI_Infrastrcuture_2}}
+\AltText{Comprehensive diagram of the case company's
+Embedded CI/CD (Continuous Integration/Continuous Deployment) Workflow,
+illustrating a sequence of stages from code integration, automated testing,
+to deployment in an embedded system environment. The workflow highlights the
+integration of development, testing, and deployment processes for
+efficient software delivery.}
+{\adjustbox{width=\textwidth}{\includegraphics{CI_Infrastrcuture_2}}}
 \caption{Embedded CI/CD Workflow}\label{fig:CI_Infrastrcuture_2} \end{figure}
 
 \subsection*{Using Docker for Environment Consistency and QEMU:} To maintain a
@@ -200,7 +207,12 @@ current workflow~\ref{fig:CI_Infrastrcuture_2} used in the case company.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{simplified_workflow_current}
+\AltText{Flow diagram of the Simplified Current Workflow, outlining the key
+steps in a sequential manner, including initial planning, development,
+testing, and deployment phases. The diagram emphasizes a linear and
+efficient process flow, highlighting critical decision points and
+transitions between stages.}
+{\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{simplified_workflow_current}}
 \caption{Simplified Current Workflow}
 \label{fig:simplified_workflow_current}
 \end{figure}
@@ -216,7 +228,11 @@ The Figure:~\ref{fig:simplified_workflow_proposed} illustrates a simplified depi
 proposed workflow used in the case company.
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{fuzzy_current_proposed}
+\AltText{Flow diagram of the Enhanced Workflow, building upon the Simplified
+Current Workflow with the integration of fuzzing. The diagram shows standard
+workflow steps like planning, development, and testing, with fuzzing added as a
+key stage in the testing phase to improve security and identify vulnerabilities.}
+{\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{fuzzy_current_proposed}}
 %\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{simplified_workflow_proposed}
 \caption{Simplified Proposed Workflow}
 \label{fig:simplified_workflow_proposed}

@@ -90,6 +90,32 @@ confirmed their ability to swiftly uncover vulnerabilities. These tools, with
 their automated reporting features, simplify the complex task of analyzing code
 coverage and identifying potential security weaknesses.
 
+First, in the example detailed in Appendix~\ref{appx:first} demonstrated the
+integration of fuzz testing in Zephyr applications,
+showcasing the key strength of AFL++: its capability to uncover and navigate
+complex call trees by leveraging coverage data from instrumented binaries. The
+fuzz tests were conducted using the AFL++ fuzzer, complemented by tools like
+``afl-cov''~\cite{GitHubmr91:online} and ``afl-plot''~\cite{AFLFunct92:online}.
+These additional resources were instrumental in pinpointing vulnerabilities,
+while also offering detailed coverage reports and visual depictions of the testing process.
+
+Next, in the example detailed in Appendix~\ref{appx:second}, the efficacy of libFuzzer
+is underscored, illustrating its prominence as a coverage-based tool known for
+its efficiency. The proficiency of libFuzzer is rooted in its rapid
+identification and navigation through complex call trees, a process enhanced by
+the utilization of coverage data. This approach is pivotal in swiftly uncovering
+vulnerabilities, as well as in providing thorough coverage analysis.
+
+Lastly, in the conducted test, AFL++-QEMU was applied to a closed-source binary,
+which serves as a communication interface between the host and the application.
+A notable finding from this test was that AFL++-QEMU exhibited instances of
+hanging, which subsequently caused the application itself to hang. But, when the same test data
+were manually executed against the target binary, no hangs
+were observed. This discrepancy suggests the necessity for further debugging,
+both in the afl-fuzz tool and the target binary. Such an investigation, while
+outside the scope of the current research, presents a promising avenue for
+future exploration in this field.
+
 The study advocates for the integration of fuzzing into the standard software
 development lifecycle, particularly within continuous testing frameworks. As
 software intricacy escalates, the necessity for thorough and efficient testing

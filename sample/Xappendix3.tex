@@ -1,16 +1,18 @@
 % % Appendix
 % % And demonstrate text references and bibliography references in appendix
-
+\vspace{21.5pt}
+\clearpage
 
 \chapter{Test Data Creation for AFL++-QEMU mode}\label{appx:third}
 The following python program to create test data for AFL++-QEMU mode.
 
 \section*{generate\_files.py}
-\begin{minted}{python}
+
+\begin{minted}[linenos,frame=lines,baselinestretch=1.2,breaklines]{python}
+
 import os
 import random
 import secrets
-import struct
 
 # Number of files to generate
 num_files = 10
@@ -50,5 +52,5 @@ for i in range(num_files):
         f.write(combined_data)
 
 \end{minted}
-
+\captionof{listing}{Python code example: AFL++-QEMU mode}\label{lst:python_code_qemu}
 %\clearpage
