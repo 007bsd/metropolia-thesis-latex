@@ -154,7 +154,7 @@ For the best experience with this template, install:
 
 Open VS Code. Click the Extensions icon on the left sidebar. Search for the extension name. Click Install
 
-##### Method 2 — Using Recommended Extensions (Automatic)
+##### Method 2: Using Recommended Extensions (Automatic)
 
 This project includes:
 ```bash
@@ -182,8 +182,6 @@ It configures:
 * Compiler settings
 
 No manual configuration required.
-
-After Successful Compilation
 
 If the setup and compilation are successful:
 
