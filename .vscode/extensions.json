@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "james-yu.latex-workshop",
+    "ms-python.python",
+    "mhutchie.git-graph",
+    "tamasfe.even-better-toml",
+    "streetsidesoftware.code-spell-checker",
+    "hediet.vscode-drawio"
+  ]
+}

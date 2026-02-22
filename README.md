@@ -67,5 +67,132 @@ Note: git version control != GitHub 😉 These instructions can be used with the
 1. Once logged in Overleaf, open Project section. Then New Project &rarr; Upload Project &rarr; select the zip (otherwise with the paid version you could sync with github (your fork))
 1. Once project opened: from the Menu change "compiler" to XeLaTeX and set ``main.tex`` as the main document
 
+### Windows + VS Code Setup
+This template is tested on Windows using **MiKTeX** and **VS Code with LaTeX Workshop**.
+
+## Setup
+
+### 1. Install MiKTeX
+
+Download:
+
+https://miktex.org/download
+
+After installation, verify:
+
+```bash
+xelatex --version
+biber --version
+makeglossaries --version
+```
+
+MiKTeX will automatically install missing packages when compiling.
+
+### 2. Install Python + Pygments (Required for minted)
+
+This setup has been tested with:
+
+```bash
+$ python --version
+Python 3.12.10
+
+$ pygmentize -V
+Pygments version 2.19.2
+```
+
+#### Installation
+
+Check Python installation:
+
+```bash
+python --version
+```
+
+If Python is not installed, download it from:
+
+https://www.python.org/downloads/
+
+Install Pygments:
+
+```bash
+pip install pygments
+```
+
+Verify:
+
+```bash
+pygmentize -V
+```
+
+### 3. Install Visual Studio Code
+Download Visual Studio Code from:
+https://code.visualstudio.com/
+
+You can check version with:
+
+```bash
+code --version
+```
+
+#### Install Required VS Code Extensions
+ Extensions
+
+For the best experience with this template, install:
+
+* LaTeX Workshop
+
+* Python
+
+* Code Spell Checker
+
+* Draw.io Integration
+
+* Git Graph (Optional but recommended)
+
+##### How To Install Extensions: Method 1: From VS Code Marketplace (Recommended)
 
 
+Open VS Code. Click the Extensions icon on the left sidebar. Search for the extension name. Click Install
+
+##### Method 2 — Using Recommended Extensions (Automatic)
+
+This project includes:
+```bash
+.vscode/extensions.json
+```
+
+When you open the project folder in VS Code, a popup will appear, 
+it asks to install recommended extensions and then click install all
+
+Included VS Code Settings
+
+The project also contains:
+```bash
+.vscode/settings.json
+```
+
+It configures:
+
+* LaTeX build recipe
+
+* Auto clean
+
+* Root file detection
+
+* Compiler settings
+
+No manual configuration required.
+
+After Successful Compilation
+
+If the setup and compilation are successful:
+
+* A file named main.pdf will be generated in the project root.
+
+* The PDF will automatically update after each successful build.
+
+If main.pdf is not generated:
+
+* Check the build output for errors.
+
+* Ensure all required tools are installed correctly.

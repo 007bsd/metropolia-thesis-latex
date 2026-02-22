@@ -1,0 +1,159 @@
+{
+  ////////////////////////////////////////////////////////////
+  // ================= NORMAL XELATEX MODE ================= //
+  // Use this for stable thesis compilation with MiKTeX
+  // or standard TeX Live.
+  //
+  // Recommended for:
+  // - Most students
+  // - Stable builds
+  // - Avoiding experimental bugs
+  ////////////////////////////////////////////////////////////
+
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex-shell",
+      "command": "xelatex",
+      "args": [
+        "-shell-escape",
+        "-8bit",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "biber",
+      "command": "biber",
+      "args": ["%DOCFILE%"]
+    },
+    {
+      "name": "makeglossaries",
+      "command": "makeglossaries",
+      "args": ["%DOCFILE%"]
+    },
+
+    ////////////////////////////////////////////////////////////
+    // ================= LUALATEX DEV MODE ================== //
+    // Experimental / advanced mode
+    //
+    // Use ONLY if:
+    // - You need latest LuaTeX features
+    // - Template explicitly requires lualatex-dev
+    // - You are debugging PDF tagging issues
+    //
+    // WARNING: Can break package compatibility sometimes.
+    ////////////////////////////////////////////////////////////
+
+    {
+      "name": "lualatexmk-dev",
+      "command": "latexmk",
+      "args": [
+        "-shell-escape",
+        "-8bit",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-lualatex=lualatex-dev",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ]
+    },
+
+    ////////////////////////////////////////////////////////////
+    // ================= STABLE LUALATEX MODE ================ //
+    // Recommended alternative to lualatex-dev
+    //
+    // Use this instead if:
+    // - You want automatic biber + glossaries
+    // - You prefer automatic compilation
+    // - You want a cleaner workflow
+    ////////////////////////////////////////////////////////////
+
+    {
+      "name": "lualatexmk",
+      "command": "latexmk",
+      "args": [
+        "-shell-escape",
+        "-8bit",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-lualatex",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ]
+    }
+  ],
+
+  ////////////////////////////////////////////////////////////
+  // ================= RECIPES ============================= //
+  // Choose which recipe you want from the UI.
+  ////////////////////////////////////////////////////////////
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "Manual: xelatex -> biber -> glossaries -> x2",
+      "tools": [
+        "xelatex-shell",
+        "biber",
+        "makeglossaries",
+        "xelatex-shell",
+        "xelatex-shell"
+      ]
+    },
+    {
+      "name": "Auto: lualatexmk (Stable)",
+      "tools": [
+        "lualatexmk"
+      ]
+    },
+    {
+      "name": "Auto: lualatexmk-dev (Experimental)",
+      "tools": [
+        "lualatexmk-dev"
+      ]
+    }
+  ],
+
+  ////////////////////////////////////////////////////////////
+  // ================= DEFAULT BEHAVIOR ==================== //
+  ////////////////////////////////////////////////////////////
+
+  "latex-workshop.latex.recipe.default": "first",
+
+  // Do NOT auto build on file save
+  "latex-workshop.latex.autoBuild.run": "never",
+
+  // Root file detection
+  "latex-workshop.latex.rootFile.useSubFile": false,
+  "latex-workshop.latex.rootFile.indicator": "\\begin{document}",
+  "latex-workshop.latex.rootFile.doNotPrompt": true,
+
+  ////////////////////////////////////////////////////////////
+  // ================= CLEANING ============================ //
+  ////////////////////////////////////////////////////////////
+
+  "latex-workshop.latex.clean.enabled": true,
+  "latex-workshop.latex.clean.method": "cleanall",
+
+  // Auto clean if build fails
+  "latex-workshop.latex.autoClean.run": "onFailed",
+
+  // Files to remove during cleaning
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.bcf",
+    "*.blg",
+    "*.glo",
+    "*.gls",
+    "*.glg",
+    "*.ist",
+    "*.run.xml",
+    "*.toc",
+    "*.xdv",
+    "*.fdb_latexmk",
+    "*.fls"
+  ]
+}
